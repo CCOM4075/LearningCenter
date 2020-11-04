@@ -1,0 +1,11 @@
+sidebar
+    inicio
+        []
+    participantes
+    registro
+    actividades
+        registrar actividad
+        mostrar actividad
+    informe
+    calendario
+    páginas
