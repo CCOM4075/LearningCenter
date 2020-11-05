@@ -5,7 +5,9 @@
     include './includes/connection.php';
     $gmtTimezone = new DateTimeZone('GMT-4');//Optener el time zone de P.R.
     $hoy = new DateTime('now',$gmtTimezone);  //Obtener la fecha usando el timezone
-    $hoy = $hoy->format('Y-m-d'); //cambiar la fecha en string                            
+    $fechaHoy = $hoy->format('Y-m-d'); //cambiar la fecha en string
+    
+                                    
 ?>
 
 <!-- Learning Center Register -->
@@ -184,10 +186,14 @@
                         <div class="container-fluid">
 
                             <h2 class="title-2">Asistencia De Hoy</h2>
-                            <h2 class="title-7"><?php echo "dia"?> de <?php
+                            <h2 class="title-7"><?php 
+                                                    $numeroDia = $hoy->format('d');
+                                                    echo $numeroDia;
+                                                ?> de 
+                                                <?php
                                                     include_once './functions/mes.php';
-                                                    //$numeroMes = month($hoy);
-                                                    $mes = mes(11);
+                                                    $numeroMes = $hoy->format('m');
+                                                    $mes = mes($numeroMes);
                                                     echo "$mes";
                                                 ?>  
                                     </h2><!--Arreglar-->
@@ -212,7 +218,7 @@
                                     
                                     
                                     //Buscar en la hoja de Asistencia si esta la fecha de hoy.
-                                    $query2 = mysqli_query($connection, "SELECT * FROM `hojaasistencia` WHERE fecha = '$hoy'");
+                                    $query2 = mysqli_query($connection, "SELECT * FROM `hojaasistencia` WHERE fecha = '$fechaHoy'");
                                     $result2 = mysqli_fetch_Array($query2);
 
                                     if($result2 > 0)
@@ -223,7 +229,7 @@
                                                                             INNER JOIN asistencia a ON h.id = a.hojaAsistencia
                                                                             INNER JOIN participantes p ON a.participanteID = p.participanteID
                                                                             INNER JOIN propositos x ON a.proposito = x.id
-                                                                            WHERE h.fecha = '$hoy'");
+                                                                            WHERE h.fecha = '$fechaHoy'");
                                     
                                         $result = mysqli_num_rows($query);
                                         if($result > 0){
