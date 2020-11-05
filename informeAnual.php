@@ -1,4 +1,6 @@
-
+<?php
+    include './includes/connection.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -189,7 +191,50 @@
                         </div>
                     </div>
                 </div>
+                <?php
+                    $meses = array (array(0,0,0,0),
+                                    array(0,0,0,0),
+                                    array(0,0,0,0),
+                                    array(0,0,0,0),
+                                    array(0,0,0,0),
+                                    array(0,0,0,0),
+                                    array(0,0,0,0),
+                                    array(0,0,0,0),
+                                    array(0,0,0,0),
+                                    array(0,0,0,0),
+                                    array(0,0,0,0),
+                                    array(0,0,0,0));
+                    $queryEdades = mysqli_query($connection, "SELECT h.fecha, a.edad FROM hojaasistencia h
+                                                        INNER JOIN asistencia a ON h.id = a.hojaAsistencia
+                                                        WHERE h.fiscalYear = 1");
+                    $edades = mysqli_num_rows($queryEdades);
+                    if($edades>0)
+                    {
+                        while($edades = mysqli_fetch_array($queryEdades))
+                        {
+                            $fecha = new DateTime($edades['fecha']);
+                            $mes = $fecha->format('m');
 
+                            if($edades['edad']>=0 && $edades['edad']<=12)
+                            {
+                                $meses[$mes-1][0] += 1;
+                                $meses[$mes-1][3] += 1;
+                            }
+                            else if($edades['edad']>=13 && $edades['edad']<=17)
+                            {
+                                $meses[$mes-1][1] += 1;
+                                $meses[$mes-1][3] += 1;
+
+                            }
+                            else if($edades['edad']>=18)
+                            {
+                                $meses[$mes-1][2] += 1;
+                                $meses[$mes-1][3] += 1;
+
+                            }
+                        }
+                    }
+                ?>
                     <div class="container-fluid">
                         <div class="row">
                         <div class="col-lg-10"></div>
@@ -205,92 +250,33 @@
                                                 <th class="text-left">Total</th>
                                             </tr>
                                         </thead>
-
+                                        
                                         <tbody>
+                                            <?php
+                                                $i = 6;
+                                                while($i!=5)
+                                                {
+                                            ?>
                                             <tr>
-                                                <th class="text-left">Julio</th>
-                                                <td class="text-left">0</td>
-                                                <td class="text-left">0</td>
-                                                <td class="text-left">0</td>
-                                                <td class="text-left">0</td>
+                                                <th class="text-left">
+                                                <?php
+                                                    include_once './functions/mes.php';
+                                                    $mes = mes($i+1);
+                                                    echo "$mes";
+                                                ?>
+                                                </th>
+                                                <td class="text-left"><?php echo $meses[$i][0] ?></td>
+                                                <td class="text-left"><?php echo $meses[$i][1] ?></td>
+                                                <td class="text-left"><?php echo $meses[$i][2] ?></td>
+                                                <td class="text-left"><?php echo $meses[$i][3] ?></td>
                                             </tr>
-                                            <tr>
-                                                <th class="text-left">Agosto</th>
-                                                <td class="text-left">22</td>
-                                                <td class="text-left">12</td>
-                                                <td class="text-left">33</td>
-                                                <td class="text-left">67</td>
-                                            </tr>
-                                            <tr>
-                                                <th class="text-left">Septiembre</th>
-                                                <td class="text-left">10</td>
-                                                <td class="text-left">2</td>
-                                                <td class="text-left">5</td>
-                                                <td class="text-left">17</td>
-                                            </tr>
-                                            <tr>
-                                                <th class="text-left">Octubre</th>
-                                                <td class="text-left">0</td>
-                                                <td class="text-left">0</td>
-                                                <td class="text-left">0</td>
-                                                <td class="text-left">0</td>
-                                            </tr>                                            
-                                            <tr>
-                                                <th class="text-left">Noviembre</th>
-                                                <td class="text-left">0</td>
-                                                <td class="text-left">0</td>
-                                                <td class="text-left">0</td>
-                                                <td class="text-left">0</td>
-                                            </tr>                                            
-                                            <tr>
-                                                <th class="text-left">Diciembre</th>
-                                                <td class="text-left">0</td>
-                                                <td class="text-left">0</td>
-                                                <td class="text-left">0</td>
-                                                <td class="text-left">0</td>
-                                            </tr>
-                                            <tr>
-                                                <th class="text-left">Enero</th>
-                                                <td class="text-left">0</td>
-                                                <td class="text-left">0</td>
-                                                <td class="text-left">0</td>
-                                                <td class="text-left">0</td>
-                                            </tr>
-                                            <tr>
-                                                <th class="text-left">Febrero</th>
-                                                <td class="text-left">0</td>
-                                                <td class="text-left">0</td>
-                                                <td class="text-left">0</td>
-                                                <td class="text-left">0</td>
-                                            </tr>
-                                            <tr>
-                                                <th class="text-left">Marzo</th>
-                                                <td class="text-left">20</td>
-                                                <td class="text-left">10</td>
-                                                <td class="text-left">15</td>
-                                                <td class="text-left">45</td>
-                                            </tr>
-                                            <tr>
-                                                <th class="text-left">Abril</th>
-                                                <td class="text-left">70</td>
-                                                <td class="text-left">23</td>
-                                                <td class="text-left">47</td>
-                                                <td class="text-left">148</td>
-                                            </tr>
-                                            <tr>
-                                                <th class="text-left">Mayo</th>
-                                                <td class="text-left">71</td>
-                                                <td class="text-left">16</td>
-                                                <td class="text-left">49</td>
-                                                <td class="text-left">136</td>
-                                            </tr>
-                                            <tr>
-                                                <th class="text-left">Junio</th>
-                                                <td class="text-left">13</td>
-                                                <td class="text-left">0</td>
-                                                <td class="text-left">17</td>
-                                                <td class="text-left">30</td>
-                                            </tr>
+
+                                            <?php 
+                                                $i++;
+                                                if($i==12)
+                                                    $i=0;
+                                                } 
+                                            ?>             
                                         </tbody>
                                     </table>
                                 </div>
