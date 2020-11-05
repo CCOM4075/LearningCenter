@@ -1,9 +1,5 @@
-
 <?php
-    include './includes/connection.php';
-
-    
-			
+    include './includes/connection.php';			
 ?>
 
 <!DOCTYPE html>
@@ -178,7 +174,6 @@
                                                                                     WHERE month(h.fecha) = 10 AND h.fiscalYear = 1");
                                                 $edades = mysqli_num_rows($queryEdades);
                                                 if($edades>0){
-                                                    
                                                     while($edades = mysqli_fetch_array($queryEdades)){
                                                         if($edades['edad']>=0 && $edades['edad']<=12)
                                                         {
@@ -195,13 +190,9 @@
                                                             $contador[2] = $contador[2] + 1;
                                                             $contador[3] = $contador[3] + 1;
                                                         }
-
                                                     }
-                                                   // $totalParticipantes = array_sum($totalParticipantes);
                                                 }
-                                            ?>
-
-                                            
+                                            ?> 
                                         <tbody>
                                             <tr>
                                                 <td class="text-center"><?php echo $contador[0] ?></td>
@@ -210,7 +201,6 @@
                                                     <td class="text-center"><?php echo $contador[3] ?>
                                                 </td>
                                             </tr>
-
                                         </tbody>
                                     </table>
                                 </div>
