@@ -27,7 +27,6 @@
 
         else if($mesID==9)
             return "Septiembre";
-
             
         else if($mesID==10)
             return "Octubre";
@@ -35,8 +34,10 @@
         else if($mesID==11)
             return "Noviembre";
 
-        else 
+        else if($mesID==12)
             return "Diciembre";
-    }  
-
+        
+        else
+            return "";
+    }
 ?>
