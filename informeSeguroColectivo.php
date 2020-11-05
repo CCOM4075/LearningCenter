@@ -1,4 +1,11 @@
 
+<?php
+    include './includes/connection.php';
+
+    
+			
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -164,13 +171,44 @@
                                                 <th class="text-center">Total</th>
                                             </tr>
                                         </thead>
+                                            <?php
+                                                $contador = array(0,0,0,0);
+                                                $queryEdades = mysqli_query($connection, "SELECT a.id, a.edad FROM hojaasistencia h
+                                                                                    INNER JOIN asistencia a ON h.id = a.hojaAsistencia
+                                                                                    WHERE month(h.fecha) = 10 AND h.fiscalYear = 1");
+                                                $edades = mysqli_num_rows($queryEdades);
+                                                if($edades>0){
+                                                    
+                                                    while($edades = mysqli_fetch_array($queryEdades)){
+                                                        if($edades['edad']>=0 && $edades['edad']<=12)
+                                                        {
+                                                            $contador[0] = $contador[0] + 1;
+                                                            $contador[3] = $contador[3] + 1;
+                                                        }
+                                                        else if($edades['edad']>=13 && $edades['edad']<=17)
+                                                        {
+                                                            $contador[1] = $contador[1] + 1;
+                                                            $contador[3] = $contador[3] + 1;
+                                                        }
+                                                        else if($edades['edad']>=18)
+                                                        {
+                                                            $contador[2] = $contador[2] + 1;
+                                                            $contador[3] = $contador[3] + 1;
+                                                        }
 
+                                                    }
+                                                   // $totalParticipantes = array_sum($totalParticipantes);
+                                                }
+                                            ?>
+
+                                            
                                         <tbody>
                                             <tr>
-                                                <td class="text-center">10</td>
-                                                <td class="text-center">3</td>
-                                                <td class="text-center">45</td>
-                                                <td class="text-center">58</td>
+                                                <td class="text-center"><?php echo $contador[0] ?></td>
+                                                    <td class="text-center"><?php echo $contador[1] ?></td>
+                                                    <td class="text-center"><?php echo $contador[2] ?></td>
+                                                    <td class="text-center"><?php echo $contador[3] ?>
+                                                </td>
                                             </tr>
 
                                         </tbody>
