@@ -1,5 +1,6 @@
 <?php
     include './includes/connection.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -254,7 +255,8 @@
                                         <tbody>
                                             <?php
                                                 $i = 6;
-                                                while($i!=5)
+                                                $exit = false;
+                                                while($exit!=true)
                                                 {
                                             ?>
                                             <tr>
@@ -272,10 +274,14 @@
                                             </tr>
 
                                             <?php 
-                                                $i++;
-                                                if($i==12)
-                                                    $i=0;
-                                                } 
+                                                    $i++; 
+                                                    if($i==12)
+                                                        $i=0;
+                                                 
+                                                    if($i==6)
+                                                        $exit = true; 
+                                                }
+                                                
                                             ?>             
                                         </tbody>
                                     </table>
