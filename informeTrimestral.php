@@ -206,34 +206,6 @@
                 </div>
 
 
-<!--SELECT DISTINCT a.id, p.nombre, p.apellidos, p.edificio, p.unidad, x.proposito, a.edad, p.genero, h.fecha 
-FROM asistencia a 
-INNER JOIN participantes p ON p.participanteID = a.participanteID
-INNER JOIN propositos x ON x.id = a.proposito
-INNER JOIN hojaasistencia h ON h.id = a.hojaAsistencia -->
-                <?php
-                    $participantesID = array();
-                    $queryTrimestral = mysqli_query($connection, "SELECT DISTINCT a.id, p.nombre, p.apellidos, p.edificio, p.unidad, x.proposito, a.edad, p.genero, h.fecha 
-                                                                FROM asistencia a 
-                                                                INNER JOIN participantes p ON p.participanteID = a.participanteID
-                                                                INNER JOIN propositos x ON x.id = a.proposito
-                                                                INNER JOIN hojaasistencia h ON h.id = a.hojaAsistencia ");
-                    $trimestral = mysqli_num_rows($queryTrimestral);
-                    if($edades>0){
-                        while($trimestral = mysqli_fetch_array($queryTrimestral)){
-                            if($trimestral['edad']>=0 && $trimestral['edad']<=12)
-                            {
-                                $contador[0] = $contador[0] + 1;
-                                $contador[3] = $contador[3] + 1;
-                            }
-                            else 
-                            {
-                                $contador[1] = $contador[1] + 1;
-                                $contador[3] = $contador[3] + 1;
-                            }
-                        }
-                    }
-                ?> 
 
                     <div class="container-fluid">
                         <div class="row">
@@ -255,30 +227,67 @@ INNER JOIN hojaasistencia h ON h.id = a.hojaAsistencia -->
                                                 <th class="text-left">62+</th>
                                                 <th class="text-left">F</th>
                                                 <th class="text-left">M</th>
-                                                <th class="text-left">Tutorias/asignaciones supervisadas</th>
-                                                <th class="text-left">Club De Biblioteca</th>
-                                                <th class="text-left">Asistencia Tecnológica</th>
                                             </tr>
                                         </thead>
 
                                         <tbody>
-                                            <tr>
-                                                <td class="text-left">Yeliann Cancel</td>
-                                                <td class="text-left">105</td>
-                                                <td class="text-left">42</td>
-                                                <td class="text-left">2020-01-02</td>
-                                                <td class="text-center"></td><!--0-4-->
-                                                <td class="text-center"></td><!--5-8-->
-                                                <td class="text-center"></td><!--9-13-->
-                                                <td class="text-center"></td><!--14-17-->
-                                                <td class="text-center">x</td><!--18-61-->
-                                                <td class="text-center"></td><!--62+-->
-                                                <td class="text-center">x</td><!--F-->
-                                                <td class="text-center"></td><!--M-->
-                                                <td class="text-center"></td>
-                                                <td class="text-center"></td>
-                                                <td class="text-center"></td>
-                                            </tr>
+                                        <?php
+                                            $participantesID = array();
+                                            $queryTrimestral = mysqli_query($connection, "SELECT DISTINCT a.id, a.participanteID, p.nombre, p.apellidos, p.edificio, p.unidad, x.proposito, a.edad, p.genero, h.fecha 
+                                                                                        FROM asistencia a 
+                                                                                        INNER JOIN participantes p ON p.participanteID = a.participanteID
+                                                                                        INNER JOIN propositos x ON x.id = a.proposito
+                                                                                        INNER JOIN hojaasistencia h ON h.id = a.hojaAsistencia
+                                                                                        WHERE h.fiscalYear = 1");
+
+                                            $trimestral = mysqli_num_rows($queryTrimestral);
+
+                                            if($trimestral>0)
+                                            {
+                                                while($trimestral = mysqli_fetch_array($queryTrimestral))
+                                                {
+                                                    if(!(in_array($trimestral['participanteID'], $participantesID)))
+                                                    {
+                                                        array_push($participantesID, $trimestral['participanteID']);
+                                                        ?>
+                                                         <tr>
+                                                            <td class="text-left"><?php echo $trimestral['nombre']." ".$trimestral['apellidos']?></td>
+                                                            <td class="text-left"><?php echo $trimestral['edificio'] ?></td>
+                                                            <td class="text-left"><?php echo $trimestral['unidad']?></td>
+                                                            <td class="text-left"><?php echo $trimestral['fecha']?></td>
+                                                            <td class="text-center"><?php
+                                                                                        if($trimestral['edad']>=0 && $trimestral['edad']<=4)
+                                                                                            echo "x";
+                                                                                    ?></td><!--0-4-->
+                                                            <td class="text-center"><?php
+                                                                                        if($trimestral['edad']>=5 && $trimestral['edad']<=8)
+                                                                                            echo "x";
+                                                                                    ?></td><!--5-8-->
+                                                            <td class="text-center"><?php
+                                                                                        if($trimestral['edad']>=9 && $trimestral['edad']<=13)
+                                                                                            echo "x";
+                                                                                    ?></td><!--9-13-->
+                                                            <td class="text-center"><?php
+                                                                                        if($trimestral['edad']>=14 && $trimestral['edad']<=17)
+                                                                                            echo "x";
+                                                                                    ?></td><!--14-17-->
+                                                            <td class="text-center"><?php
+                                                                                        if($trimestral['edad']>=18 && $trimestral['edad']<=61)
+                                                                                            echo "x";
+                                                                                    ?></td><!--18-61-->
+                                                            <td class="text-center"><?php
+                                                                                        if($trimestral['edad']>61)
+                                                                                            echo "x";
+                                                                                    ?></td><!--62+-->
+                                                            <td class="text-center"><?php if($trimestral['genero']=='F')echo "x";?></td><!--F-->
+                                                            <td class="text-center"><?php if($trimestral['genero']=='M')echo "x";?></td><!--M-->
+                                                        </tr>
+                                                        <?php
+                                                    }
+                                                }
+                                            }
+                                        ?> 
+                                           
                                                                                                                     
                                         </tbody>
                                     </table>
