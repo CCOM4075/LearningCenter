@@ -385,31 +385,34 @@
                                                 <th class="text-left">Actividad</th>
                                                 <th class="text-left">Cantidad De Residentes</th>
                                                 <th class="text-left">Población Impactada</th>
-                                                <th class="text-left">Fecha</th>
                                             </tr>
                                         </thead>
 
                                         <tbody>
 
                                             <?php
-                                                $queryReExamen = mysqli_query($connection, "SELECT COUNT(a.id)
-                                                    FROM hojaasistencia h
-                                                    INNER JOIN asistencia a ON h.id = a.hojaAsistencia
-                                                    INNER JOIN participantes p ON a.participanteID = p.participanteID
-                                                    INNER JOIN propositos x ON a.proposito = x.id
-                                                    WHERE a.proposito = 4 AND month(h.fecha) = 10");
+                                                $queryReExamen = mysqli_query($connection, "SELECT a.participanteID
+                                                FROM asistencia a
+                                                INNER JOIN hojaasistencia h ON h.id = a.hojaAsistencia
+                                                WHERE month(h.fecha)= 10 AND h.fiscalYear = 1 AND a.proposito = 4");
+
+                                                $queryResume = mysqli_query($connection, "SELECT a.participanteID
+                                                FROM asistencia a
+                                                INNER JOIN hojaasistencia h ON h.id = a.hojaAsistencia
+                                                WHERE month(h.fecha)= 10 AND h.fiscalYear = 1 AND a.proposito = 5");
+
+                                                $resume = mysqli_num_rows($queryResume);
                                             ?>
                                             <tr>
                                                 <td class="text-left">Re-Exámen</td>
-                                                <td class="text-left">14</td>
+                                                <td class="text-left"><?php echo mysqli_num_rows($queryReExamen);?>
+                                                </td>
                                                 <td class="text-left">Adulto</td>
-                                                <td class="text-left">2020-01-31</td>
                                             </tr>
                                             <tr>
                                                 <td class="text-left">Resumé</td>
-                                                <td class="text-left">1</td>
+                                                <td class="text-left"><?php echo mysqli_num_rows($queryResume);?></td>
                                                 <td class="text-left">Adulto</td>
-                                                <td class="text-left">2020-01-31</td>
                                             </tr>
                                         </tbody>
                                     </table>
