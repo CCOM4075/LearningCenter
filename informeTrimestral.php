@@ -1,3 +1,7 @@
+<?php
+    include './includes/connection.php';			
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -201,6 +205,36 @@
                     </div>
                 </div>
 
+
+<!--SELECT DISTINCT a.id, p.nombre, p.apellidos, p.edificio, p.unidad, x.proposito, a.edad, p.genero, h.fecha 
+FROM asistencia a 
+INNER JOIN participantes p ON p.participanteID = a.participanteID
+INNER JOIN propositos x ON x.id = a.proposito
+INNER JOIN hojaasistencia h ON h.id = a.hojaAsistencia -->
+                <?php
+                    $participantesID = array();
+                    $queryTrimestral = mysqli_query($connection, "SELECT DISTINCT a.id, p.nombre, p.apellidos, p.edificio, p.unidad, x.proposito, a.edad, p.genero, h.fecha 
+                                                                FROM asistencia a 
+                                                                INNER JOIN participantes p ON p.participanteID = a.participanteID
+                                                                INNER JOIN propositos x ON x.id = a.proposito
+                                                                INNER JOIN hojaasistencia h ON h.id = a.hojaAsistencia ");
+                    $trimestral = mysqli_num_rows($queryTrimestral);
+                    if($edades>0){
+                        while($trimestral = mysqli_fetch_array($queryTrimestral)){
+                            if($trimestral['edad']>=0 && $trimestral['edad']<=12)
+                            {
+                                $contador[0] = $contador[0] + 1;
+                                $contador[3] = $contador[3] + 1;
+                            }
+                            else 
+                            {
+                                $contador[1] = $contador[1] + 1;
+                                $contador[3] = $contador[3] + 1;
+                            }
+                        }
+                    }
+                ?> 
+
                     <div class="container-fluid">
                         <div class="row">
                         <div class="col-lg-10"></div>
@@ -245,142 +279,7 @@
                                                 <td class="text-center"></td>
                                                 <td class="text-center"></td>
                                             </tr>
-                                            <tr>
-                                                <td class="text-left">Julia Candelaria</td>
-                                                <td class="text-left">101</td>
-                                                <td class="text-left">4</td>
-                                                <td class="text-left">2020-01-02</td>
-                                                <td class="text-center"></td><!--0-4-->
-                                                <td class="text-center"></td><!--5-8-->
-                                                <td class="text-center"></td><!--9-13-->
-                                                <td class="text-center"></td><!--14-17-->
-                                                <td class="text-center">x</td><!--18-61-->
-                                                <td class="text-center"></td><!--62+-->
-                                                <td class="text-center">x</td><!--F-->
-                                                <td class="text-center"></td><!--M-->
-                                                <td class="text-center"></td>
-                                                <td class="text-center"></td>
-                                                <td class="text-center"></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">Jahil Bonet</td>
-                                                <td class="text-left">108</td>
-                                                <td class="text-left">64</td>
-                                                <td class="text-left">2020-01-02</td>
-                                                <td class="text-center"></td><!--0-4-->
-                                                <td class="text-center"></td><!--5-8-->
-                                                <td class="text-center"></td><!--9-13-->
-                                                <td class="text-center">x</td><!--14-17-->
-                                                <td class="text-center"></td><!--18-61-->
-                                                <td class="text-center"></td><!--62+-->
-                                                <td class="text-center"></td><!--F-->
-                                                <td class="text-center">x</td><!--M-->
-                                                <td class="text-center"></td>
-                                                <td class="text-center"></td>
-                                                <td class="text-center"></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">Yeliann Cancel</td>
-                                                <td class="text-left">105</td>
-                                                <td class="text-left">42</td>
-                                                <td class="text-left">2020-01-02</td>
-                                                <td class="text-center"></td><!--0-4-->
-                                                <td class="text-center"></td><!--5-8-->
-                                                <td class="text-center"></td><!--9-13-->
-                                                <td class="text-center"></td><!--14-17-->
-                                                <td class="text-center">x</td><!--18-61-->
-                                                <td class="text-center"></td><!--62+-->
-                                                <td class="text-center">x</td><!--F-->
-                                                <td class="text-center"></td><!--M-->
-                                                <td class="text-center"></td>
-                                                <td class="text-center"></td>
-                                                <td class="text-center"></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">Julia Candelaria</td>
-                                                <td class="text-left">101</td>
-                                                <td class="text-left">4</td>
-                                                <td class="text-left">2020-01-02</td>
-                                                <td class="text-center"></td><!--0-4-->
-                                                <td class="text-center"></td><!--5-8-->
-                                                <td class="text-center"></td><!--9-13-->
-                                                <td class="text-center"></td><!--14-17-->
-                                                <td class="text-center">x</td><!--18-61-->
-                                                <td class="text-center"></td><!--62+-->
-                                                <td class="text-center">x</td><!--F-->
-                                                <td class="text-center"></td><!--M-->
-                                                <td class="text-center"></td>
-                                                <td class="text-center"></td>
-                                                <td class="text-center"></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">Jahil Bonet</td>
-                                                <td class="text-left">108</td>
-                                                <td class="text-left">64</td>
-                                                <td class="text-left">2020-01-02</td>
-                                                <td class="text-center"></td><!--0-4-->
-                                                <td class="text-center"></td><!--5-8-->
-                                                <td class="text-center"></td><!--9-13-->
-                                                <td class="text-center">x</td><!--14-17-->
-                                                <td class="text-center"></td><!--18-61-->
-                                                <td class="text-center"></td><!--62+-->
-                                                <td class="text-center"></td><!--F-->
-                                                <td class="text-center">x</td><!--M-->
-                                                <td class="text-center"></td>
-                                                <td class="text-center"></td>
-                                                <td class="text-center"></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">Yeliann Cancel</td>
-                                                <td class="text-left">105</td>
-                                                <td class="text-left">42</td>
-                                                <td class="text-left">2020-01-02</td>
-                                                <td class="text-center"></td><!--0-4-->
-                                                <td class="text-center"></td><!--5-8-->
-                                                <td class="text-center"></td><!--9-13-->
-                                                <td class="text-center"></td><!--14-17-->
-                                                <td class="text-center">x</td><!--18-61-->
-                                                <td class="text-center"></td><!--62+-->
-                                                <td class="text-center">x</td><!--F-->
-                                                <td class="text-center"></td><!--M-->
-                                                <td class="text-center"></td>
-                                                <td class="text-center"></td>
-                                                <td class="text-center"></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">Julia Candelaria</td>
-                                                <td class="text-left">101</td>
-                                                <td class="text-left">4</td>
-                                                <td class="text-left">2020-01-02</td>
-                                                <td class="text-center"></td><!--0-4-->
-                                                <td class="text-center"></td><!--5-8-->
-                                                <td class="text-center"></td><!--9-13-->
-                                                <td class="text-center"></td><!--14-17-->
-                                                <td class="text-center">x</td><!--18-61-->
-                                                <td class="text-center"></td><!--62+-->
-                                                <td class="text-center">x</td><!--F-->
-                                                <td class="text-center"></td><!--M-->
-                                                <td class="text-center"></td>
-                                                <td class="text-center"></td>
-                                                <td class="text-center"></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">Jahil Bonet</td>
-                                                <td class="text-left">108</td>
-                                                <td class="text-left">64</td>
-                                                <td class="text-left">2020-01-02</td>
-                                                <td class="text-center"></td><!--0-4-->
-                                                <td class="text-center"></td><!--5-8-->
-                                                <td class="text-center"></td><!--9-13-->
-                                                <td class="text-center">x</td><!--14-17-->
-                                                <td class="text-center"></td><!--18-61-->
-                                                <td class="text-center"></td><!--62+-->
-                                                <td class="text-center"></td><!--F-->
-                                                <td class="text-center">x</td><!--M-->
-                                                <td class="text-center"></td>
-                                                <td class="text-center"></td>
-                                                <td class="text-center"></td>
-                                            </tr>
+                                                                                                                    
                                         </tbody>
                                     </table>
                                 </div>
