@@ -14,18 +14,18 @@ if(!empty($_SESSION['active']))
 
 	if(!empty($_POST))
 	{
-		if(empty($_POST['email']) || empty($_POST['password']))
+		if(empty($_POST['usuario']) || empty($_POST['password']))
 		{
-			$alert = 'Ingrese su Email y Password';
+			$alert = 'Ingrese su usuario y contraseña';
 		}else{
             
 			include './includes/connection.php';
 
 			
-			$email = $_POST['email'];
+			$email = $_POST['usuario'];
 			$password = $_POST['password'];
 
-			$query = mysqli_query($connection, "SELECT * FROM usuarios WHERE email = '$email' AND password = '$password'");
+			$query = mysqli_query($connection, "SELECT * FROM usuarios WHERE usuario = '$usuario' AND password = '$password'");
 			$result = mysqli_num_rows($query);
 			if($result>0)
 			{
@@ -41,7 +41,7 @@ if(!empty($_SESSION['active']))
 				}
 				
 			}else{
-				$alert = 'El Email o la Contraseña son incorrectos.';
+				$alert = 'El usuario o la contraseña son incorrectos.';
 				session_destroy();
 			}
 
@@ -103,8 +103,8 @@ if(!empty($_SESSION['active']))
                         <div class="login-form">
                             <form action="" method="post">
                                 <div class="form-group">
-                                    <label>Correo Electrónico</label>
-                                    <input class="au-input au-input--full" type="email" name="email" placeholder="">
+                                    <label>Usuario</label>
+                                    <input class="au-input au-input--full" type="usuario" name="usuario" placeholder="">
                                 </div>
                                 <div class="form-group">
                                     <label>Contraseña</label>

@@ -14,14 +14,14 @@
 	{
         
 		$alert='';
-		if(empty($_POST['nombre']) || empty($_POST['email']) || empty($_POST['password']) 
+		if(empty($_POST['nombre']) || empty($_POST['usuario']) || empty($_POST['password']) 
             || empty($_POST['password2']) || empty($_POST['tipoCuenta']))
 		{
 			$alert='<p class="msg_error">Todos los campos son Obligatorios</p>';
 		}else{
             $nombre = $_POST['nombre'];
             $apellidos = $_POST['apellidos'];
-            $email = $_POST['email'];
+            $usuario = $_POST['usuario'];
             $password = $_POST['password'];
             $password2 = $_POST['password2'];
             $tipoCuenta = $_POST['tipoCuenta'];
@@ -29,15 +29,15 @@
             if($password != $password2){
 				$alert='<p class="msg_error">Las Contraseñas no coincide.</p>';
 			}else{
-                /* Query Para buscar si el email ya existe */
-				/*$query = mysqli_query($connection, "SELECT * FROM usuarios WHERE email = '$email'");
+                /* Query Para buscar si el usuario ya existe */
+				/*$query = mysqli_query($connection, "SELECT * FROM usuarios WHERE usuario = '$usuario'");
                 $result = mysqli_fetch_Array($query);
                 
                 if($result > 0){
 					$alert='<p class="msg_error">EL Correo Electronico ya está registrado.</p>';
 				}else{*/
-                        $query_insert = mysqli_query($connection, "UPDATE usuarios SET nombre='$nombre', apellidos='$apellidos', email='$email',
-                         password='$password', rol='$tipoCuenta'");
+                        $query_insert = mysqli_query($connection, "UPDATE usuarios SET nombre='$nombre', apellidos='$apellidos', usuario='$usuario',
+                         password='$password', rol='$tipoCuenta' WHERE userID = '$usuarioID");
                     
                             if($query_insert){
                                 $alert='<p class="msg_save">Se ha registrado el ususario.</p>';
@@ -279,10 +279,10 @@
 
                                             <div class="row form-group">
                                                 <div class="col col-md-3">
-                                                    <label for= "email" class=" form-control-label" for="text-input" >Correo Electronico</label>
+                                                    <label for= "usuario" class=" form-control-label" for="text-input" >Usuario</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input class="form-control" type="email" id="email" value="<?php echo $data["email"] ?>" name="email">
+                                                    <input class="form-control" type="text" id="usuario" value="<?php echo $data["usuario"] ?>" name="usuario">
                                                 </div>
                                             </div>
                                                 
@@ -310,7 +310,7 @@
                                                 </button>
                                                 <?php
                                                 $alert='';
-                                                if(empty($_POST['nombre']) || empty($_POST['email']) || empty($_POST['password']) 
+                                                if(empty($_POST['nombre']) || empty($_POST['usuario']) || empty($_POST['password']) 
                                                     || empty($_POST['password2']) || empty($_POST['tipoCuenta']))
                                                 {
                                                     
@@ -318,8 +318,8 @@
                                                 }else{
                                                     if($password == $password2)
                                                     {
-                                                 if(isset($_POST['someter'])){
-                                                     echo "<script>window.open('listaUsuarios.php','_self')</script>";
+                                                        if(isset($_POST['someter'])){
+                                                            echo "<script>window.open('listaUsuarios.php','_self')</script>";
                             
                                                       }
                                                     }

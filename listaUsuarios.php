@@ -79,7 +79,7 @@
                                                 <th class="text-left">ID</th>
                                                 <th class="text-left">Nombre</th>
                                                 <th class="text-left">Tipo De Cuenta</th>
-                                                <th class="text-left">Email</th>
+                                                <th class="text-left">Usuario</th>
                                                 <th class="text-left">Opciones</th>
                                             </tr>
                                         </thead>
@@ -89,7 +89,7 @@
                                             
                                         
                                         <?php 
-                                            $query = mysqli_query($connection, "SELECT u.userID, u.nombre, u.apellidos, u.email, r.rol FROM usuarios u INNER JOIN rol r ON u.rol = r.rolID");
+                                            $query = mysqli_query($connection, "SELECT u.userID, u.nombre, u.apellidos, u.usuario, r.rol FROM usuarios u INNER JOIN rol r ON u.rol = r.rolID");
                                             $result = mysqli_num_rows($query);
                                             if($result > 0){
 
@@ -99,7 +99,7 @@
                                                     <td><?php echo $usuario['userID']?></td>
                                                     <td><?php echo $usuario['nombre']." ".$usuario['apellidos']?></td>
                                                     <td><?php echo $usuario['rol']?></td>
-                                                    <td><?php echo $usuario['email']?></td>
+                                                    <td><?php echo $usuario['usuario']?></td>
                                                     <td><a  href="editUsuario.php?id=<?php echo $usuario['userID'];?>">Editar</a> | <a  href="deleteUsuario.php?id=<?php echo $usuario['userID'];?>">Eliminar</a></td>
                                                 </tr>
 
