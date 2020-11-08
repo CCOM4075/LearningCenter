@@ -1,13 +1,18 @@
 <?php
     include './includes/connection.php';
+
     if(empty($_REQUEST['id']))
         {
             header("location: listaActividades.php");
         }else{
             $actividadID = $_REQUEST['id'];
-                   
- 
-}
+        }
+
+    $query = mysqli_query($connection, "SELECT actividadID FROM actividades where actividadID = '$actividadID'");
+    $result = mysqli_num_rows($query);
+    if($result == 0){
+            header("location: listaActividades.php");
+    }
  
 ?>
 <!DOCTYPE html>
@@ -129,7 +134,7 @@
                             </div>
                             
                             <div class="section__content section__content--p30">
-                            <h2 class="title-2">Fotos</h2>
+                            <h2 class="title-2">Galería</h2>
                             <div class="row m-t-25"></div>
                             <?php 
                               $query = mysqli_query($connection, "SELECT foto FROM fotosactividades WHERE actividad = '$actividadID'");
@@ -250,4 +255,3 @@
  
 </html>
 <!-- end document-->
- 
