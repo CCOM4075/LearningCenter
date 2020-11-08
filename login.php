@@ -22,7 +22,7 @@ if(!empty($_SESSION['active']))
 			include './includes/connection.php';
 
 			
-			$email = $_POST['usuario'];
+			$usuario = $_POST['usuario'];
 			$password = $_POST['password'];
 
 			$query = mysqli_query($connection, "SELECT * FROM usuarios WHERE usuario = '$usuario' AND password = '$password'");
@@ -104,7 +104,7 @@ if(!empty($_SESSION['active']))
                             <form action="" method="post">
                                 <div class="form-group">
                                     <label>Usuario</label>
-                                    <input class="au-input au-input--full" type="usuario" name="usuario" placeholder="">
+                                    <input class="au-input au-input--full" type="text" name="usuario" placeholder="">
                                 </div>
                                 <div class="form-group">
                                     <label>Contraseña</label>
