@@ -100,7 +100,7 @@
                                                     <td><?php echo $usuario['nombre']." ".$usuario['apellidos']?></td>
                                                     <td><?php echo $usuario['rol']?></td>
                                                     <td><?php echo $usuario['usuario']?></td>
-                                                    <td><a  href="editUsuario.php?id=<?php echo $usuario['userID'];?>">Editar</a> | <a  href="deleteUsuario.php?id=<?php echo $usuario['userID'];?>">Eliminar</a></td>
+                                                    <td><a  href="editUsuario.php?id=<?php echo $usuario['userID'];?>" class='far fa-edit' style='color:green'></a> <a  href="deleteUsuario.php?id=<?php echo $usuario['userID'];?>" class='fas fa-trash' style='color:red'></a></td>
                                                 </tr>
 
                                         <?php
