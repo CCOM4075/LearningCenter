@@ -1,6 +1,20 @@
 <?php
     include './includes/connection.php';
 
+    if(!empty($_REQUEST['fecha']))
+    {
+        $fechaString = $_REQUEST['fecha'];
+        $fechaFormato = new DateTime($fechaString);
+
+        $query = mysqli_query($connection, "SELECT a.participanteID, p.nombre, p.apellidos, a.edad, a.horaDeEntrada, a.horaDeSalida, x.proposito
+                                                                        FROM hojaasistencia h
+                                                                        INNER JOIN asistencia a ON h.id = a.hojaAsistencia
+                                                                        INNER JOIN participantes p ON a.participanteID = p.participanteID
+                                                                        INNER JOIN propositos x ON a.proposito = x.id
+                                                                        WHERE h.fecha = '$fechaString'"); //Arreglar(Estatico, poner dinamico)
+                                  
+        $result = mysqli_num_rows($query);
+    }
     
 ?>
 <!DOCTYPE html>
@@ -44,119 +58,6 @@
 
 <body class="animsition">
     <div class="page-wrapper">
-        <!-- HEADER MOBILE-->
-        <header class="header-mobile d-block d-lg-none">
-            <div class="header-mobile__bar">
-                <div class="container-fluid">
-                    <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
-                            <img src="images/icon/LC_icon175x55.png" alt="CoolAdmin" />
-                        </a>
-                        <button class="hamburger hamburger--slider" type="button">
-                            <span class="hamburger-box">
-                                <span class="hamburger-inner"></span>
-                            </span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <nav class="navbar-mobile">
-                <div class="container-fluid">
-                    <ul class="navbar-mobile__list list-unstyled">
-
-                        
-                        <li>
-                            <a href="index.html">
-                                <i class="fas fa-chart-bar"></i>Inicio</a>
-                        </li>
-
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-tachometer-alt"></i>Registro</a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="form.html">Registro De Participante</a>
-                                </li>
-                                <li>
-                                    <a href="form2.php">Registro De Administrador</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="informes.html">
-                                <i class="fas fa-table"></i>Informe</a>
-                        </li>
-                        <li>
-                            <a href="calendar.html">
-                                <i class="fas fa-calendar-alt"></i>Calendario</a>
-                        </li>
-
-                        <!--
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>Pages</a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="login.html">Login</a>
-                                </li>
-                                <li>
-                                    <a href="register.html">Register</a>
-                                </li>
-                                <li>
-                                    <a href="forget-pass.html">Forget Password</a>
-                                </li>
-                            </ul>
-                        </li>
-                        -->
-
-                        <!--
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-desktop"></i>UI Elements</a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="button.html">Button</a>
-                                </li>
-                                <li>
-                                    <a href="badge.html">Badges</a>
-                                </li>
-                                <li>
-                                    <a href="tab.html">Tabs</a>
-                                </li>
-                                <li>
-                                    <a href="card.html">Cards</a>
-                                </li>
-                                <li>
-                                    <a href="alert.html">Alerts</a>
-                                </li>
-                                <li>
-                                    <a href="progress-bar.html">Progress Bars</a>
-                                </li>
-                                <li>
-                                    <a href="modal.html">Modals</a>
-                                </li>
-                                <li>
-                                    <a href="switch.html">Switchs</a>
-                                </li>
-                                <li>
-                                    <a href="grid.html">Grids</a>
-                                </li>
-                                <li>
-                                    <a href="fontawesome.html">Fontawesome Icon</a>
-                                </li>
-                                <li>
-                                    <a href="typo.html">Typography</a>
-                                </li>
-                            </ul>
-                        </li>
-                        -->
-
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        <!-- END HEADER MOBILE-->
 
         <!-- MENU SIDEBAR-->
         <?php
@@ -181,7 +82,18 @@
                 <div class="table-data__tool">
                     <div class="table-data__tool-left">
                         <h3 class="title-1">Asistencia</h3>
-                        <h2 class="title-7">29 Septiembre 2020</h2>
+                        <h2 class="title-7"><?php 
+                                                if(!empty($_REQUEST['fecha']))
+                                                {
+                                                    include_once './functions/mes.php';
+                                                    $numeroDia = $fechaFormato->format('d');
+                                                    $numeroMes = $fechaFormato->format('m');
+                                                    $year = $fechaFormato->format('yy');
+                                                    $mes = mes($numeroMes);
+                                                    echo $numeroDia." de ".$mes." de ".$year;
+                                                    
+                                                }
+                                            ?></h2>
                     </div>
                     <div class="table-data__tool-right">
                         <div class="row form-group">
@@ -194,6 +106,7 @@
                         </div>
                     </div>
                 </div>
+                <?php if(!empty($_REQUEST['fecha'])){echo $fechaString;}?>
                 <div class="container-fluid">
 
                 
@@ -214,7 +127,7 @@
                                 <tbody>
 
                                 <?php    
-                                if(empty($_REQUEST['fecha']))
+                                if(empty($_REQUEST['fecha'])||$result==0)
                                 {
                                 ?>
                                     <tr>
@@ -226,15 +139,6 @@
                                     </tr>
                                 <?php
                                 }else{
-                                    $fecha = $_REQUEST['fecha'];
-                                    $query = mysqli_query($connection, "SELECT a.participanteID, p.nombre, p.apellidos, a.edad, a.horaDeEntrada, a.horaDeSalida, x.proposito
-                                                                        FROM hojaasistencia h
-                                                                        INNER JOIN asistencia a ON h.id = a.hojaAsistencia
-                                                                        INNER JOIN participantes p ON a.participanteID = p.participanteID
-                                                                        INNER JOIN propositos x ON a.proposito = x.id
-                                                                        WHERE h.fecha = '2020-10-30'"); //Arreglar(Estatico, poner dinamico)
-                                  
-                                    $result = mysqli_num_rows($query);
                                     if($result > 0){
                                         while($asistencia = mysqli_fetch_array($query)){
                                 ?>			
