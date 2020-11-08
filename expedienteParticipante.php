@@ -7,7 +7,7 @@
             $participanteID = $_REQUEST['id'];
             $query = mysqli_query($connection, "SELECT * FROM `participantes` WHERE participanteID = '$participanteID'");
             $query2 = mysqli_query($connection, "SELECT h.fecha, p.proposito FROM `asistencia` a INNER JOIN propositos p 
-                    ON a.proposito = p.id INNER JOIN hojaasistencia h ON a.hojaAsistencia = h.id WHERE a.participanteID = $participanteID");
+                    ON a.proposito = p.id INNER JOIN hojaasistencia h ON a.hojaAsistencia = h.id WHERE a.participanteID = $participanteID ORDER BY h.id DESC");
             $participante = mysqli_fetch_array($query);
             
 
@@ -162,12 +162,63 @@
                                             <?php
                                                     }
                                                 }
+                                                else{
+                                                    ?>
+                                                    <tr>
+                                                        <td>N/A</td>
+                                                        <td>N/A</td>
+                                                    </tr>   
+                                                    <?php                                             
+                                                }
                                             ?>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
+                            <div class="col-lg-10"></div>
+                            <h2 class="title-2">Asistencia de Actividad:</h2>
+                                <div class="row m-t-25"></div>
+                                <div class="table-responsive table--no-card m-b-30">
+                                    <!--tabla blanca-->
+                                    <table class="table table-borderless table-striped table-earning">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-left">Fecha</th>
+                                                <th class="text-left">Nombre</th>
+                                            </tr>
+                                        </thead>
 
+                                        <tbody>
+                                            <?php 
+                                            $queryActividad = mysqli_query($connection, "SELECT b.fecha, b.nombre 
+                                            FROM asistenciaactividad a 
+                                            INNER JOIN actividades b ON a.actividadID =  b.actividadID
+                                            WHERE a.participanteID = '$participanteID' ORDER BY b.actividadID ASC");
+
+                                                $result1 = mysqli_num_rows($queryActividad);
+                                                if($result1 > 0){
+                                                    while($datos = mysqli_fetch_array($queryActividad)){
+                                            ?>			
+                                                    <tr>
+                                                        <td><?php echo $datos['fecha']?></td>
+                                                        <td><?php echo $datos['nombre']?></td>
+                                                    </tr>
+                                            <?php
+                                                    }
+                                                }
+                                                else{
+                                                    ?>
+                                                    <tr>
+                                                        <td>N/A</td>
+                                                        <td>N/A</td>
+                                                    </tr>   
+                                                    <?php                                             
+                                                }
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                             </div>
                         </div>
                         <!--Footer-->
