@@ -92,7 +92,7 @@
                                             </tr>
                                         </thead>
                                         <?php 
-                                            $query = mysqli_query($connection, "SELECT fecha, nombre, recurso, lugar, participantes, hora, actividadID FROM actividades where actividadID = '$actividadID'");
+                                            $query = mysqli_query($connection, "SELECT fecha, nombre, recurso, lugar, participantes, hora,  promocion  FROM actividades where actividadID = '$actividadID'");
                                             $result = mysqli_num_rows($query);
                                             if($result > 0){
  
@@ -124,6 +124,8 @@
                                                 <td class="text-left"><?php echo $actividad['hora']?></td>
                                             </tr>
                                             <tr>
+                                                <th class="text-left">Promoción</th>
+                                                <td class="text-left"><?php echo $actividad['promocion']?></td>
                                             </tr>
                                             <?php
                                                 }
@@ -184,15 +186,16 @@
                                             WHERE a.actividadID = '$actividadID'");
                                             $result = mysqli_num_rows($query);
                                             if($result > 0){
- 
+                                                    $i = 1;
                                                 while($participante = mysqli_fetch_array($query)){
+                                                    
                                                     $naci = $participante['birthday'];
                                                     $fecha_nacimiento = new DateTime($naci) ;
                                                     $hoy = new DateTime();
                                                     $edad = $hoy->diff($fecha_nacimiento);
                                         ?>  
                                             <tr>
-                                                <td class="text-left"><?php echo $participante['participanteID']?></td>
+                                                <td class="text-left"><?php echo $i?></td>
                                                 <td class="text-left">
                                                     <a href="expedienteParticipante.php?id=<?php echo $participante['participanteID'];?>"><?php echo $participante['nombre']." ".$participante['apellidos']?></a></td>
                                                 <td class="text-left"><?php echo $edad->y?></td>
@@ -200,6 +203,7 @@
                                                 <td class="text-left"><?php echo $participante['unidad']?></td>
                                             </tr>
                                             <?php
+                                                $i++;
                                                 }
                                             }
                                         ?>
@@ -255,3 +259,4 @@
  
 </html>
 <!-- end document-->
+ 
