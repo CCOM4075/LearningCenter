@@ -7,12 +7,11 @@
         $fechaFormato = new DateTime($fechaString);
 
         $query = mysqli_query($connection, "SELECT a.participanteID, p.nombre, p.apellidos, a.edad, a.horaDeEntrada, a.horaDeSalida, x.proposito
-                                                                        FROM hojaasistencia h
-                                                                        INNER JOIN asistencia a ON h.id = a.hojaAsistencia
-                                                                        INNER JOIN participantes p ON a.participanteID = p.participanteID
-                                                                        INNER JOIN propositos x ON a.proposito = x.id
-                                                                        WHERE h.fecha = '$fechaString'"); //Arreglar(Estatico, poner dinamico)
-                                  
+                                            FROM hojaasistencia h
+                                            INNER JOIN asistencia a ON h.id = a.hojaAsistencia
+                                            INNER JOIN participantes p ON a.participanteID = p.participanteID
+                                            INNER JOIN propositos x ON a.proposito = x.id
+                                            WHERE h.fecha = '$fechaString'");                            
         $result = mysqli_num_rows($query);
     }
     
