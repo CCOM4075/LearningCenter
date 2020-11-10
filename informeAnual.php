@@ -1,6 +1,54 @@
 <?php
     include './includes/connection.php';
 
+    if(!empty($_REQUEST['fiscalYear']))
+    {
+        $fiscalYear = $_REQUEST['fiscalYear'];
+
+        $meses = array (array(0,0,0,0),
+        array(0,0,0,0),
+        array(0,0,0,0),
+        array(0,0,0,0),
+        array(0,0,0,0),
+        array(0,0,0,0),
+        array(0,0,0,0),
+        array(0,0,0,0),
+        array(0,0,0,0),
+        array(0,0,0,0), 
+        array(0,0,0,0),
+        array(0,0,0,0));
+        $queryEdades = mysqli_query($connection, "SELECT h.fecha, a.edad FROM hojaasistencia h
+                            INNER JOIN asistencia a ON h.id = a.hojaAsistencia
+                            WHERE h.fiscalYear = '$fiscalYear'");
+        $edades = mysqli_num_rows($queryEdades);
+        if($edades>0)
+                    {
+                        while($edades = mysqli_fetch_array($queryEdades))
+                        {
+                            $fecha = new DateTime($edades['fecha']);
+                            $mes = $fecha->format('m');
+
+                            if($edades['edad']>=0 && $edades['edad']<=12)
+                            {
+                                $meses[$mes-1][0] += 1;
+                                $meses[$mes-1][3] += 1;
+                            }
+                            else if($edades['edad']>=13 && $edades['edad']<=17)
+                            {
+                                $meses[$mes-1][1] += 1;
+                                $meses[$mes-1][3] += 1;
+
+                            }
+                            else if($edades['edad']>=18)
+                            {
+                                $meses[$mes-1][2] += 1;
+                                $meses[$mes-1][3] += 1;
+
+                            }
+                        }
+                    }
+    }
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -183,58 +231,29 @@
                     <div class="table-data__tool-right">
                         <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
                                     <!--rs-select2--light rs-select2--sm-->
-                            <select class="js-select2" name="type">
+                            <select class="js-select2" id="fiscalYear" name="fiscalYear"> 
                                 <option selected="selected">Año Fiscal </option>
-                                <option value="">2019-2020</option>
-                                <option value="">2020-2021</option>
+                                <?php
+                                    $runFiscalYear = mysqli_query($connection,"SELECT * FROM fiscalYear");
+
+                                    while($fiscalYear = mysqli_fetch_array($runFiscalYear))
+                                    {
+                                        $year = $fiscalYear['year'];
+                                        $id = $fiscalYear['id'];
+                                ?>
+                                        <option value="<?php echo $id ?>"><?php echo $year ?></option>
+                                        <?php
+                                    }
+                                        ?>
                             </select>
+                       
                             <div class="dropDownSelect2"></div>
                         </div>
                     </div>
                 </div>
                 <?php
-                    $meses = array (array(0,0,0,0),
-                                    array(0,0,0,0),
-                                    array(0,0,0,0),
-                                    array(0,0,0,0),
-                                    array(0,0,0,0),
-                                    array(0,0,0,0),
-                                    array(0,0,0,0),
-                                    array(0,0,0,0),
-                                    array(0,0,0,0),
-                                    array(0,0,0,0),
-                                    array(0,0,0,0),
-                                    array(0,0,0,0));
-                    $queryEdades = mysqli_query($connection, "SELECT h.fecha, a.edad FROM hojaasistencia h
-                                                        INNER JOIN asistencia a ON h.id = a.hojaAsistencia
-                                                        WHERE h.fiscalYear = 1");
-                    $edades = mysqli_num_rows($queryEdades);
-                    if($edades>0)
-                    {
-                        while($edades = mysqli_fetch_array($queryEdades))
-                        {
-                            $fecha = new DateTime($edades['fecha']);
-                            $mes = $fecha->format('m');
-
-                            if($edades['edad']>=0 && $edades['edad']<=12)
-                            {
-                                $meses[$mes-1][0] += 1;
-                                $meses[$mes-1][3] += 1;
-                            }
-                            else if($edades['edad']>=13 && $edades['edad']<=17)
-                            {
-                                $meses[$mes-1][1] += 1;
-                                $meses[$mes-1][3] += 1;
-
-                            }
-                            else if($edades['edad']>=18)
-                            {
-                                $meses[$mes-1][2] += 1;
-                                $meses[$mes-1][3] += 1;
-
-                            }
-                        }
-                    }
+                    
+                    
                 ?>
                     <div class="container-fluid">
                         <div class="row">
@@ -254,7 +273,7 @@
                                         
                                         <tbody>
                                             <?php
-                                                $i = 6;
+                                                $i = 6 ;
                                                 $exit = false;
                                                 while($exit!=true)
                                                 {
@@ -267,10 +286,14 @@
                                                     echo "$mes";
                                                 ?>
                                                 </th>
-                                                <td class="text-left"><?php echo $meses[$i][0] ?></td>
-                                                <td class="text-left"><?php echo $meses[$i][1] ?></td>
-                                                <td class="text-left"><?php echo $meses[$i][2] ?></td>
-                                                <td class="text-left"><?php echo $meses[$i][3] ?></td>
+                                                <td class="text-left"><?php if(!empty($_REQUEST['fiscalYear']))
+                                                                                echo $meses[$i][0] ?></td>
+                                                <td class="text-left"><?php if(!empty($_REQUEST['fiscalYear']))
+                                                                                echo $meses[$i][1] ?></td>
+                                                <td class="text-left"><?php if(!empty($_REQUEST['fiscalYear']))
+                                                                                echo $meses[$i][2] ?></td>
+                                                <td class="text-left"><?php if(!empty($_REQUEST['fiscalYear']))
+                                                                                echo $meses[$i][3] ?></td>
                                             </tr>
 
                                             <?php 
@@ -281,7 +304,6 @@
                                                     if($i==6)
                                                         $exit = true; 
                                                 }
-                                                
                                             ?>             
                                         </tbody>
                                     </table>
