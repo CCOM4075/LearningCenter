@@ -1,6 +1,15 @@
 <?php
     include './includes/connection.php';
 
+    if(!empty($_POST))
+	{
+        $yearID = $_POST['fiscalYear'];
+        if(!empty($yearID))
+            header("location: informeAnual.php?fiscalYear=$yearID");
+        else
+            header("location: informeAnual.php");
+    }
+
     if(!empty($_REQUEST['fiscalYear']))
     {
         $fiscalYear = $_REQUEST['fiscalYear'];
@@ -91,119 +100,6 @@
 
 <body class="animsition">
     <div class="page-wrapper">
-        <!-- HEADER MOBILE-->
-        <header class="header-mobile d-block d-lg-none">
-            <div class="header-mobile__bar">
-                <div class="container-fluid">
-                    <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
-                            <img src="images/icon/LC_icon175x55.png" alt="CoolAdmin" />
-                        </a>
-                        <button class="hamburger hamburger--slider" type="button">
-                            <span class="hamburger-box">
-                                <span class="hamburger-inner"></span>
-                            </span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <nav class="navbar-mobile">
-                <div class="container-fluid">
-                    <ul class="navbar-mobile__list list-unstyled">
-
-                        
-                        <li>
-                            <a href="index.html">
-                                <i class="fas fa-chart-bar"></i>Inicio</a>
-                        </li>
-
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-tachometer-alt"></i>Registro</a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="form.html">Registro De Participante</a>
-                                </li>
-                                <li>
-                                    <a href="form2.php">Registro De Administrador</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="informes.html">
-                                <i class="fas fa-table"></i>Informe</a>
-                        </li>
-                        <li>
-                            <a href="calendar.html">
-                                <i class="fas fa-calendar-alt"></i>Calendario</a>
-                        </li>
-
-                        <!--
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>Pages</a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="login.html">Login</a>
-                                </li>
-                                <li>
-                                    <a href="register.html">Register</a>
-                                </li>
-                                <li>
-                                    <a href="forget-pass.html">Forget Password</a>
-                                </li>
-                            </ul>
-                        </li>
-                        -->
-
-                        <!--
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-desktop"></i>UI Elements</a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="button.html">Button</a>
-                                </li>
-                                <li>
-                                    <a href="badge.html">Badges</a>
-                                </li>
-                                <li>
-                                    <a href="tab.html">Tabs</a>
-                                </li>
-                                <li>
-                                    <a href="card.html">Cards</a>
-                                </li>
-                                <li>
-                                    <a href="alert.html">Alerts</a>
-                                </li>
-                                <li>
-                                    <a href="progress-bar.html">Progress Bars</a>
-                                </li>
-                                <li>
-                                    <a href="modal.html">Modals</a>
-                                </li>
-                                <li>
-                                    <a href="switch.html">Switchs</a>
-                                </li>
-                                <li>
-                                    <a href="grid.html">Grids</a>
-                                </li>
-                                <li>
-                                    <a href="fontawesome.html">Fontawesome Icon</a>
-                                </li>
-                                <li>
-                                    <a href="typo.html">Typography</a>
-                                </li>
-                            </ul>
-                        </li>
-                        -->
-
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        <!-- END HEADER MOBILE-->
 
         <!-- MENU SIDEBAR-->
         <?php
@@ -229,10 +125,11 @@
                         <h3 class="title-1">Informe Anual</h3>
                     </div>
                     <div class="table-data__tool-right">
+                    <form action="" method="post">    
                         <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
                                     <!--rs-select2--light rs-select2--sm-->
-                            <select class="js-select2" id="fiscalYear" name="fiscalYear"> 
-                                <option selected="selected">Año Fiscal </option>
+                            <select class="js-select2" id="fiscalYear" name="fiscalYear" required> 
+                                <option value="">Año Fiscal </option>
                                 <?php
                                     $runFiscalYear = mysqli_query($connection,"SELECT * FROM fiscalYear");
 
@@ -240,15 +137,22 @@
                                     {
                                         $year = $fiscalYear['year'];
                                         $id = $fiscalYear['id'];
+                                        echo "<option value=$id> $year</option>";
+                                    }
                                 ?>
-                                        <option value="<?php echo $id ?>"><?php echo $year ?></option>
-                                        <?php
+                                       
                                     }
                                         ?>
                             </select>
-                       
                             <div class="dropDownSelect2"></div>
+                            <div></div>
+                            <div class="">
+                                <button type="submit" class="btn btn-primary btn-sm">Someter
+                                </button>
+                                
+                            </div>
                         </div>
+                    </form>
                     </div>
                 </div>
                 <?php
