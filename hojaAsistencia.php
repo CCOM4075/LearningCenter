@@ -103,7 +103,7 @@
                                                     $numeroDia = $fechaFormato->format('d');
                                                     $numeroMes = $fechaFormato->format('m');
                                                     $year = $fechaFormato->format('yy');
-                                                    $mes = mes($numeroMes);
+                                                    $mes = getMes($numeroMes);
                                                     echo $numeroDia." de ".$mes." de ".$year;
                                                     
                                                 }
