@@ -77,10 +77,10 @@
                                 <div class="table-responsive table--no-card m-b-30">
                                     <!--tabla blanca-->
                                     <br>
-<div class="data_delete">
-<h2 style="text-align: center">Deseas ELIMINAR este Usuario?</h2>
-<?php 
-                        $query = mysqli_query($connection, "SELECT u.userID, u.nombre, u.apellidos, u.email, r.rol FROM usuarios u INNER JOIN rol r ON u.rol = r.rolID WHERE userID ='$usuarioID'");
+                <div class="data_delete">
+                <h2 style="text-align: center">Deseas ELIMINAR este Usuario?</h2>
+                <?php 
+                        $query = mysqli_query($connection, "SELECT u.userID, u.nombre, u.apellidos, u.usuario, r.rol FROM usuarios u INNER JOIN rol r ON u.rol = r.rolID WHERE userID ='$usuarioID'");
                         $result = mysqli_num_rows($query);
                             if($result > 0){
 
@@ -89,7 +89,7 @@
                                         ?>
                                         
                 <p>Nombre Completo: <sapn><?php echo $usuario['nombre']." ".$usuario['apellidos']; ?></span></p>
-                <p>Email: <sapn><?php echo $usuario['email']; ?></span></p>
+                <p>Email: <sapn><?php echo $usuario['usuario']; ?></span></p>
                 <p>rol: <sapn><?php echo $usuario['rol']; ?></span></p>
                 <?php
                                                 }
