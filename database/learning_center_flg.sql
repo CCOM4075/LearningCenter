@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 03, 2020 at 02:14 AM
+-- Generation Time: Nov 14, 2020 at 08:46 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -38,6 +38,7 @@ CREATE TABLE `actividades` (
   `proposito` text NOT NULL,
   `participantes` int(11) NOT NULL,
   `tipo` int(11) NOT NULL,
+  `promocion` text NOT NULL,
   `fotos` int(11) NOT NULL,
   `fiscalYear` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -46,11 +47,13 @@ CREATE TABLE `actividades` (
 -- Dumping data for table `actividades`
 --
 
-INSERT INTO `actividades` (`actividadID`, `nombre`, `recurso`, `lugar`, `fecha`, `hora`, `proposito`, `participantes`, `tipo`, `fotos`, `fiscalYear`) VALUES
-(1, 'Taller de Word', 'Leonardo Sotomayor', 'Biblioteca', '2020-10-15', '4:00pm', 'La actividad se hizo para que aprendan a usar la herramienta de word.', 15, 1, 0, 1),
-(2, 'Prevension de Drogas', 'Leonardo Sotomayor', 'Biblioteca', '2020-09-21', '', 'Formentar el no uso de las drogas.', 0, 2, 0, 1),
-(3, 'Busqueda de Documentos de', 'Leonardo Sotomayor', 'Biblioteca', '2020-10-29', '', 'rkjfldjfs', 0, 3, 0, 1),
-(4, 'Movie Day', 'Leonardo Sotomayor', 'Biblioteca', '2020-10-30', '', 'bvjksdbfkjdsb.', 0, 4, 0, 1);
+INSERT INTO `actividades` (`actividadID`, `nombre`, `recurso`, `lugar`, `fecha`, `hora`, `proposito`, `participantes`, `tipo`, `promocion`, `fotos`, `fiscalYear`) VALUES
+(1, 'Taller de Word', 'Leonardo Sotomayor', 'Biblioteca', '2020-10-15', '4:00pm', 'La actividad se hizo para que aprendan a usar la herramienta de word.', 15, 1, '', 0, 1),
+(2, 'Prevension de Drogas', 'Leonardo Sotomayor', 'Biblioteca', '2020-09-21', '', 'Formentar el no uso de las drogas.', 0, 2, '', 0, 1),
+(3, 'Busqueda de Documentos de', 'Leonardo Sotomayor', 'Biblioteca', '2020-10-29', '', 'rkjfldjfs', 0, 3, '', 0, 1),
+(4, 'Movie Day', 'Leonardo Sotomayor', 'Biblioteca', '2020-10-30', '', 'bvjksdbfkjdsb.', 0, 4, '', 0, 1),
+(5, 'Taller de Excel', 'Leonardo Sotomayor', 'Biblioteca', '2020-11-04', '', 'Excel', 0, 1, 'promocion.pdf', 0, 0),
+(14, 'Gaming Day', 'Leonardo Sotomayor', 'Biblioteca', '2020-11-07', '20:30', 'Jugar Videojuegos.', 0, 4, '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -75,7 +78,7 @@ CREATE TABLE `asistencia` (
 INSERT INTO `asistencia` (`id`, `participanteID`, `proposito`, `edad`, `horaDeEntrada`, `horaDeSalida`, `hojaAsistencia`) VALUES
 (1, 4, 3, 23, '00:00:00', '00:00:00', 1),
 (2, 3, 4, 30, '00:00:00', '00:00:00', 1),
-(3, 4, 1, 23, '15:30:00', '00:00:00', 4),
+(3, 4, 1, 23, '15:30:00', '00:00:00', 3),
 (4, 8, 5, 23, '19:14:39', '00:00:00', 3),
 (5, 8, 5, 22, '20:36:00', '00:00:00', 5),
 (6, 4, 3, 23, '00:00:00', '00:00:00', 5),
@@ -123,7 +126,8 @@ CREATE TABLE `fiscalyear` (
 
 INSERT INTO `fiscalyear` (`id`, `year`) VALUES
 (1, '2020-2021'),
-(2, '2021-2022');
+(2, '2021-2022'),
+(3, '2022-2023');
 
 -- --------------------------------------------------------
 
@@ -184,7 +188,7 @@ CREATE TABLE `participantes` (
 --
 
 INSERT INTO `participantes` (`participanteID`, `nombre`, `apellidos`, `genero`, `edificio`, `unidad`, `birthday`, `inscripcion`, `activo`) VALUES
-(3, 'Juan Antonio', 'Perez Cruz', 'M', 102, 27, '2001-12-31', '2020-10-26', 1),
+(3, 'Juan Antonio', 'Perez Gonzalez', 'M', 102, 27, '2001-12-31', '2020-10-26', 1),
 (4, 'Kelmary', 'La Loca', 'F', 101, 10, '1997-03-13', '2020-10-27', 1),
 (8, 'Hector Luis', 'Mata Putas', 'M', 105, 50, '1998-11-01', '2020-10-28', 1),
 (11, 'Yonaro Astronauta', 'Mala Memoria', 'M', 103, 28, '1999-07-17', '2020-10-28', 1),
@@ -265,7 +269,7 @@ CREATE TABLE `usuarios` (
   `userID` int(11) NOT NULL,
   `nombre` varchar(20) NOT NULL,
   `apellidos` varchar(30) NOT NULL,
-  `email` varchar(40) NOT NULL,
+  `usuario` varchar(40) NOT NULL,
   `password` varchar(20) NOT NULL,
   `rol` int(11) NOT NULL,
   `activo` int(11) NOT NULL DEFAULT 1
@@ -275,13 +279,13 @@ CREATE TABLE `usuarios` (
 -- Dumping data for table `usuarios`
 --
 
-INSERT INTO `usuarios` (`userID`, `nombre`, `apellidos`, `email`, `password`, `rol`, `activo`) VALUES
-(1, 'Meleane', 'Arroyo Candelaria', 'meleane.arroyo@learningcenter.com', 'admi123', 1, 1),
-(2, 'Learning Center', '', 'fluisgarcia@learningcenter.com', 'user123', 2, 1),
-(3, 'Leonardo', 'Sotomayor Montalvo', 'leonardo.sotomayor@learningcenter.com', 'admi123', 1, 1),
-(6, 'Hector Luis', 'Rivera Rosa', 'hector.rivera@learningcenter.com', 'admi123', 1, 1),
-(7, 'Learning Center', '', 'pcatalina@learningcenter.com', 'user1', 2, 1),
-(8, 'Jonathan', 'Rodriguez Pizarro', 'jonathan.rodriguez@learningcenter.com', 'admi123', 1, 1);
+INSERT INTO `usuarios` (`userID`, `nombre`, `apellidos`, `usuario`, `password`, `rol`, `activo`) VALUES
+(1, 'Meleane', 'Arroyo Candelaria', 'meleane.arroyo', 'admi123', 1, 1),
+(2, 'Learning Center', '', 'fluisgarcia', 'user', 2, 1),
+(3, 'Leonardo', 'Sotomayor Montalvo', 'leonardo.sotomayor', 'admi1', 1, 1),
+(6, 'Hector Luis', 'Rivera Rosa', 'hector.rivera', 'admi1', 1, 1),
+(7, 'Learning Center', '', 'pcatalina', 'user1', 2, 1),
+(8, 'Jonathan', 'Rodriguez Pizarro', 'jonathan.rodriguez', 'admi123', 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -361,7 +365,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `actividades`
 --
 ALTER TABLE `actividades`
-  MODIFY `actividadID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `actividadID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `asistencia`
@@ -379,7 +383,7 @@ ALTER TABLE `asistenciaactividad`
 -- AUTO_INCREMENT for table `fiscalyear`
 --
 ALTER TABLE `fiscalyear`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `fotosactividades`
