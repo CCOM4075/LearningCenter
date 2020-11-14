@@ -73,7 +73,7 @@
             <!-- MAIN CONTENT-->
             <div class="main-content">
                 <div class="section__content section__content--p30">
-                    <h2 class="title-2">Deseas ELIMINAR este Participante?</h2>
+                    <h2 class="title-2">Deseas ELIMINAR este participante?</h2>
                     <div class="row m-t-25"></div>
                         <div class="row"></div>
                             <div class="col-lg-10">
@@ -99,9 +99,9 @@
                                                     while($participante = mysqli_fetch_array($query)){
                                                         ?>     
                                                             <tr>  
-                                                                <td><sapn><?php echo $participante['nombre']." ".$participante['apellidos']; ?></span></td>
-                                                                <td><sapn><?php echo $participante['edificio']; ?></span></td>
-                                                                <td><sapn><?php echo $participante['unidad']; ?></span></td>
+                                                                <td><?php echo $participante['nombre']." ".$participante['apellidos']; ?></td>
+                                                                <td><?php echo $participante['edificio']; ?></td>
+                                                                <td><?php echo $participante['unidad']; ?></td>
                                                             <tr>
                                                         <?php
                                                     }
