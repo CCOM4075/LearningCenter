@@ -1,5 +1,4 @@
 <?php
-//Leonardo
     include './includes/connection.php';
     if(empty($_REQUEST['id']))
     {
@@ -73,63 +72,63 @@
             <!-- MAIN CONTENT-->
             <div class="main-content">
                 <div class="section__content section__content--p30">
-                    <h2 class="title-2">Deseas ELIMINAR este participante?</h2>
+                    <h2 class="title-2">Eliminar Participante</h2>
                     <div class="row m-t-25"></div>
                         <div class="row"></div>
                             <div class="col-lg-10">
-                                <div class="table-responsive table--no-card m-b-30">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Deseas <strong>ELIMINAR</strong> este participante?
+                                    </div>
                                     <!--tabla blanca-->
-                                    <table class="table table-borderless table-striped table-earning">
-                                        
-                                        <thead>
-                                            <tr>
-                                                <th class="text-left">Nombre Completo</th>
-                                                <th class="text-left">Edificio</th>
-                                                <th class="text-left">Unidad</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <div class="data_delete">                                            
-                                                
-                                            </div>
+
+                                    <div class="card-body card-block">
+                                        <form action="" method="post">
+
                                             <?php 
                                                 $query = mysqli_query($connection, "SELECT nombre, apellidos, edificio, unidad FROM `participantes` where participanteID ='$participanteID'");
                                                 $result = mysqli_num_rows($query);
                                                 if($result > 0){
                                                     while($participante = mysqli_fetch_array($query)){
-                                                        ?>     
-                                                            <tr>  
-                                                                <td><?php echo $participante['nombre']." ".$participante['apellidos']; ?></td>
-                                                                <td><?php echo $participante['edificio']; ?></td>
-                                                                <td><?php echo $participante['unidad']; ?></td>
-                                                            <tr>
+                                                        ?> 
+                                                            <div class="row form-group">
+                                                                <div class="col col-md-3"> Nombre</div>
+                                                                <div class="col-12 col-md-9"><?php echo $participante['nombre']." ".$participante['apellidos']; ?></div>
+                                                            </div>
+
+                                                            <div class="row form-group">
+                                                                <div class="col col-md-3">Edificio</div>
+                                                                <div class="col-12 col-md-9"><?php echo $participante['edificio']; ?></div>
+                                                            </div>
+
+                                                            <div class="row form-group">
+                                                                <div class="col col-md-3">Unidad</div>
+                                                                <div class="col-12 col-md-9"><?php echo $participante['unidad']; ?></div>
+                                                            </div>
                                                         <?php
                                                     }
                                                 }
                                             ?>
-                                                
-                                        </tbody>
-                                    </table>
-                                    
-                                    
-                                </div>
-                                <form action="" method="post">
+                                        </form>
+                                        <form action="" method="post">
                                             <button class="btn btn-danger btn-sm" type="submit" name="yes">YES</button>
                                             <button class="btn btn-primary btn-sm" name="no" type="submit">NO</button>
-                                    
+                                            
 
-                                    <?php
-                                        if(isset($_POST['yes'])){
-                                            mysqli_query($connection,"UPDATE participantes SET activo ='2' WHERE participanteID ='$participanteID'");
-                                            echo "<script>window.open('listaParticipantes.php','_self')</script>";
-                                        }
-                                        if(isset($_POST['no'])){
-                                            //header('location: index.php');
-                                            echo "<script>window.open('listaParticipantes.php','_self')</script>";
-                                        }
-                                    ?>
-
-                                </form> 
+                                            <?php
+                                                if(isset($_POST['yes'])){
+                                                    mysqli_query($connection,"UPDATE participantes SET activo ='2' WHERE participanteID ='$participanteID'");
+                                                    echo "<script>window.open('listaParticipantes.php','_self')</script>";
+                                                }
+                                                if(isset($_POST['no'])){
+                                                    //header('location: index.php');
+                                                    echo "<script>window.open('listaParticipantes.php','_self')</script>";
+                                                }
+                                            ?>
+                                        </form> 
+                                    </div>
+                                </div>
+                                
                             </div>
                             </div>
                             <!--<div class="col-lg-3">-->
