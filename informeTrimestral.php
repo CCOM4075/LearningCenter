@@ -19,7 +19,7 @@
         $trimestre = $_REQUEST['trimestre'];
         $year = $_REQUEST['year'];
         include_once './functions/trimestre.php';
-        $meses= trimestre($trimestre);
+        $meses= getTrimestre($trimestre);
 
         $queryTrimestral = mysqli_query($connection, "SELECT DISTINCT a.id, a.participanteID, p.nombre, p.apellidos, p.edificio, p.unidad, x.proposito, a.edad, p.genero, h.fecha 
                                                             FROM asistencia a 
