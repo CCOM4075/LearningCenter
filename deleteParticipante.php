@@ -49,7 +49,6 @@
 <body class="animsition">
     <div class="page-wrapper">
         <!-- HEADER MOBILE-->
-
         <!-- END HEADER MOBILE-->
 
 
@@ -62,70 +61,74 @@
 
         <!-- PAGE CONTAINER-->
         <div class="page-container">
+
+
             <!-- HEADER DESKTOP-->
             <?php
 	            include './includes/header.php';
             ?>
             <!-- END HEADER DESKTOP-->
 
+
             <!-- MAIN CONTENT-->
             <div class="main-content">
                 <div class="section__content section__content--p30">
-                    <h2 class="title-2">Eliminar Participantes</h2>
+                    <h2 class="title-2">Deseas ELIMINAR este Participante?</h2>
                     <div class="row m-t-25"></div>
                         <div class="row"></div>
-                            <div class="col-lg-10"></div>
+                            <div class="col-lg-10">
                                 <div class="table-responsive table--no-card m-b-30">
                                     <!--tabla blanca-->
-                                    <br>
-<div class="data_delete">
-<h2 style="text-align: center">Deseas ELIMINAR este Participante?</h2>
-<?php 
-                        $query = mysqli_query($connection, "SELECT nombre, apellidos, edificio, unidad FROM `participantes` where participanteID ='$participanteID'");
-                        $result = mysqli_num_rows($query);
-                            if($result > 0){
-
-                                while($participante = mysqli_fetch_array($query)){
-
-                                        ?>
+                                    <table class="table table-borderless table-striped table-earning">
                                         
-                <p>Nombre Completo: <sapn><?php echo $participante['nombre']." ".$participante['apellidos']; ?></span></p>
-                <p>Edificio: <sapn><?php echo $participante['edificio']; ?></span></p>
-                <p>unidad: <sapn><?php echo $participante['unidad']; ?></span></p>
-                <?php
+                                        <thead>
+                                            <tr>
+                                                <th class="text-left">Nombre Completo</th>
+                                                <th class="text-left">Edificio</th>
+                                                <th class="text-left">Unidad</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <div class="data_delete">                                            
+                                                
+                                            </div>
+                                            <?php 
+                                                $query = mysqli_query($connection, "SELECT nombre, apellidos, edificio, unidad FROM `participantes` where participanteID ='$participanteID'");
+                                                $result = mysqli_num_rows($query);
+                                                if($result > 0){
+                                                    while($participante = mysqli_fetch_array($query)){
+                                                        ?>     
+                                                            <tr>  
+                                                                <td><sapn><?php echo $participante['nombre']." ".$participante['apellidos']; ?></span></td>
+                                                                <td><sapn><?php echo $participante['edificio']; ?></span></td>
+                                                                <td><sapn><?php echo $participante['unidad']; ?></span></td>
+                                                            <tr>
+                                                        <?php
+                                                    }
                                                 }
-                                            }
-                                        ?>
-<form action="" method="post">
-<br><br>
+                                            ?>
+                                                
+                                        </tbody>
 
-<button class="btn btn-danger btn-sm" type="submit" name="yes">YES</button>
-<button class="btn btn-primary btn-sm" name="no" type="submit">NO</button>
-
-</form> 
-</div>
-<?php
-    if(isset($_POST['yes'])){
-        mysqli_query($connection,"UPDATE participantes SET activo ='2' WHERE participanteID ='$participanteID'");
-        echo "<script>window.open('listaParticipantes.php','_self')</script>";
-           
-            
-    }
-    if(isset($_POST['no'])){
-        //header('location: index.php');
-        echo "<script>window.open('listaParticipantes.php','_self')</script>";
-    }
-
-?>
-
-
-</div>
+                                        <form action="" method="post">
+                                                <button class="btn btn-danger btn-sm" type="submit" name="yes">YES</button>
+                                                <button class="btn btn-primary btn-sm" name="no" type="submit">NO</button>
+                                        </form> 
+                                    <?php
+                                        if(isset($_POST['yes'])){
+                                            mysqli_query($connection,"UPDATE participantes SET activo ='2' WHERE participanteID ='$participanteID'");
+                                            echo "<script>window.open('listaParticipantes.php','_self')</script>";
+                                        }
+                                        if(isset($_POST['no'])){
+                                            //header('location: index.php');
+                                            echo "<script>window.open('listaParticipantes.php','_self')</script>";
+                                        }
+                                    ?>
+                                    </table>
                                 </div>
                             </div>
+                            </div>
                             <!--<div class="col-lg-3">-->
-                    
-                         
-                        
                         
                                 <!-- END DATA TABLE-->
                             </div>
