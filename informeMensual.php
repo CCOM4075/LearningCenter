@@ -1,8 +1,23 @@
 <?php
     include './includes/connection.php';
+ 
+    if(!empty($_POST))
+	{
+        $mes = $_POST['mes'];
+        $year = $_POST['year'];;
 
+
+        if((!empty($mes))&&(!empty($year)))
+            header("location: informeMensual.php?mes=$mes&year=$year");
+        else
+            header("location: informeMensual.php");
+    }
+
+    if(!empty($_REQUEST['mes'])&&!empty($_REQUEST['year']))
+    {
+        
+    }
     
-			
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -122,52 +137,54 @@
                     <div class="table-data__tool-left">
                         <h3 class="title-1">Informe Mensual</h3>
                     </div>
-                    <div class="table-data__tool-right">
-                        <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
-                                    <!--rs-select2--light rs-select2--sm-->
-                            <select class="js-select2" name="year">
-                                <option selected="selected">Año</option>
-                                <?php
-                                    
-                                    $runFiscalYear = mysqli_query($connection,"SELECT * FROM fiscalYear");
 
-                                    while($fiscalYear = mysqli_fetch_array($runFiscalYear))
-                                    {
-                                        $fYear = $fiscalYear['year'];
-                                        $id = $fiscalYear['id'];
-                                        echo "<option value='$id'> $fYear</option>";
-                                    }
-                                ?>
-                            </select>
-                            <div class="dropDownSelect2"></div>
-                        </div>
-                        <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
-                                    <!--rs-select2--light rs-select2--sm-->
-                            <select class="js-select2" name="mes">
-                                <option selected="selected">Mes</option>
-                                <option value="07">Julio</option>
-                                <option value="08">Agosto</option>
-                                <option value="09">Septiembre</option>
-                                <option value="10">Octubre</option>
-                                <option value="11">Noviembre</option>
-                                <option value="12">Diciembre</option>
-                                <option value="01">Enero</option>
-                                <option value="02">Febrero</option>
-                                <option value="03">Marzo</option>
-                                <option value="04">Abril</option>
-                                <option value="05">Mayo</option>
-                                <option value="06">Junio</option>
-                            </select>
-                            <div class="dropDownSelect2"></div>
-                        </div>
+                    <div class="table-data__tool-right">
+                        <form action="" method="post">
+                            <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
+                                        <!--rs-select2--light rs-select2--sm-->
+                                <select class="js-select2" name="year">
+                                    <option value="0">Año</option>
+                                    <?php
+                                        
+                                        $runFiscalYear = mysqli_query($connection,"SELECT * FROM fiscalYear");
+
+                                        while($fiscalYear = mysqli_fetch_array($runFiscalYear))
+                                        {
+                                            $fYear = $fiscalYear['year'];
+                                            $id = $fiscalYear['id'];
+                                            echo "<option value='$id'> $fYear</option>";
+                                        }
+                                    ?>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>
+                            <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
+                                        <!--rs-select2--light rs-select2--sm-->
+                                <select class="js-select2" name="mes">
+                                    <option value="0"> Mes</option>
+                                    <option value="07">Julio</option>
+                                    <option value="08">Agosto</option>
+                                    <option value="09">Septiembre</option>
+                                    <option value="10">Octubre</option>
+                                    <option value="11">Noviembre</option>
+                                    <option value="12">Diciembre</option>
+                                    <option value="01">Enero</option>
+                                    <option value="02">Febrero</option>
+                                    <option value="03">Marzo</option>
+                                    <option value="04">Abril</option>
+                                    <option value="05">Mayo</option>
+                                    <option value="06">Junio</option>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>
+                        
                     </div>
+                <button type="submit" class="btn btn-primary btn-sm">Ingresar</button>
+                </form> 
                 </div>
 
-                <form action="informeMensual.php?year=" method="post" >
-                <button type="submit" class="btn btn-primary btn-sm">Ingresar</button>
-                </form>
-
-                </br>
+               
+                
                 <h3 class="title-5">Estadística Por Edades</h3>
                 </br>
                 <!--tabla1-->
@@ -178,8 +195,6 @@
                                 <div class="table-responsive table--no-card m-b-30">
                                     <table class="table table-borderless table-striped table-earning">
                                         <thead>
-                                            
-
                                             <tr>
                                                 <th class="text-center">0-4</th>
                                                 <th class="text-center">5-8</th>
@@ -192,6 +207,22 @@
                                         </thead>
 
                                         <tbody>
+                                        <?php     
+                                            if(!empty($_REQUEST['mes'])&&!empty($_REQUEST['year'])||$result==0)
+                                            {
+                                        ?>
+                                                <td class="text-center"></td>
+                                                <td class="text-center"></td>
+                                                <td class="text-center"></td>
+                                                <td class="text-center"></td>
+                                                <td class="text-center"></td>
+                                                <td class="text-center"></td>
+                                                <td class="text-center"></td>
+                                        <?php    
+                                            }
+                                        ?>
+                                        </tr>
+
                                             <tr>
                                             <?php
                                                 $contador = array(0,0,0,0,0,0,0);
