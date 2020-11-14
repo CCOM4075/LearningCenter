@@ -181,7 +181,7 @@
                                                 <th class="text-left">
                                                 <?php
                                                     include_once './functions/mes.php';
-                                                    $mes = mes($i+1);
+                                                    $mes = getMes($i+1);
                                                     echo "$mes";
                                                 ?>
                                                 </th>
