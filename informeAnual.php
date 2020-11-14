@@ -140,21 +140,16 @@
                                         echo "<option value=$id> $year</option>";
                                     }
                                 ?>
-                                       
                                     }
                                         ?>
                             </select>
-                            <div class="dropDownSelect2"></div>
-                            <div></div>
-                            <div class="">
-                                <button type="submit" class="btn btn-primary btn-sm">Someter
-                                </button>
-                                
-                            </div>
+                                <div class="dropDownSelect2"></div>
                         </div>
-                    </form>
-                    </div>
+                        <button type="submit" class="btn btn-primary btn-sm">Ingresar</button>
+                    </div>   
+                    </form> 
                 </div>
+
                 <?php
                     
                      
@@ -186,7 +181,7 @@
                                                 <th class="text-left">
                                                 <?php
                                                     include_once './functions/mes.php';
-                                                    $mes = mes($i+1);
+                                                    $mes = getMes($i+1);
                                                     echo "$mes";
                                                 ?>
                                                 </th>

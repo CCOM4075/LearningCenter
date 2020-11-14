@@ -1,5 +1,5 @@
 <?php
-    function trimestre($trimestreID)
+    function getTrimestre($trimestreID)
     {
         if($trimestreID==1)
             return array('07','08','09');

@@ -1,5 +1,5 @@
 <?php
-    function mes($mesID)
+    function getMes($mesID)
     {
         if($mesID==1)
             return "Enero";
