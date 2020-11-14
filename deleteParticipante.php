@@ -109,11 +109,15 @@
                                             ?>
                                                 
                                         </tbody>
+                                    </table>
+                                    
+                                    
+                                </div>
+                                <form action="" method="post">
+                                            <button class="btn btn-danger btn-sm" type="submit" name="yes">YES</button>
+                                            <button class="btn btn-primary btn-sm" name="no" type="submit">NO</button>
+                                    
 
-                                        <form action="" method="post">
-                                                <button class="btn btn-danger btn-sm" type="submit" name="yes">YES</button>
-                                                <button class="btn btn-primary btn-sm" name="no" type="submit">NO</button>
-                                        </form> 
                                     <?php
                                         if(isset($_POST['yes'])){
                                             mysqli_query($connection,"UPDATE participantes SET activo ='2' WHERE participanteID ='$participanteID'");
@@ -124,8 +128,8 @@
                                             echo "<script>window.open('listaParticipantes.php','_self')</script>";
                                         }
                                     ?>
-                                    </table>
-                                </div>
+
+                                </form> 
                             </div>
                             </div>
                             <!--<div class="col-lg-3">-->
