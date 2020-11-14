@@ -193,7 +193,7 @@
                                                 <?php
                                                     include_once './functions/mes.php';
                                                     $numeroMes = $hoy->format('m');
-                                                    $mes = mes($numeroMes);
+                                                    $mes = getMes($numeroMes);
                                                     echo "$mes";
                                                 ?>  
                                     </h2><!--Arreglar-->
