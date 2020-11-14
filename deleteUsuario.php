@@ -48,7 +48,6 @@
 <body class="animsition">
     <div class="page-wrapper">
         <!-- HEADER MOBILE-->
-
         <!-- END HEADER MOBILE-->
 
 
@@ -61,11 +60,14 @@
 
         <!-- PAGE CONTAINER-->
         <div class="page-container">
+
+
             <!-- HEADER DESKTOP-->
             <?php
 	            include './includes/header.php';
             ?>
             <!-- END HEADER DESKTOP-->
+
 
             <!-- MAIN CONTENT-->
             <div class="main-content">
@@ -73,58 +75,65 @@
                     <h2 class="title-2">Eliminar Usuario</h2>
                     <div class="row m-t-25"></div>
                         <div class="row"></div>
-                            <div class="col-lg-10"></div>
-                                <div class="table-responsive table--no-card m-b-30">
+                            <div class="col-lg-10">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Deseas <strong>ELIMINAR</strong> este usuario?
+                                    </div>
                                     <!--tabla blanca-->
-                                    <br>
-                <div class="data_delete">
-                <h2 style="text-align: center">Deseas ELIMINAR este Usuario?</h2>
-                <?php 
-                        $query = mysqli_query($connection, "SELECT u.userID, u.nombre, u.apellidos, u.usuario, r.rol FROM usuarios u INNER JOIN rol r ON u.rol = r.rolID WHERE userID ='$usuarioID'");
-                        $result = mysqli_num_rows($query);
-                            if($result > 0){
 
-                                while($usuario = mysqli_fetch_array($query)){
+                                    <div class="card-body card-block">
+                                        <form action="" method="post">
 
-                                        ?>
-                                        
-                <p>Nombre Completo: <sapn><?php echo $usuario['nombre']." ".$usuario['apellidos']; ?></span></p>
-                <p>Email: <sapn><?php echo $usuario['usuario']; ?></span></p>
-                <p>rol: <sapn><?php echo $usuario['rol']; ?></span></p>
-                <?php
+                                            <?php 
+                                            $query = mysqli_query($connection, "SELECT u.userID, u.nombre, u.apellidos, u.usuario, r.rol FROM usuarios u INNER JOIN rol r ON u.rol = r.rolID WHERE userID ='$usuarioID'");
+                                            $result = mysqli_num_rows($query);
+                                                if($result > 0){
+                                                    while($usuario = mysqli_fetch_array($query)){
+                                                        ?>     
+                                                            <div class="row form-group">
+                                                                <div class="col col-md-3"> Nombre</div>
+                                                                <div class="col-12 col-md-9"><?php echo $usuario['nombre']." ".$usuario['apellidos']; ?></div>
+                                                            </div>
+
+                                                            <div class="row form-group">
+                                                                <div class="col col-md-3">Usuario</div>
+                                                                <div class="col-12 col-md-9"><?php echo $usuario['usuario']; ?></div>
+                                                            </div>
+
+                                                            <div class="row form-group">
+                                                                <div class="col col-md-3">Rol</div>
+                                                                <div class="col-12 col-md-9"><?php echo $usuario['rol']; ?></div>
+                                                            </div>
+                                                        <?php
+                                                    }
                                                 }
-                                            }
-                                        ?>
-<form action="" method="post">
-<br><br>
+                                            ?>
 
-<button class="btn btn-danger btn-sm" type="submit" name="yes">YES</button>
-<button class="btn btn-primary btn-sm" name="no" type="submit">NO</button>
+                                        
+                                        </form>
+                                        <form action="" method="post">
+                                            <button class="btn btn-danger btn-sm" type="submit" name="yes">YES</button>
+                                            <button class="btn btn-primary btn-sm" name="no" type="submit">NO</button>
+                                            
 
-</form> 
-</div>
-<?php
-    if(isset($_POST['yes'])){
-        mysqli_query($connection,"UPDATE usuarios SET activo ='2' WHERE userID ='$usuarioID'");
-        echo "<script>window.open('listaUsuarios.php','_self')</script>";
-           
-            
-    }
-    if(isset($_POST['no'])){
-        //header('location: index.php');
-        echo "<script>window.open('listaUsuarios.php','_self')</script>";
-    }
-
-?>
-
-
-</div>
+                                            <?php
+                                                if(isset($_POST['yes'])){
+                                                    mysqli_query($connection,"UPDATE usuarios SET activo ='2' WHERE userID ='$usuarioID'");
+                                                    echo "<script>window.open('listaUsuarios.php','_self')</script>";
+                                                }
+                                                if(isset($_POST['no'])){
+                                                    //header('location: index.php');
+                                                    echo "<script>window.open('listaUsuarios.php','_self')</script>";
+                                                }
+                                            ?>
+                                        </form> 
+                                    </div>
                                 </div>
+                                
+                            </div>
                             </div>
                             <!--<div class="col-lg-3">-->
-                    
-                         
-                        
                         
                                 <!-- END DATA TABLE-->
                             </div>
