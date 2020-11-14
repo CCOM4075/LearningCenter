@@ -140,21 +140,16 @@
                                         echo "<option value=$id> $year</option>";
                                     }
                                 ?>
-                                       
                                     }
                                         ?>
                             </select>
-                            <div class="dropDownSelect2"></div>
-                            <div></div>
-                            <div class="">
-                                <button type="submit" class="btn btn-primary btn-sm">Someter
-                                </button>
-                                
-                            </div>
+                                <div class="dropDownSelect2"></div>
                         </div>
-                    </form>
-                    </div>
+                        <button type="submit" class="btn btn-primary btn-sm">Ingresar</button>
+                    </div>   
+                    </form> 
                 </div>
+
                 <?php
                     
                      
