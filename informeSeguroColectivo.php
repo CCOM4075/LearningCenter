@@ -188,8 +188,8 @@
                             </div>
                         <button type="submit" class="btn btn-primary btn-sm">Ingresar</button>
                     </div>   
-                </form> 
-                </div>
+                        </form> 
+            </div>
 
                 <!--tabla1-->
 
