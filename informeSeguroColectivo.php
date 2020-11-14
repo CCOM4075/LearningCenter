@@ -1,5 +1,31 @@
 <?php
-    include './includes/connection.php';			
+    include './includes/connection.php';
+    $validacion = false;
+ 
+    if(!empty($_POST))
+	{
+        $mes = $_POST['mes'];
+        $year = $_POST['year'];;
+
+
+        if((!empty($mes))&&(!empty($year)))
+            header("location: informeSeguroColectivo.php?mes=$mes&year=$year");
+        else
+            header("location: informeSeguroColectivo.php");
+    }
+
+    if(!empty($_REQUEST['mes']) && !empty($_REQUEST['year']))
+    {
+        $mes = $_REQUEST['mes'];
+        $year = $_REQUEST['year'];
+        $contador = array(0,0,0,0);
+        $queryEdades = mysqli_query($connection, "SELECT a.id, a.edad FROM hojaasistencia h
+                                            INNER JOIN asistencia a ON h.id = a.hojaAsistencia
+                                            WHERE month(h.fecha) = $mes AND h.fiscalYear = $year");
+        $edades = mysqli_num_rows($queryEdades);
+        if($edades>0)
+            $validacion = true;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -120,36 +146,49 @@
                     <div class="table-data__tool-left">
                         <h3 class="title-1">Informe Seguro Colectivo</h3>
                     </div>
+
                     <div class="table-data__tool-right">
-                        <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
-                                    <!--rs-select2--light rs-select2--sm-->
-                            <select class="js-select2" name="type">
-                                <option selected="selected">Año</option>
-                                <option value="">2019-2020</option>
-                                <option value="">2020-2021</option>
-                            </select>
-                            <div class="dropDownSelect2"></div>
-                        </div>
-                        <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
-                                    <!--rs-select2--light rs-select2--sm-->
-                            <select class="js-select2" name="type">
-                                <option selected="selected">Mes</option>
-                                <option value="">Julio</option>
-                                <option value="">Agosto</option>
-                                <option value="">Septiembre</option>
-                                <option value="">Octubre</option>
-                                <option value="">Noviembre</option>
-                                <option value="">Diciembre</option>
-                                <option value="">Enero</option>
-                                <option value="">Febrero</option>
-                                <option value="">Marzo</option>
-                                <option value="">Abril</option>
-                                <option value="">Mayo</option>
-                                <option value="">Junio</option>
-                            </select>
-                            <div class="dropDownSelect2"></div>
-                        </div>
-                    </div>
+                        <form action="" method="post">
+                            <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
+                                        <!--rs-select2--light rs-select2--sm-->
+                                <select class="js-select2" name="year" required>
+                                    <option value="0">Año</option>
+                                    <?php
+                                        
+                                        $runFiscalYear = mysqli_query($connection,"SELECT * FROM fiscalYear");
+
+                                        while($fiscalYear = mysqli_fetch_array($runFiscalYear))
+                                        {
+                                            $fYear = $fiscalYear['year'];
+                                            $id = $fiscalYear['id'];
+                                            echo "<option value='$id'> $fYear</option>";
+                                        }
+                                    ?>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>
+                            <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
+                                        <!--rs-select2--light rs-select2--sm-->
+                                <select class="js-select2" name="mes" required>
+                                    <option value="0"> Mes</option>
+                                    <option value="07">Julio</option>
+                                    <option value="08">Agosto</option>
+                                    <option value="09">Septiembre</option>
+                                    <option value="10">Octubre</option>
+                                    <option value="11">Noviembre</option>
+                                    <option value="12">Diciembre</option>
+                                    <option value="01">Enero</option>
+                                    <option value="02">Febrero</option>
+                                    <option value="03">Marzo</option>
+                                    <option value="04">Abril</option>
+                                    <option value="05">Mayo</option>
+                                    <option value="06">Junio</option>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>
+                        <button type="submit" class="btn btn-primary btn-sm">Ingresar</button>
+                    </div>   
+                </form> 
                 </div>
 
                 <!--tabla1-->
@@ -168,12 +207,8 @@
                                             </tr>
                                         </thead>
                                             <?php
-                                                $contador = array(0,0,0,0);
-                                                $queryEdades = mysqli_query($connection, "SELECT a.id, a.edad FROM hojaasistencia h
-                                                                                    INNER JOIN asistencia a ON h.id = a.hojaAsistencia
-                                                                                    WHERE month(h.fecha) = 10 AND h.fiscalYear = 1");
-                                                $edades = mysqli_num_rows($queryEdades);
-                                                if($edades>0){
+                                                if($validacion == true)
+                                                {
                                                     while($edades = mysqli_fetch_array($queryEdades)){
                                                         if($edades['edad']>=0 && $edades['edad']<=12)
                                                         {
@@ -191,16 +226,27 @@
                                                             $contador[3] = $contador[3] + 1;
                                                         }
                                                     }
-                                                }
+                                                
                                             ?> 
                                         <tbody>
                                             <tr>
                                                 <td class="text-center"><?php echo $contador[0] ?></td>
-                                                    <td class="text-center"><?php echo $contador[1] ?></td>
-                                                    <td class="text-center"><?php echo $contador[2] ?></td>
-                                                    <td class="text-center"><?php echo $contador[3] ?>
-                                                </td>
+                                                <td class="text-center"><?php echo $contador[1] ?></td>
+                                                <td class="text-center"><?php echo $contador[2] ?></td>
+                                                <td class="text-center"><?php echo $contador[3] ?></td>
                                             </tr>
+                                            <?php
+                                            }
+                                            else
+                                            {
+                                            ?>
+                                                <td class="text-center">N/A</td>
+                                                <td class="text-center"></td>
+                                                <td class="text-center"></td>
+                                                <td class="text-center"></td>
+                                            <?php
+                                            }
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>

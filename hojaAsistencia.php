@@ -1,5 +1,18 @@
 <?php
     include './includes/connection.php';
+ 
+    if(!empty($_POST))
+	{
+        //$fechaAsistencia = strtotime($_POST['fechaAsistencia']);
+        $fechaAsistencia = $_POST['fechaAsistencia'];
+
+        if($fechaAsistencia)
+            //echo "Hola";
+            header("location: hojaAsistencia.php?fecha=$fechaAsistencia");
+        else
+            //echo "Mundo";
+            header("location: hojaAsistencia.php");
+    }
 
     if(!empty($_REQUEST['fecha']))
     {
@@ -13,6 +26,8 @@
                                             INNER JOIN propositos x ON a.proposito = x.id
                                             WHERE h.fecha = '$fechaString'");                            
         $result = mysqli_num_rows($query);
+        if($result == 0)
+        header("location: hojaAsistencia.php");
     }
     
 ?>
@@ -94,16 +109,22 @@
                                                 }
                                             ?></h2>
                     </div>
+
+
                     <div class="table-data__tool-right">
-                        <div class="row form-group">
-                            <div class="col-12 col-md-8">
-                                 <input type="date" id="fecha" name="fecha" class="form-control" href=>
+                        <form action="" method="post">
+                            <div class="row form-group">
+                                <div class="col-12 col-md-8">
+                                    <input type="date" id="fechaAsistencia" name="fechaAsistencia" class="form-control" href=>
+                                </div>
+                                    <button type="submit" class="btn btn-primary btn-sm">
+                                        <i class="fa fa-dot-circle-o"></i> Someter
+                                    </button>
                             </div>
-                                <button type="submit" class="btn btn-primary btn-sm">
-                                    <i class="fa fa-dot-circle-o"></i> Someter
-                                </button>
-                        </div>
+                        </form> 
                     </div>
+
+
                 </div>
                 <?php if(!empty($_REQUEST['fecha'])){echo $fechaString;}?>
                 <div class="container-fluid">

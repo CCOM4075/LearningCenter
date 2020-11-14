@@ -18,10 +18,8 @@ if(!empty($_SESSION['active']))
 		{
 			$alert = 'Ingrese su usuario y contraseña';
 		}else{
+            include './includes/connection.php';
             
-			include './includes/connection.php';
-
-			
 			$usuario = $_POST['usuario'];
 			$password = $_POST['password'];
 

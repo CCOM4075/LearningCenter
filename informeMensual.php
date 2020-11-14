@@ -1,8 +1,19 @@
 <?php
     include './includes/connection.php';
+ 
+    if(!empty($_POST))
+	{
+        $mes = $_POST['mes'];
+        $year = $_POST['year'];;
 
-    
-			
+
+        if((!empty($mes))&&(!empty($year)))
+            header("location: informeMensual.php?mes=$mes&year=$year");
+        else
+            header("location: informeMensual.php");
+    }
+
+    //if(!empty($_REQUEST['mes'])&&!empty($_REQUEST['year']))  
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -122,64 +133,62 @@
                     <div class="table-data__tool-left">
                         <h3 class="title-1">Informe Mensual</h3>
                     </div>
-                    <div class="table-data__tool-right">
-                        <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
-                                    <!--rs-select2--light rs-select2--sm-->
-                            <select class="js-select2" name="year">
-                                <option selected="selected">Año</option>
-                                <?php
-                                    
-                                    $runFiscalYear = mysqli_query($connection,"SELECT * FROM fiscalYear");
 
-                                    while($fiscalYear = mysqli_fetch_array($runFiscalYear))
-                                    {
-                                        $fYear = $fiscalYear['year'];
-                                        $id = $fiscalYear['id'];
-                                        echo "<option value='$id'> $fYear</option>";
-                                    }
-                                ?>
-                            </select>
-                            <div class="dropDownSelect2"></div>
-                        </div>
-                        <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
-                                    <!--rs-select2--light rs-select2--sm-->
-                            <select class="js-select2" name="mes">
-                                <option selected="selected">Mes</option>
-                                <option value="07">Julio</option>
-                                <option value="08">Agosto</option>
-                                <option value="09">Septiembre</option>
-                                <option value="10">Octubre</option>
-                                <option value="11">Noviembre</option>
-                                <option value="12">Diciembre</option>
-                                <option value="01">Enero</option>
-                                <option value="02">Febrero</option>
-                                <option value="03">Marzo</option>
-                                <option value="04">Abril</option>
-                                <option value="05">Mayo</option>
-                                <option value="06">Junio</option>
-                            </select>
-                            <div class="dropDownSelect2"></div>
-                        </div>
-                    </div>
+                    <div class="table-data__tool-right">
+                        <form action="" method="post">
+                            <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
+                                        <!--rs-select2--light rs-select2--sm-->
+                                <select class="js-select2" name="year" required>
+                                    <option value="0">Año</option>
+                                    <?php
+                                        
+                                        $runFiscalYear = mysqli_query($connection,"SELECT * FROM fiscalYear");
+
+                                        while($fiscalYear = mysqli_fetch_array($runFiscalYear))
+                                        {
+                                            $fYear = $fiscalYear['year'];
+                                            $id = $fiscalYear['id'];
+                                            echo "<option value='$id'> $fYear</option>";
+                                        }
+                                    ?>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>
+                            <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
+                                        <!--rs-select2--light rs-select2--sm-->
+                                <select class="js-select2" name="mes" required>
+                                    <option value="0"> Mes</option>
+                                    <option value="07">Julio</option>
+                                    <option value="08">Agosto</option>
+                                    <option value="09">Septiembre</option>
+                                    <option value="10">Octubre</option>
+                                    <option value="11">Noviembre</option>
+                                    <option value="12">Diciembre</option>
+                                    <option value="01">Enero</option>
+                                    <option value="02">Febrero</option>
+                                    <option value="03">Marzo</option>
+                                    <option value="04">Abril</option>
+                                    <option value="05">Mayo</option>
+                                    <option value="06">Junio</option>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>
+                        <button type="submit" class="btn btn-primary btn-sm">Ingresar</button>
+                    </div>   
+                </form> 
                 </div>
 
-                <form action="informeMensual.php?year=" method="post" >
-                <button type="submit" class="btn btn-primary btn-sm">Ingresar</button>
-                </form>
-
-                </br>
+               
+                
                 <h3 class="title-5">Estadística Por Edades</h3>
                 </br>
                 <!--tabla1-->
-
                     <div class="container-fluid">
                         <div class="row">
                         <div class="col-lg-10"></div>
                                 <div class="table-responsive table--no-card m-b-30">
                                     <table class="table table-borderless table-striped table-earning">
                                         <thead>
-                                            
-
                                             <tr>
                                                 <th class="text-center">0-4</th>
                                                 <th class="text-center">5-8</th>
@@ -192,15 +201,32 @@
                                         </thead>
 
                                         <tbody>
-                                            <tr>
-                                            <?php
-                                                $contador = array(0,0,0,0,0,0,0);
+                                        <?php     
+                                            if(empty($_REQUEST['mes']) && empty($_REQUEST['year']))
+                                            {
+                                        ?>
+                                                <tr>
+                                                <?php
+                                                    for($i=0;$i<=6;$i++)
+                                                    {
+                                                ?>
+                                                        <td class="text-center"></td>
+                                                <?php
+                                                    }
+                                                ?>
+                                            </tr>
+                                        <?php    
+                                            }
+                                            else
+                                            {
+                                                $mes = $_REQUEST['mes'];
+                                                $year = $_REQUEST['year'];
                                                 $queryEdades = mysqli_query($connection, "SELECT a.id, a.edad FROM hojaasistencia h
-                                                                                    INNER JOIN asistencia a ON h.id = a.hojaAsistencia
-                                                                                    WHERE month(h.fecha) = 10 AND h.fiscalYear = 1");
+                                                                                            INNER JOIN asistencia a ON h.id = a.hojaAsistencia
+                                                                                            WHERE month(h.fecha) = $mes AND h.fiscalYear = $year");
                                                 $edades = mysqli_num_rows($queryEdades);
+                                                $contador = array(0,0,0,0,0,0,0);
                                                 if($edades>0){
-                                                    
                                                     while($edades = mysqli_fetch_array($queryEdades)){
                                                         if($edades['edad']>=0 && $edades['edad']<=4)
                                                         {
@@ -233,18 +259,21 @@
                                                             $contador[6] = $contador[6] + 1;
                                                         }
                                                     }
-                                                   // $totalParticipantes = array_sum($totalParticipantes);
                                                 }
                                             ?>
-                                                <td class="text-center"><?php echo $contador[0] ?></td>
-                                                <td class="text-center"><?php echo $contador[1] ?></td>
-                                                <td class="text-center"><?php echo $contador[2] ?></td>
-                                                <td class="text-center"><?php echo $contador[3] ?></td>
-                                                <td class="text-center"><?php echo $contador[4] ?></td>
-                                                <td class="text-center"><?php echo $contador[5] ?></td>
-                                                <td class="text-center"><?php echo $contador[6] ?></td>
+                                            <tr>
+                                                <?php
+                                                    for($i=0;$i<=6;$i++)
+                                                    {
+                                                ?>
+                                                        <td class="text-center"><?php echo $contador[$i] ?></td>
+                                                <?php
+                                                    }
+                                                ?>
                                             </tr>
-
+                                        <?php    
+                                            }
+                                        ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -253,7 +282,6 @@
 
 
                     <!--tabla2-->
-
                     </br>
                     <h3 class="title-5">Talleres O Charlas</h3>
                     </br>
@@ -262,10 +290,7 @@
                         <div class="row">
                         <div class="col-lg-10"></div>
                                 <div class="table-responsive table--no-card2 m-b-30" >
-
-
                                     <table class="table table-borderless table-striped table-earning">
-                                       
                                         <thead>
                                             <tr>
                                                 <th class="text-left">Nombre De La Actividad</th>
@@ -277,14 +302,17 @@
                                         </thead>
 
                                         <tbody>
-                                        <?php 
+                                        <?php
+                                        if(!empty($_REQUEST['mes']) && !empty($_REQUEST['year']))
+                                        {
                                             //Query para calcular la cantidad de participantes en una actividad
                                             $query = mysqli_query($connection, "SELECT actividadID, nombre, proposito, fecha FROM actividades
-                                                                    WHERE fiscalYear = 1 AND month(fecha) = 10 AND tipo = 1 OR tipo = 2 OR tipo = 4");
+                                                                    WHERE (fiscalYear = $year AND month(fecha) = $mes) AND (tipo = 1 OR tipo = 2 OR tipo = 4)");
                                             $result = mysqli_num_rows($query);
+
                                             if($result > 0){
- 
-                                                while($actividad = mysqli_fetch_array($query)){
+                                                while($actividad = mysqli_fetch_array($query))
+                                                {
                                                     $actividadID = $actividad['actividadID'];
                                             
                                                     //Query de Cantidad de Participantes
@@ -294,16 +322,29 @@
                                                     <td><?php echo $actividad['nombre']?></td>
                                                     <td><?php echo $actividad['proposito']?></td>
                                                     <td><?php 
-                                                        while($participantes = mysqli_fetch_array($query2)){
-                                                        echo $participantes[0];
-                                                        }
-                                                    ?></td>
+                                                            while($participantes = mysqli_fetch_array($query2))
+                                                            {
+                                                                echo $participantes[0];
+                                                            }
+                                                        ?></td>
                                                     <td>Jovenes</td>
                                                     <td><?php echo $actividad['fecha']?></td>
                                                 </tr>
                                         <?php
                                                 }
                                             }
+                                        }
+                                        else{
+                                        ?>
+                                            <tr>
+                                                <td class="text-center"></td>
+                                                <td class="text-center"></td>
+                                                <td class="text-center"></td>
+                                                <td class="text-center"></td>
+                                                <td class="text-center"></td>
+                                            </tr>
+                                        <?php  
+                                        }
                                         ?>
                                         </tbody>
                                     </table>
@@ -320,28 +361,30 @@
                         <div class="container-fluid">
                         <div class="row">
                         <div class="col-lg-10"></div>
-                                <div class="table-responsive table--no-card m-b-30">
-                                    <!--tabla blanca-->
+                                <div class="table-responsive table--no-card2 m-b-30" >
                                     <table class="table table-borderless table-striped table-earning">
                                         <thead>
                                             <tr>
                                                 <th class="text-left">Adiestramiento</th>
-                                                <th class="text-left">Proposito</th>
+                                                <th class="text-left">Próposito</th>
                                                 <th class="text-left">Participantes</th>
                                                 <th class="text-left">Población Impactada</th>
                                                 <th class="text-left">Fecha</th>
                                             </tr>
                                         </thead>
- 
+
                                         <tbody>
-                                        <?php 
+                                        <?php
+                                        if(!empty($_REQUEST['mes']) && !empty($_REQUEST['year']))
+                                        {
                                             //Query para calcular la cantidad de participantes en una actividad
                                             $query = mysqli_query($connection, "SELECT actividadID, nombre, proposito, fecha FROM actividades
-                                                                    WHERE fiscalYear = 1 AND month(fecha) = 10 AND tipo = 3");
+                                                                    WHERE fiscalYear = $year AND month(fecha) = $mes AND tipo = 3");
                                             $result = mysqli_num_rows($query);
+
                                             if($result > 0){
- 
-                                                while($actividad = mysqli_fetch_array($query)){
+                                                while($actividad = mysqli_fetch_array($query))
+                                                {
                                                     $actividadID = $actividad['actividadID'];
                                             
                                                     //Query de Cantidad de Participantes
@@ -351,16 +394,29 @@
                                                     <td><?php echo $actividad['nombre']?></td>
                                                     <td><?php echo $actividad['proposito']?></td>
                                                     <td><?php 
-                                                        while($participantes = mysqli_fetch_array($query2)){
-                                                        echo $participantes[0];
-                                                        }
-                                                    ?></td>
+                                                            while($participantes = mysqli_fetch_array($query2))
+                                                            {
+                                                                echo $participantes[0];
+                                                            }
+                                                        ?></td>
                                                     <td>Jovenes</td>
                                                     <td><?php echo $actividad['fecha']?></td>
                                                 </tr>
                                         <?php
                                                 }
                                             }
+                                        }
+                                        else{
+                                        ?>
+                                            <tr>
+                                                <td class="text-center"></td>
+                                                <td class="text-center"></td>
+                                                <td class="text-center"></td>
+                                                <td class="text-center"></td>
+                                                <td class="text-center"></td>
+                                            </tr>
+                                        <?php  
+                                        }
                                         ?>
                                         </tbody>
                                     </table>
@@ -391,17 +447,19 @@
                                         <tbody>
 
                                             <?php
+                                            if(!empty($_REQUEST['mes']) && !empty($_REQUEST['year']))
+                                            {
                                                 $queryReExamen = mysqli_query($connection, "SELECT a.participanteID
                                                 FROM asistencia a
                                                 INNER JOIN hojaasistencia h ON h.id = a.hojaAsistencia
-                                                WHERE month(h.fecha)= 10 AND h.fiscalYear = 1 AND a.proposito = 4");
+                                                WHERE month(h.fecha)= $mes AND h.fiscalYear = $year AND a.proposito = 4");
 
                                                 $queryResume = mysqli_query($connection, "SELECT a.participanteID
                                                 FROM asistencia a
                                                 INNER JOIN hojaasistencia h ON h.id = a.hojaAsistencia
-                                                WHERE month(h.fecha)= 10 AND h.fiscalYear = 1 AND a.proposito = 5");
+                                                WHERE month(h.fecha)= $mes AND h.fiscalYear = $year AND a.proposito = 5");
 
-                                                $resume = mysqli_num_rows($queryResume);
+                                                
                                             ?>
                                             <tr>
                                                 <td class="text-left">Re-Exámen</td>
@@ -414,7 +472,25 @@
                                                 <td class="text-left"><?php echo mysqli_num_rows($queryResume);?></td>
                                                 <td class="text-left">Adulto</td>
                                             </tr>
-                                        </tbody>
+                                            <?php
+                                            }
+                                            else
+                                            {
+                                            ?>
+                                                <tr>
+                                                <td class="text-left">Re-Exámen</td>
+                                                <td class="text-left"></td>
+                                                <td class="text-left"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">Resumé</td>
+                                                <td class="text-left"></td>
+                                                <td class="text-left"></td>
+                                            </tr>
+                                            <?php
+                                            }
+                                            ?>
+                                    </tbody>
                                     </table>
                                 </div>
                             </div>
