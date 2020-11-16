@@ -7,7 +7,7 @@
 
     $fechaHoy = getTodayDate();                       
 ?>
-
+ 
 <!-- Learning Center Register -->
  
 <head>
@@ -228,7 +228,19 @@
                                                 <td><?php echo $asistencia['edad']?></td>
                                                 <td><?php echo $asistencia['horaDeEntrada']?></td>
                                                 <td><?php echo $asistencia['proposito']?></td>
-                                                <td><?php echo $asistencia['horaDeSalida']?></td>
+                                                <td><?php
+                                                        if($asistencia['horaDeSalida']=='00:00:00')
+                                                        {
+                                                            ?>
+                                                                 <button type="submit" class="btn btn-primary btn-sm">Someter
+                                                                </button>
+                                                            <?php
+                                                        }
+                                                        else
+                                                        {
+                                                            echo $asistencia['horaDeSalida'];
+                                                        }
+                                                    ?></td>
                                             </tr>
                                     <?php
                                             }
