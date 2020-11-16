@@ -3,11 +3,9 @@
 
 <?php
     include './includes/connection.php';
-    $gmtTimezone = new DateTimeZone('GMT-4');//Optener el time zone de P.R.
-    $hoy = new DateTime('now',$gmtTimezone);  //Obtener la fecha usando el timezone
-    $fechaHoy = $hoy->format('Y-m-d'); //cambiar la fecha en string
-    
-                                    
+    include_once './functions/functions.php';
+
+    $fechaHoy = getTodayDate();                       
 ?>
 
 <!-- Learning Center Register -->
@@ -186,17 +184,7 @@
                         <div class="container-fluid">
 
                             <h2 class="title-2">Asistencia De Hoy</h2>
-                            <h2 class="title-7"><?php 
-                                                    $numeroDia = $hoy->format('d');
-                                                    echo $numeroDia;
-                                                ?> de 
-                                                <?php
-                                                    include_once './functions/mes.php';
-                                                    $numeroMes = $hoy->format('m');
-                                                    $mes = getMes($numeroMes);
-                                                    echo "$mes";
-                                                ?>  
-                                    </h2><!--Arreglar-->
+                            <h2 class="title-7"><?php echo getCurrentDay() ?> de <?php echo getCurrentMonth(); ?> </h2>
                                                 
                             <div class="row m-t-25"></div>
                                 <div class="table-responsive table--no-card m-b-30">
