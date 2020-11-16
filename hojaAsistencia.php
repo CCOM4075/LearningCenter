@@ -1,5 +1,6 @@
 <?php
     include './includes/connection.php';
+
  
     if(!empty($_POST))
 	{
@@ -99,15 +100,15 @@
                         <h2 class="title-7"><?php 
                                                 if(!empty($_REQUEST['fecha']))
                                                 {
-                                                    include_once './functions/mes.php';
-                                                    $numeroDia = $fechaFormato->format('d');
-                                                    $numeroMes = $fechaFormato->format('m');
-                                                    $year = $fechaFormato->format('yy');
-                                                    $mes = getMes($numeroMes);
+                                                    include_once './functions/functions.php';
+                                                    $numeroDia = getCurrentDay();
+                                                    $mes = getCurrentMonth();
+                                                    $year = getCurrentYear();
                                                     echo $numeroDia." de ".$mes." de ".$year;
                                                     
                                                 }
-                                            ?></h2>
+                                            ?>
+                        </h2>
                     </div>
 
 
