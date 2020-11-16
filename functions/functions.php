@@ -63,17 +63,22 @@
         $gmtTimezone = new DateTimeZone('GMT-4');//Optener el time zone de P.R.
         $hoy = new DateTime('now',$gmtTimezone);  //Obtener la fecha usando el timezone
         $fechaHoy = $hoy->format('Y-m-d'); //cambiar la fecha en string
-
         return $fechaHoy;
     }
 
     function getCurrentMonth()
     {
-        $gmtTimezone = new DateTimeZone('GMT-4');//Optener el time zone de P.R.
-        $hoy = new DateTime('now',$gmtTimezone);  //Obtener la fecha usando el timezone
-        $numeroMes = $hoy->format('m');
+        $numeroMes = getCurrentMonthNumber();
         $mesName = getMes($numeroMes);
         return $mesName;
+    }
+
+    function getCurrentMonthNumber()
+    {
+        $gmtTimezone = new DateTimeZone('GMT-4');//Optener el time zone de P.R.
+        $hoy = new DateTime('now',$gmtTimezone);  //Obtener la fecha usando el timezone
+        $mesNumber = $hoy->format('m');
+        return $mesNumber;
     }
 
     function getCurrentDay()
@@ -83,8 +88,20 @@
         $numeroDia = $hoy->format('d');
         return $numeroDia;
     }
-
     
+    function getCurrentYear()
+    {
+        $gmtTimezone = new DateTimeZone('GMT-4');//Optener el time zone de P.R.
+        $hoy = new DateTime('now',$gmtTimezone);  //Obtener la fecha usando el timezone
+        $year = $hoy->format('yy');
+        return $year;
+    }
+
+    function convert24to12($hora)
+    {
+        echo "a";
+    }
+
 
 ?>
 
