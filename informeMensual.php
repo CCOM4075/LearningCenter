@@ -173,7 +173,7 @@
                                 </select>
                                 <div class="dropDownSelect2"></div>
                             </div>
-                        <button type="submit" class="btn btn-primary btn-sm">Ingresar</button>
+                        <button type="submit" class="btn btn-primary">Ingresar</button>
                     </div>   
                 </form> 
                 </div>
