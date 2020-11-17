@@ -188,7 +188,6 @@
 
                                 <?php   
                                     
-                                    
                                     //Buscar en la hoja de Asistencia si esta la fecha de hoy.
                                     $query2 = mysqli_query($connection, "SELECT * FROM `hojaasistencia` WHERE fecha = '$fechaHoy'");
                                     $result2 = mysqli_fetch_Array($query2);
@@ -213,19 +212,19 @@
                                                 <td><?php echo convert24to12($asistencia['horaDeEntrada'])?></td>
                                                 <td><?php echo $asistencia['proposito']?></td>
                                                 <td><?php
-                                                        if($asistencia['horaDeSalida']=='00:00:00')
-                                                        {
-                                                            ?> 
-                                                                <form action="someterSalida.php?asistenciaID=<?php echo $asistencia['id'] ?>" method="post">
-                                                                        <input type="submit" name="submit" value="Someter Salida" class="au-btn au-btn--block au-btn--green" />
-                                                                </form>
-                                                            <?php
-                                                        }
-                                                        else
-                                                        {
-                                                            echo convert24to12($asistencia['horaDeSalida']);
-                                                        }
-                                                    ?></td>
+                                                    if($asistencia['horaDeSalida']=='00:00:00')
+                                                    {
+                                                        ?> 
+                                                            <form action="someterSalida.php?asistenciaID=<?php echo $asistencia['id'] ?>" method="post">
+                                                                <input type="submit" name="submit" value="Someter Salida" class="au-btn au-btn--block au-btn--green" />
+                                                            </form>
+                                                        <?php
+                                                    }
+                                                    else
+                                                    {
+                                                        echo convert24to12($asistencia['horaDeSalida']);
+                                                    }
+                                                ?></td>
                                             </tr>
                                         <?php
                                             }
@@ -234,11 +233,10 @@
                                 ?>
                                 </tbody>
                             </table>
-                                </div>
+
+                            </div>
                             <!--<div class="col-lg-3">-->
                             </div>
-
-                       
                             </div>
                             <!--<div class="col-lg-3">-->
                         </div>
@@ -249,11 +247,11 @@
             <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
         </div>
-                <!--Footer-->
-                <?php
-                    include './includes/footer.php';
-                ?>
-                <!--End Footer-->
+        <!--Footer-->
+        <?php
+            include './includes/footer.php';
+        ?>
+        <!--End Footer-->
     </div>
 
     <!-- Jquery JS-->
