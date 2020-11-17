@@ -90,15 +90,7 @@
                                                 
                                             ?>
                                             <div class="text">
-                                                <h2><?php 
-                                                        $queryCantidadHoy = mysqli_query($connection, "SELECT a.id
-                                                        FROM hojaasistencia h
-                                                        INNER JOIN asistencia a ON h.id = a.hojaAsistencia
-                                                        WHERE h.fecha = '$fechaHoy'");
-
-                                                        $cantidadHoy = mysqli_num_rows($queryCantidadHoy);
-                                                        echo $cantidadHoy;
-                                                    ?>
+                                                <h2><?php  echo addZero(cantidadParticipantesDia()); ?>
                                                         <div class="icon">
                                                             <i class="zmdi zmdi-account-o"></i>
                                                         </div>
@@ -139,16 +131,7 @@
                                                 <i class="zmdi zmdi-calendar-note"></i>
                                             </div>-->
                                             <div class="text">
-                                                <h2><?php
-                                                        $mesActual = getCurrentMonthNumber();
-                                                        $queryCantidadMes = mysqli_query($connection, "SELECT a.id
-                                                        FROM hojaasistencia h
-                                                        INNER JOIN asistencia a ON h.id = a.hojaAsistencia
-                                                        WHERE month(h.fecha) = '$mesActual'");
-
-                                                        $cantidadMes = mysqli_num_rows($queryCantidadMes);
-                                                        echo $cantidadMes;
-                                                    ?></h2>
+                                                <h2><?php echo addZero(cantidadParticipantesMes()); ?></h2>
                                                 <h6>participantes <br/> este mes</h6>
                                             </div>
                                         </div>
@@ -186,16 +169,7 @@
                                                 <i class="zmdi zmdi-calendar-note"></i>
                                             </div>-->
                                             <div class="text">
-                                            <h2><?php
-                                                    $yearActual = getCurrentYear();
-                                                    $queryCantidadYear = mysqli_query($connection, "SELECT a.id
-                                                    FROM hojaasistencia h
-                                                    INNER JOIN asistencia a ON h.id = a.hojaAsistencia
-                                                    WHERE year(h.fecha) = '$yearActual'");
-
-                                                    $cantidadYear = mysqli_num_rows($queryCantidadYear);
-                                                    echo $cantidadYear;
-                                                ?></h2>
+                                            <h2><?php echo addZero(cantidadParticipantesYear()); ?></h2>
                                                 <h6>participantes <br/> este año</h6>
                                             </div>
                                         </div>
