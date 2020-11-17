@@ -113,6 +113,64 @@
         return $hora;
     }
 
+    function cantidadParticipantesDia()
+    {
+        include './includes/connection.php';
+        $fechaHoy = getTodayDate();
+        $queryCantidadHoy = mysqli_query($connection, "SELECT a.id
+        FROM hojaasistencia h
+        INNER JOIN asistencia a ON h.id = a.hojaAsistencia
+        WHERE h.fecha = '$fechaHoy'");
+
+        $cantidadHoy = mysqli_num_rows($queryCantidadHoy);
+
+        return $cantidadHoy;
+
+    }
+
+    function cantidadParticipantesMes()
+    {
+        include './includes/connection.php';
+
+        $mesActual = getCurrentMonthNumber();
+        $queryCantidadMes = mysqli_query($connection, "SELECT a.id
+        FROM hojaasistencia h
+        INNER JOIN asistencia a ON h.id = a.hojaAsistencia
+        WHERE month(h.fecha) = '$mesActual'");
+
+        $cantidadMes = mysqli_num_rows($queryCantidadMes);
+
+        return $cantidadMes;
+    }
+
+    function cantidadParticipantesYear()
+    {
+        include './includes/connection.php';
+
+        $yearActual = getCurrentYear();
+        $queryCantidadYear = mysqli_query($connection, "SELECT a.id
+        FROM hojaasistencia h
+        INNER JOIN asistencia a ON h.id = a.hojaAsistencia
+        WHERE year(h.fecha) = '$yearActual'");
+
+        $cantidadYear = mysqli_num_rows($queryCantidadYear);
+
+        return $cantidadYear;
+    }
+
+    function addZero($cantidad)
+    {
+        if($cantidad<10)
+        {
+            $cantidad = "00".$cantidad;
+        }
+        else if($cantidad >=10 && $cantidad<100)
+        {
+            $cantidad = "0".$cantidad;
+        }
+        return $cantidad;
+    }
+
 
 ?>
 
