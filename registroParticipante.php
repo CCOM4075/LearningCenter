@@ -178,18 +178,16 @@
                                     </div>
                                 </div>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
-
-            <!--Footer-->
-            <?php
-                include './includes/footer.php';
-            ?>
-            <!--End Footer-->
-
-        </div>
-
+            </div>
+        <!--Footer-->
+        <?php
+            include './includes/footer.php';
+        ?>
+        <!--End Footer-->
     </div>
 
     <!-- Jquery JS-->
