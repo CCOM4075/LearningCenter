@@ -69,7 +69,7 @@
                 <div class="section__content section__content--p30">
 
                     <div class="container-fluid">
-                        
+
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
@@ -85,9 +85,7 @@
                                 <div class="overview-item overview-item--c1">
                                     <div class="overview__inner">
                                         <div class="overview-box clearfix">
-                                            
                                             <?php
-                                                
                                             ?>
                                             <div class="text">
                                                 <h2><?php  echo addZero(cantidadParticipantesDia()); ?>
@@ -98,12 +96,9 @@
                                                 <h6>participantes <br/> este día</h6>
                                             </div>
                                             <div class="icon">
-                                            <i class="zmdi zmdi-collection-item-1"></i>
+                                                <i class="zmdi zmdi-collection-item-1"></i>
                                             </div>
                                         </div>
-                                        <!-- <div class="overview-chart">
-                                            <canvas id="widgetChart1"></canvas>
-                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -116,9 +111,8 @@
                                                 <h2><?php echo addZero(cantidadParticipantesMes()); ?></h2>
                                                 <h6>participantes <br/> este mes</h6>
                                             </div>
-                                            
                                             <div class="icon">
-                                            <i class="zmdi zmdi-calendar"></i>
+                                                <i class="zmdi zmdi-calendar"></i>
                                             </div>
                                         </div>
                                         <!--chart-->
@@ -134,9 +128,8 @@
                                                 <h2>000</h2>
                                                 <h6>participantes <br/> este trimestre</h6>
                                             </div>
-
                                             <div class="icon">
-                                            <i class="zmdi zmdi-calendar-note"></i>
+                                                <i class="zmdi zmdi-calendar-note"></i>
                                             </div>
                                         </div>
                                         <!-- <div class="overview-chart">
