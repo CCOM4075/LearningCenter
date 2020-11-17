@@ -48,7 +48,7 @@
 
 <body class="animsition">
     <div class="page-wrapper">
-        
+
         <!-- MENU SIDEBAR-->
         <?php
 	        include './includes/menuSideBar.php';
@@ -97,9 +97,9 @@
                                                     
                                                 <h6>participantes <br/> este día</h6>
                                             </div>
-                                                <div class="icon">
-                                                <i class="zmdi zmdi-account-o"></i>
-                                                </div>
+                                            <div class="icon">
+                                            <i class="zmdi zmdi-account-o"></i>
+                                            </div>
                                         </div>
                                         <!-- <div class="overview-chart">
                                             <canvas id="widgetChart1"></canvas>
@@ -113,8 +113,12 @@
                                     <div class="overview__inner">
                                         <div class="overview-box clearfix">
                                             <div class="text">
-                                                <h2>0253</h2>
-                                                <h6>participantes <br/> esta semana</h6>
+                                                <h2><?php echo addZero(cantidadParticipantesMes()); ?></h2>
+                                                <h6>participantes <br/> este mes</h6>
+                                            </div>
+                                            
+                                            <div class="icon">
+                                            <i class="zmdi zmdi-calendar-note"></i>
                                             </div>
                                         </div>
                                         <!-- <div class="overview-chart">
@@ -132,8 +136,12 @@
                                                 <i class="zmdi zmdi-calendar-note"></i>
                                             </div>-->
                                             <div class="text">
-                                                <h2><?php echo addZero(cantidadParticipantesMes()); ?></h2>
-                                                <h6>participantes <br/> este mes</h6>
+                                                <h2>000</h2>
+                                                <h6>participantes <br/> este trimestre</h6>
+                                            </div>
+
+                                            <div class="icon">
+                                            <i class="zmdi zmdi-calendar-note"></i>
                                             </div>
                                         </div>
                                         <!-- <div class="overview-chart">
@@ -341,24 +349,21 @@
                             </div>
                         </div> -->
 
-            <!--Footer-->
-            <?php
-                include './includes/footer.php';
-            ?>
-            <!--End Footer-->
+            
                         
 
                     </div>
                 </div>
-                
+
             </div>
-
-            
-
             <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
         </div>
-
+                <!--Footer-->
+                <?php
+                    include './includes/footer.php';
+                ?>
+                <!--End Footer-->
     </div>
 
     <!-- Jquery JS-->
