@@ -284,7 +284,7 @@ section {
 /*Page Objects*/
 .page-wrapper {
     overflow: hidden;
-    background: #cacaca;
+    background: #e7e7e7;
     padding-bottom: 8vh;
 }
 
@@ -1611,13 +1611,14 @@ section {
 
 .menu-sidebar {
     width: 200px;
-    position: absolute;
+    position: fixed;
     left: 0px;
     top: 75px;
     bottom: 0;
     transition: 0.5s;
     background: #fff;
     overflow-y: auto;
+    overflow: hidden;
     z-index: 3;
 }
 
