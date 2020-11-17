@@ -98,7 +98,7 @@
                                                 <h6>participantes <br/> este día</h6>
                                             </div>
                                             <div class="icon">
-                                            <i class="zmdi zmdi-account-o"></i>
+                                            <i class="zmdi zmdi-calendar"></i>
                                             </div>
                                         </div>
                                         <!-- <div class="overview-chart">
