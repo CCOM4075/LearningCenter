@@ -31,34 +31,34 @@
                             WHERE h.fiscalYear = '$fiscalYear'");
         $edades = mysqli_num_rows($queryEdades);
         if($edades>0)
+            {
+                while($edades = mysqli_fetch_array($queryEdades))
+                {
+                    $fecha = new DateTime($edades['fecha']);
+                    $mes = $fecha->format('m');
+
+                    if($edades['edad']>=0 && $edades['edad']<=12)
                     {
-                        while($edades = mysqli_fetch_array($queryEdades))
-                        {
-                            $fecha = new DateTime($edades['fecha']);
-                            $mes = $fecha->format('m');
-
-                            if($edades['edad']>=0 && $edades['edad']<=12)
-                            {
-                                $meses[$mes-1][0] += 1;
-                                $meses[$mes-1][3] += 1;
-                            }
-                            else if($edades['edad']>=13 && $edades['edad']<=17)
-                            {
-                                $meses[$mes-1][1] += 1;
-                                $meses[$mes-1][3] += 1;
-
-                            }
-                            else if($edades['edad']>=18)
-                            {
-                                $meses[$mes-1][2] += 1;
-                                $meses[$mes-1][3] += 1;
-
-                            }
-                        }
+                        $meses[$mes-1][0] += 1;
+                        $meses[$mes-1][3] += 1;
                     }
+                    else if($edades['edad']>=13 && $edades['edad']<=17)
+                    {
+                        $meses[$mes-1][1] += 1;
+                        $meses[$mes-1][3] += 1;
+
+                    }
+                    else if($edades['edad']>=18)
+                    {
+                        $meses[$mes-1][2] += 1;
+                        $meses[$mes-1][3] += 1;
+
+                    }
+                }
+            }
     }
-    
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -95,7 +95,6 @@
 
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all">
-
 </head>
 
 <body class="animsition">
@@ -209,16 +208,15 @@
                                 </div>
                             </div>
                         </div>
-                        <!--Footer-->
-                        <?php
-	                        include './includes/footer.php';
-                        ?>
-                        <!--End Footer-->
                     </div>
                 </div>
             </div>
+            <!--Footer-->
+            <?php
+                include './includes/footer.php';
+            ?>
+            <!--End Footer-->
         </div>
-
     </div>
 
     <!-- Jquery JS-->
