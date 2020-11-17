@@ -45,10 +45,10 @@
 
 </head>
 
+
 <body class="animsition">
     <div class="page-wrapper">
-
-
+        
         <!-- MENU SIDEBAR-->
         <?php
 	        include './includes/menuSideBar.php';
@@ -91,14 +91,15 @@
                                             ?>
                                             <div class="text">
                                                 <h2><?php  echo addZero(cantidadParticipantesDia()); ?>
-                                                        <div class="icon">
-                                                            <i class="zmdi zmdi-account-o"></i>
-                                                        </div>
+                                                        
                                                         <div class="chart1Total"></div>
                                                     </h2>
                                                     
                                                 <h6>participantes <br/> este día</h6>
                                             </div>
+                                                <div class="icon">
+                                                <i class="zmdi zmdi-account-o"></i>
+                                                </div>
                                         </div>
                                         <!-- <div class="overview-chart">
                                             <canvas id="widgetChart1"></canvas>
@@ -261,7 +262,7 @@
                             <!--<div class="col-lg-3">-->
                         </div>
                         
-                        <div class="row">
+                        <!-- <div class="row">
                             
                             <div class="col-lg-6">
                                 <div class="au-card recent-report">
@@ -338,17 +339,22 @@
                         <div class="row">
                             <div class="col-lg-6">
                             </div>
-                        </div>
+                        </div> -->
 
-                        <!--Footer-->
-                        <?php
-	                        include './includes/footer.php';
-                        ?>
-                        <!--End Footer-->
+            <!--Footer-->
+            <?php
+                include './includes/footer.php';
+            ?>
+            <!--End Footer-->
+                        
 
                     </div>
                 </div>
+                
             </div>
+
+            
+
             <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
         </div>
