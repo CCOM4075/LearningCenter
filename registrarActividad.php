@@ -149,10 +149,8 @@
                                                 </div>
                                             </div>
 
-
-
                                             <div class="row form-group">
-                                            <div class="col col-md-3">
+                                                <div class="col col-md-3">
                                                     <label for="proposito" class=" form-control-label">Propósito</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
@@ -233,16 +231,15 @@
                                 </div>
                             </div>
                         </div>
-                        <!--Footer-->
-                        <?php
-	                        include './includes/footer.php';
-                        ?>
-                        <!--End Footer-->
                     </div>
                 </div>
             </div>
+            <!--Footer-->
+            <?php
+                include './includes/footer.php';
+            ?>
+            <!--End Footer-->
         </div>
-
     </div>
 
     <!-- Jquery JS-->
