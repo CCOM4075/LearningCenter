@@ -97,9 +97,20 @@
         return $year;
     }
 
+    function getCurrentHour()
+    {
+        $gmtTimezone = new DateTimeZone('GMT-4');//Optener el time zone de P.R.
+
+        $hoy = new DateTime('now',$gmtTimezone);  //Obtener la fecha usando el timezone
+        $horaActual = $hoy->format('H:i:s');
+
+        return $horaActual;
+    }
+
     function convert24to12($hora)
     {
-        echo "a";
+        $hora = date("g:i a", strtotime($hora));
+        return $hora;
     }
 
 
