@@ -42,7 +42,6 @@
 
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all">
-
 </head>
 
 
@@ -85,15 +84,11 @@
                                 <div class="overview-item overview-item--c1">
                                     <div class="overview__inner">
                                         <div class="overview-box clearfix">
-                                            <?php
-                                            ?>
                                             <div class="text">
                                                 <h2><?php  echo addZero(cantidadParticipantesDia()); ?>
-                                                        
-                                                        <div class="chart1Total"></div>
-                                                    </h2>
-                                                    
-                                                <h6>participantes <br/> este día</h6>
+                                                    <div class="chart1Total"></div>
+                                                </h2>
+                                                <h6>participantes<br/>este día</h6>
                                             </div>
                                             <div class="icon">
                                                 <i class="zmdi zmdi-collection-item-1"></i>
@@ -167,72 +162,70 @@
                                 <div class="table-responsive table--no-card m-b-30">
                                     <!--tabla blanca-->
                                     <table class="table table-borderless table-striped table-earning">
-                                <thead>
-                                    <tr>
-                                        <th class="text-left">Nombre</th>
-                                        <th class="text-left">Edad</th>
-                                        <th class="text-left">Hora Entrada</th>
-                                        <th class="text-left">Proposito</th>
-                                        <th class="text-left">Hora Salida</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-
-                                <?php   
-                                    
-                                    //Buscar en la hoja de Asistencia si esta la fecha de hoy.
-                                    $query2 = mysqli_query($connection, "SELECT * FROM `hojaasistencia` WHERE fecha = '$fechaHoy'");
-                                    $result2 = mysqli_fetch_Array($query2);
-
-                                    if($result2 > 0)
-                                    {
-                                        
-                                        $query = mysqli_query($connection, "SELECT a.participanteID, p.nombre, p.apellidos, a.edad, a.horaDeEntrada, a.horaDeSalida, x.proposito, a.id
-                                                                            FROM hojaasistencia h
-                                                                            INNER JOIN asistencia a ON h.id = a.hojaAsistencia
-                                                                            INNER JOIN participantes p ON a.participanteID = p.participanteID
-                                                                            INNER JOIN propositos x ON a.proposito = x.id
-                                                                            WHERE h.fecha = '$fechaHoy'");
-                                    
-                                        $result = mysqli_num_rows($query);
-                                        if($result > 0){
-                                            while($asistencia = mysqli_fetch_array($query)){
-                                        ?>			
+                                        <thead>
                                             <tr>
-                                                <td><?php echo $asistencia['nombre']." ".$asistencia['apellidos']?></td>
-                                                <td><?php echo $asistencia['edad']?></td>
-                                                <td><?php echo convert24to12($asistencia['horaDeEntrada'])?></td>
-                                                <td><?php echo $asistencia['proposito']?></td>
-                                                <td><?php
-                                                    if($asistencia['horaDeSalida']=='00:00:00')
-                                                    {
-                                                        ?> 
-                                                            <form action="someterSalida.php?asistenciaID=<?php echo $asistencia['id'] ?>" method="post">
-                                                                <input type="submit" name="submit" value="Someter Salida" class="au-btn au-btn--block au-btn--green" />
-                                                            </form>
-                                                        <?php
-                                                    }
-                                                    else
-                                                    {
-                                                        echo convert24to12($asistencia['horaDeSalida']);
-                                                    }
-                                                ?></td>
+                                                <th class="text-left">Nombre</th>
+                                                <th class="text-left">Edad</th>
+                                                <th class="text-left">Hora Entrada</th>
+                                                <th class="text-left">Proposito</th>
+                                                <th class="text-left">Hora Salida</th>
                                             </tr>
-                                        <?php
-                                            }
-                                        }
-                                    }
-                                ?>
-                                </tbody>
-                            </table>
+                                        </thead>
 
-                            </div>
+                                        <tbody>
+                                        <?php   
+                                            //Buscar en la hoja de Asistencia si esta la fecha de hoy.
+                                            $query2 = mysqli_query($connection, "SELECT * FROM `hojaasistencia` WHERE fecha = '$fechaHoy'");
+                                            $result2 = mysqli_fetch_Array($query2);
+
+                                            if($result2 > 0)
+                                            {
+                                                
+                                                $query = mysqli_query($connection, "SELECT a.participanteID, p.nombre, p.apellidos, a.edad, a.horaDeEntrada, a.horaDeSalida, x.proposito, a.id
+                                                                                    FROM hojaasistencia h
+                                                                                    INNER JOIN asistencia a ON h.id = a.hojaAsistencia
+                                                                                    INNER JOIN participantes p ON a.participanteID = p.participanteID
+                                                                                    INNER JOIN propositos x ON a.proposito = x.id
+                                                                                    WHERE h.fecha = '$fechaHoy'");
+                                            
+                                                $result = mysqli_num_rows($query);
+                                                if($result > 0){
+                                                    while($asistencia = mysqli_fetch_array($query)){
+                                                ?>			
+                                                    <tr>
+                                                        <td><?php echo $asistencia['nombre']." ".$asistencia['apellidos']?></td>
+                                                        <td><?php echo $asistencia['edad']?></td>
+                                                        <td><?php echo convert24to12($asistencia['horaDeEntrada'])?></td>
+                                                        <td><?php echo $asistencia['proposito']?></td>
+                                                        <td><?php
+                                                            if($asistencia['horaDeSalida']=='00:00:00')
+                                                            {
+                                                                ?> 
+                                                                    <form action="someterSalida.php?asistenciaID=<?php echo $asistencia['id'] ?>" method="post">
+                                                                        <input type="submit" name="submit" value="Someter Salida" class="au-btn au-btn--block au-btn--green" />
+                                                                    </form>
+                                                                <?php
+                                                            }
+                                                            else
+                                                            {
+                                                                echo convert24to12($asistencia['horaDeSalida']);
+                                                            }
+                                                        ?></td>
+                                                    </tr>
+                                        <?php
+                                                    }
+                                                }
+                                            }
+                                        ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             <!--<div class="col-lg-3">-->
                             </div>
                             </div>
                             <!--<div class="col-lg-3">-->
                         </div>
+
                     </div>
                 </div>
 
@@ -270,7 +263,6 @@
 
     <!-- Main JS-->
     <script src="js/main.js"></script>
-
 </body>
 
 </html>
