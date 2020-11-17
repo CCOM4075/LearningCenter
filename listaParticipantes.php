@@ -116,22 +116,16 @@
                                 </div>
                             </div>
                             <!--<div class="col-lg-3">-->
-                    
-                         
-                        
-                        
                                 <!-- END DATA TABLE-->
                             </div>
                         </div>
-                        
-                        <!--Footer-->
-                        <?php
-                            include './includes/footer.php';
-                        ?>
-                        <!--End Footer-->
- 
                     </div>
                 </div>
+                <!--Footer-->
+                <?php
+                include './includes/footer.php';
+                ?>
+                <!--End Footer-->
             </div>
         </div>
  
