@@ -98,7 +98,7 @@
                                                 <h6>participantes <br/> este día</h6>
                                             </div>
                                             <div class="icon">
-                                            <i class="zmdi zmdi-calendar"></i>
+                                            <i class="zmdi zmdi-collection-item-1"></i>
                                             </div>
                                         </div>
                                         <!-- <div class="overview-chart">
@@ -118,7 +118,7 @@
                                             </div>
                                             
                                             <div class="icon">
-                                            <i class="zmdi zmdi-calendar-note"></i>
+                                            <i class="zmdi zmdi-calendar"></i>
                                             </div>
                                         </div>
                                         <!-- <div class="overview-chart">
@@ -181,10 +181,10 @@
                                             <h2><?php echo addZero(cantidadParticipantesYear()); ?></h2>
                                                 <h6>participantes <br/> este año</h6>
                                             </div>
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-calendar-note"></i>
+                                            </div>
                                         </div>
-                                        <!-- <div class="overview-chart">
-                                            <canvas id="widgetChart4"></canvas>
-                                        </div> -->
                                     </div>
                                 </div>
                             </div>
