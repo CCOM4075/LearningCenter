@@ -90,25 +90,33 @@
                                             </div>
                                             <div class="chart1Total"></div>
                                             -->
+                                            <?php
+                                                
+                                            ?>
                                             <div class="text">
-                                                <h2>0040</h2>
+                                                <h2><?php 
+                                                        $queryCantidadHoy = mysqli_query($connection, "SELECT a.id
+                                                        FROM hojaasistencia h
+                                                        INNER JOIN asistencia a ON h.id = a.hojaAsistencia
+                                                        WHERE h.fecha = '$fechaHoy'");
+
+                                                        $cantidadHoy = mysqli_num_rows($queryCantidadHoy);
+                                                        echo $cantidadHoy;
+                                                    ?></h2>
                                                 <h6>participantes <br/> este día</h6>
                                             </div>
                                         </div>
-                                        <div class="overview-chart">
+                                        <!-- <div class="overview-chart">
                                             <canvas id="widgetChart1"></canvas>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-sm-6 col-lg-3">
+                            <!--<div class="col-sm-6 col-lg-3">
                                 <div class="overview-item overview-item--c2">
                                     <div class="overview__inner">
                                         <div class="overview-box clearfix">
-                                            <!--<div class="icon">
-                                                <i class="zmdi zmdi-account-o"></i>
-                                            </div>-->
                                             <div class="text">
                                                 <h2>0253</h2>
                                                 <h6>participantes <br/> esta semana</h6>
@@ -119,7 +127,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
 
                             <div class="col-sm-6 col-lg-3">
                                 <div class="overview-item overview-item--c3">
@@ -129,13 +137,22 @@
                                                 <i class="zmdi zmdi-calendar-note"></i>
                                             </div>-->
                                             <div class="text">
-                                                <h2>0831</h2>
+                                                <h2><?php
+                                                        $mesActual = getCurrentMonthNumber();
+                                                        $queryCantidadMes = mysqli_query($connection, "SELECT a.id
+                                                        FROM hojaasistencia h
+                                                        INNER JOIN asistencia a ON h.id = a.hojaAsistencia
+                                                        WHERE month(h.fecha) = '$mesActual'");
+
+                                                        $cantidadMes = mysqli_num_rows($queryCantidadMes);
+                                                        echo $cantidadMes;
+                                                    ?></h2>
                                                 <h6>participantes <br/> este mes</h6>
                                             </div>
                                         </div>
-                                        <div class="overview-chart">
+                                        <!-- <div class="overview-chart">
                                             <canvas id="widgetChart3"></canvas>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -167,13 +184,22 @@
                                                 <i class="zmdi zmdi-calendar-note"></i>
                                             </div>-->
                                             <div class="text">
-                                                <h2>0831</h2>
+                                            <h2><?php
+                                                    $yearActual = getCurrentYear();
+                                                    $queryCantidadYear = mysqli_query($connection, "SELECT a.id
+                                                    FROM hojaasistencia h
+                                                    INNER JOIN asistencia a ON h.id = a.hojaAsistencia
+                                                    WHERE year(h.fecha) = '$yearActual'");
+
+                                                    $cantidadYear = mysqli_num_rows($queryCantidadYear);
+                                                    echo $cantidadYear;
+                                                ?></h2>
                                                 <h6>participantes <br/> este año</h6>
                                             </div>
                                         </div>
-                                        <div class="overview-chart">
+                                        <!-- <div class="overview-chart">
                                             <canvas id="widgetChart4"></canvas>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -212,7 +238,7 @@
                                     if($result2 > 0)
                                     {
                                         
-                                        $query = mysqli_query($connection, "SELECT a.participanteID, p.nombre, p.apellidos, a.edad, a.horaDeEntrada, a.horaDeSalida, x.proposito
+                                        $query = mysqli_query($connection, "SELECT a.participanteID, p.nombre, p.apellidos, a.edad, a.horaDeEntrada, a.horaDeSalida, x.proposito, a.id
                                                                             FROM hojaasistencia h
                                                                             INNER JOIN asistencia a ON h.id = a.hojaAsistencia
                                                                             INNER JOIN participantes p ON a.participanteID = p.participanteID
@@ -226,19 +252,20 @@
                                             <tr>
                                                 <td><?php echo $asistencia['nombre']." ".$asistencia['apellidos']?></td>
                                                 <td><?php echo $asistencia['edad']?></td>
-                                                <td><?php echo $asistencia['horaDeEntrada']?></td>
+                                                <td><?php echo convert24to12($asistencia['horaDeEntrada'])?></td>
                                                 <td><?php echo $asistencia['proposito']?></td>
                                                 <td><?php
                                                         if($asistencia['horaDeSalida']=='00:00:00')
                                                         {
-                                                            ?>
-                                                                 <button type="submit" class="btn btn-primary btn-sm">Someter
-                                                                </button>
+                                                            ?> 
+                                                                <form action="someterSalida.php?asistenciaID=<?php echo $asistencia['id'] ?>" method="post">
+                                                                        <input type="submit" name="submit" value="Someter Salida" class="au-btn au-btn--block au-btn--green" />
+                                                                </form>
                                                             <?php
                                                         }
                                                         else
                                                         {
-                                                            echo $asistencia['horaDeSalida'];
+                                                            echo convert24to12($asistencia['horaDeSalida']);
                                                         }
                                                     ?></td>
                                             </tr>
