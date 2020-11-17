@@ -218,16 +218,15 @@
                                 </div>
                             </div>
                         </div>
-                        <!--Footer-->
-                        <?php
-	                        include './includes/footer.php';
-                        ?>
-                        <!--End Footer-->
                     </div>
                 </div>
             </div>
+            <!--Footer-->
+            <?php
+                include './includes/footer.php';
+            ?>
+            <!--End Footer-->
         </div>
-
     </div>
 
     <!-- Jquery JS-->
