@@ -190,22 +190,19 @@
                         <div class="row">
                             <div class="col">
                               <div class="au-card">
-
                                 <div id="calendar"></div>
-                                
                               </div>
                             </div><!-- .col -->
                         </div>
-
                         <!--Footer-->
                         <?php
 	                        include './includes/footer.php';
                         ?>
                         <!--End Footer-->
-                        
                     </div>
                 </div>
             </div>
+            
         </div>
 
     </div>
