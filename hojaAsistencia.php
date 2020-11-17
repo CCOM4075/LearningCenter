@@ -166,9 +166,18 @@
                                         <tr>
                                             <td><?php echo $asistencia['nombre']." ".$asistencia['apellidos']?></td>
                                             <td><?php echo $asistencia['edad']?></td>
-                                            <td><?php echo $asistencia['horaDeEntrada']?></td>
+                                            <td><?php echo convert24to12($asistencia['horaDeEntrada'])?></td>
                                             <td><?php echo $asistencia['proposito']?></td>
-                                            <td><?php echo $asistencia['horaDeSalida']?></td>
+                                            <td><?php
+                                                        if($asistencia['horaDeSalida']=='00:00:00')
+                                                        {
+                                                            echo "";
+                                                        }
+                                                        else
+                                                        {
+                                                            echo convert24to12($asistencia['horaDeSalida']);
+                                                        }
+                                                    ?></td>
                                         </tr>
                                 <?php
                                         }
