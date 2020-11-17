@@ -432,7 +432,7 @@
 
                         <div class="container-fluid">
                         <div class="row">
-                        <div class="col-lg-10"></div>
+                            <div class="col-lg-10"></div>
                                 <div class="table-responsive table--no-card m-b-30">
                                     <!--tabla blanca-->
                                     <table class="table table-borderless table-striped table-earning">
