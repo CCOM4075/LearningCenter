@@ -73,7 +73,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-                                    <h2 class="title-2">Resúmen</h2>
+                                    <h2 class="title-2">Resumen</h2>
                                 </div>
                             </div>
                         </div>
@@ -85,11 +85,7 @@
                                 <div class="overview-item overview-item--c1">
                                     <div class="overview__inner">
                                         <div class="overview-box clearfix">
-                                            <!--<div class="icon">
-                                                <i class="zmdi zmdi-account-o"></i>
-                                            </div>
-                                            <div class="chart1Total"></div>
-                                            -->
+                                            
                                             <?php
                                                 
                                             ?>
@@ -102,7 +98,13 @@
 
                                                         $cantidadHoy = mysqli_num_rows($queryCantidadHoy);
                                                         echo $cantidadHoy;
-                                                    ?></h2>
+                                                    ?>
+                                                        <div class="icon">
+                                                            <i class="zmdi zmdi-account-o"></i>
+                                                        </div>
+                                                        <div class="chart1Total"></div>
+                                                    </h2>
+                                                    
                                                 <h6>participantes <br/> este día</h6>
                                             </div>
                                         </div>
@@ -113,7 +115,7 @@
                                 </div>
                             </div>
 
-                            <!--<div class="col-sm-6 col-lg-3">
+                            <div class="col-sm-6 col-lg-3">
                                 <div class="overview-item overview-item--c2">
                                     <div class="overview__inner">
                                         <div class="overview-box clearfix">
@@ -122,12 +124,12 @@
                                                 <h6>participantes <br/> esta semana</h6>
                                             </div>
                                         </div>
-                                        <div class="overview-chart">
+                                        <!-- <div class="overview-chart">
                                             <canvas id="widgetChart2"></canvas>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
-                            </div>-->
+                            </div>
 
                             <div class="col-sm-6 col-lg-3">
                                 <div class="overview-item overview-item--c3">
