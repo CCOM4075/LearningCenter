@@ -168,7 +168,7 @@
                                                 <th class="text-left">Edad</th>
                                                 <th class="text-left">Hora Entrada</th>
                                                 <th class="text-left">Proposito</th>
-                                                <th class="text-left">Hora Salida</th>
+                                                <th class="text-center">Hora Salida</th>
                                             </tr>
                                         </thead>
 
@@ -197,12 +197,12 @@
                                                         <td><?php echo $asistencia['edad']?></td>
                                                         <td><?php echo convert24to12($asistencia['horaDeEntrada'])?></td>
                                                         <td><?php echo $asistencia['proposito']?></td>
-                                                        <td><?php
+                                                        <td class="text-center"><?php
                                                             if($asistencia['horaDeSalida']=='00:00:00')
                                                             {
                                                                 ?> 
                                                                     <form action="someterSalida.php?asistenciaID=<?php echo $asistencia['id'] ?>" method="post">
-                                                                        <input type="submit" name="submit" value="Someter Salida" class="au-btn au-btn--block au-btn--green" />
+                                                                        <input type="submit" name="submit" value="Someter Salida" class="au-btn2" />
                                                                     </form>
                                                                 <?php
                                                             }
