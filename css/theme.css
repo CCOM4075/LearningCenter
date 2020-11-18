@@ -470,6 +470,22 @@ section {
     cursor: pointer;
 }
 
+.au-btn2 {
+    padding: 5px 15px;
+    text-transform: uppercase;
+    color: #fff;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background: #63c76a;
+
+}
+
 .au-btn:hover {
     color: #fff;
     background: #3868cd;
@@ -484,6 +500,10 @@ section {
 }
 
 .au-btn--block {
+    display: block;
+    width: 100%;
+}
+.au-btn--block2 {
     display: block;
     width: 100%;
 }
