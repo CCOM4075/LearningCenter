@@ -4,6 +4,7 @@
  
 <?php
     include './includes/connection.php';
+    include_once './functions/functions.php';
 
     if(!empty($_POST))
     {  
@@ -20,10 +21,11 @@
             $participanteEdificio = $_POST['edificio'];
             $participanteUnidad = $_POST['unidad'];
             $participanteNacimiento = $_POST['birthday'];
+            $inscripcion = getTodayDate();
             
-            $query = mysqli_query($connection, "INSERT INTO participantes(nombre, apellidos, genero, edificio, unidad, birthday)
+            $query = mysqli_query($connection, "INSERT INTO participantes(nombre, apellidos, genero, edificio, unidad, birthday, inscripcion)
                                                 values('$participanteNombre', '$participanteApellidos', '$participanteGenero', 
-                                                '$participanteEdificio', '$participanteUnidad', '$participanteNacimiento')");
+                                                '$participanteEdificio', '$participanteUnidad', '$participanteNacimiento', '$inscripcion')");
         }
     }
 ?>
