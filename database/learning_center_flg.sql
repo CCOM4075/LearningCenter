@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2020 at 03:40 PM
+-- Generation Time: Nov 18, 2020 at 03:48 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -183,7 +183,7 @@ CREATE TABLE `participantes` (
   `edificio` int(11) NOT NULL,
   `unidad` int(11) NOT NULL,
   `birthday` date NOT NULL,
-  `inscripcion` date NOT NULL DEFAULT current_timestamp(),
+  `inscripcion` date NOT NULL,
   `activo` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -196,7 +196,8 @@ INSERT INTO `participantes` (`participanteID`, `nombre`, `apellidos`, `genero`, 
 (4, 'Kelmary', 'La Loca', 'F', 101, 10, '1997-03-13', '2020-10-27', 1),
 (8, 'Hector Luis', 'Mata Putas', 'M', 105, 50, '1998-11-01', '2020-10-28', 1),
 (11, 'Yonaro Astronauta', 'Mala Memoria', 'M', 103, 28, '1999-07-17', '2020-10-28', 1),
-(12, 'Leo Libro', 'Del Cotto', 'M', 111, 100, '1997-03-06', '2020-10-29', 1);
+(12, 'Leo Libro', 'Del Cotto', 'M', 111, 100, '1997-03-06', '2020-10-29', 1),
+(14, 'Wanda', 'Vazquez', 'F', 105, 54, '1970-06-12', '2020-11-18', 1);
 
 -- --------------------------------------------------------
 
@@ -405,7 +406,7 @@ ALTER TABLE `hojaasistencia`
 -- AUTO_INCREMENT for table `participantes`
 --
 ALTER TABLE `participantes`
-  MODIFY `participanteID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `participanteID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `propositos`
