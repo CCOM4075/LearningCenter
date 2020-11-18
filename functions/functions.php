@@ -161,19 +161,8 @@
     function cantidadParticipantesTrimestre()
     { 
         include './includes/connection.php';
-
-        // $yearActual = getCurrentYear();
-        // $queryCantidadYear = mysqli_query($connection, "SELECT a.id
-        // FROM hojaasistencia h
-        // INNER JOIN asistencia a ON h.id = a.hojaAsistencia
-        // WHERE year(h.fecha) = '$yearActual'");
-
-        // $cantidadYear = mysqli_num_rows($queryCantidadYear);
-
-        // return $cantidadYear;
-
         $year = 1;
-        $meses= getTrimestre(getTrimestreMeses(getCurrentMonth()));
+        $meses= getTrimestreMeses(getTrimestre(getCurrentMonthNumber()));
 
         $queryTrimestral = mysqli_query($connection, "SELECT a.id
                                                             FROM asistencia a 
@@ -182,8 +171,8 @@
                                                             INNER JOIN hojaasistencia h ON h.id = a.hojaAsistencia
                                                             WHERE h.fiscalYear = $year AND (month(h.fecha) = $meses[0] OR month(h.fecha) = $meses[1] OR month(h.fecha) = $meses[2])");
  
-        $trimestral = mysqli_num_rows($queryTrimestral);
-        return $trimestral; 
+        $participantesTrimestre = mysqli_num_rows($queryTrimestral);
+        return $participantesTrimestre; 
     }
 
     function addZero($cantidad)
