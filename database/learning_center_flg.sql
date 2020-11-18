@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2020 at 08:46 PM
+-- Generation Time: Nov 18, 2020 at 03:40 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -52,8 +52,8 @@ INSERT INTO `actividades` (`actividadID`, `nombre`, `recurso`, `lugar`, `fecha`,
 (2, 'Prevension de Drogas', 'Leonardo Sotomayor', 'Biblioteca', '2020-09-21', '', 'Formentar el no uso de las drogas.', 0, 2, '', 0, 1),
 (3, 'Busqueda de Documentos de', 'Leonardo Sotomayor', 'Biblioteca', '2020-10-29', '', 'rkjfldjfs', 0, 3, '', 0, 1),
 (4, 'Movie Day', 'Leonardo Sotomayor', 'Biblioteca', '2020-10-30', '', 'bvjksdbfkjdsb.', 0, 4, '', 0, 1),
-(5, 'Taller de Excel', 'Leonardo Sotomayor', 'Biblioteca', '2020-11-04', '', 'Excel', 0, 1, 'promocion.pdf', 0, 0),
-(14, 'Gaming Day', 'Leonardo Sotomayor', 'Biblioteca', '2020-11-07', '20:30', 'Jugar Videojuegos.', 0, 4, '', 0, 0);
+(5, 'Taller de Excel', 'Leonardo Sotomayor', 'Biblioteca', '2020-11-04', '', 'Excel', 0, 1, 'promocion.pdf', 0, 2),
+(14, 'Gaming Day', 'Leonardo Sotomayor', 'Biblioteca', '2020-11-07', '20:30', 'Jugar Videojuegos.', 0, 4, '', 0, 2);
 
 -- --------------------------------------------------------
 
@@ -66,7 +66,7 @@ CREATE TABLE `asistencia` (
   `participanteID` int(11) NOT NULL,
   `proposito` int(11) NOT NULL,
   `edad` int(11) NOT NULL,
-  `horaDeEntrada` time NOT NULL DEFAULT current_timestamp(),
+  `horaDeEntrada` time NOT NULL,
   `horaDeSalida` time NOT NULL,
   `hojaAsistencia` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -83,7 +83,10 @@ INSERT INTO `asistencia` (`id`, `participanteID`, `proposito`, `edad`, `horaDeEn
 (5, 8, 5, 22, '20:36:00', '00:00:00', 5),
 (6, 4, 3, 23, '00:00:00', '00:00:00', 5),
 (7, 4, 4, 23, '15:16:33', '00:00:00', 6),
-(8, 12, 4, 23, '15:17:16', '00:00:00', 6);
+(8, 12, 4, 23, '15:17:16', '19:00:00', 6),
+(27, 11, 1, 21, '15:24:00', '19:35:51', 7),
+(28, 12, 1, 23, '17:57:00', '19:36:04', 7),
+(29, 8, 3, 22, '20:00:00', '21:15:00', 7);
 
 -- --------------------------------------------------------
 
@@ -163,7 +166,8 @@ INSERT INTO `hojaasistencia` (`id`, `fecha`, `fiscalYear`) VALUES
 (3, '2020-10-27', '1'),
 (4, '2020-10-29', '1'),
 (5, '2020-10-30', '1'),
-(6, '2020-10-31', '1');
+(6, '2020-10-31', '1'),
+(7, '2020-11-16', '1');
 
 -- --------------------------------------------------------
 
@@ -371,7 +375,7 @@ ALTER TABLE `actividades`
 -- AUTO_INCREMENT for table `asistencia`
 --
 ALTER TABLE `asistencia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `asistenciaactividad`
@@ -395,7 +399,7 @@ ALTER TABLE `fotosactividades`
 -- AUTO_INCREMENT for table `hojaasistencia`
 --
 ALTER TABLE `hojaasistencia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `participantes`
