@@ -158,6 +158,34 @@
         return $cantidadYear;
     }
 
+    function cantidadParticipantesTrimestre()
+    { 
+        include './includes/connection.php';
+
+        // $yearActual = getCurrentYear();
+        // $queryCantidadYear = mysqli_query($connection, "SELECT a.id
+        // FROM hojaasistencia h
+        // INNER JOIN asistencia a ON h.id = a.hojaAsistencia
+        // WHERE year(h.fecha) = '$yearActual'");
+
+        // $cantidadYear = mysqli_num_rows($queryCantidadYear);
+
+        // return $cantidadYear;
+
+        $year = 1;
+        $meses= getTrimestre(getTrimestreMeses(getCurrentMonth()));
+
+        $queryTrimestral = mysqli_query($connection, "SELECT a.id
+                                                            FROM asistencia a 
+                                                            INNER JOIN participantes p ON p.participanteID = a.participanteID
+                                                            INNER JOIN propositos x ON x.id = a.proposito
+                                                            INNER JOIN hojaasistencia h ON h.id = a.hojaAsistencia
+                                                            WHERE h.fiscalYear = $year AND (month(h.fecha) = $meses[0] OR month(h.fecha) = $meses[1] OR month(h.fecha) = $meses[2])");
+ 
+        $trimestral = mysqli_num_rows($queryTrimestral);
+        return $trimestral; 
+    }
+
     function addZero($cantidad)
     {
         if($cantidad<10)
@@ -169,6 +197,42 @@
             $cantidad = "0".$cantidad;
         }
         return $cantidad;
+    }
+
+    function getTrimestreMeses($trimestreID)
+    {
+        if($trimestreID==1)
+            return array('07','08','09');
+
+        else if($trimestreID==2)
+            return array('10','11','12');
+
+        else if($trimestreID==3)
+            return array('01','02','03');
+
+        else if($trimestreID==4)
+            return array('04','05','06');
+
+        else
+            return "";
+    }
+
+    function getTrimestre($mesID)
+    {
+        if($mesID==7 || $mesID==8 || $mesID==9)
+            return 1;
+
+        else if($mesID==10 || $mesID==11 || $mesID==12)
+            return 2;
+        
+        else if($mesID==1 || $mesID==2 || $mesID==3)
+            return 3;
+
+        else if($mesID==4 || $mesID==5 || $mesID==6)
+            return 4;
+
+        else
+            return "";
     }
 
 
