@@ -44,7 +44,7 @@
     function getHojaDeAsistencia($fecha)
     {
         include './includes/connection.php';
-        
+
         $queryBuscarHojaDeAsistencia = mysqli_query($connection, "SELECT id FROM hojaasistencia WHERE fecha = '$fecha'");
 
         $result = mysqli_num_rows($queryBuscarHojaDeAsistencia);
@@ -52,10 +52,41 @@
         if($result > 0)
         {
             $idHoja = mysqli_fetch_array($queryBuscarHojaDeAsistencia);
-            echo $idHoja['id'];
+            return $idHoja['id'];
         }
         else
-            echo "0";
+            return 0;
+
+            
+    }
+
+    function createHojaAsistencia()
+    {
+        include './includes/connection.php';
+        $fechaHoy = getTodayDate();
+        $fiscalYear = 1;
+
+        $hojaAsistencia = getHojaDeAsistencia($fechaHoy);
+
+        if($hojaAsistencia == 0)
+        {
+            $ultimaHojaAsistencia = getUltimaHojaAsistencia();
+            $queryHoraSalidaDefault = mysqli_query($connection, "UPDATE asistencia SET horaDeSalida = '19:00:00' WHERE hojaAsistencia = '$ultimaHojaAsistencia'");
+            
+            $query_insert = mysqli_query($connection, "INSERT INTO hojaasistencia(fecha, fiscalYear) VALUES('$fechaHoy','$fiscalYear')");
+        }
+        else
+        {
+
+        }
+    }
+
+    function getUltimaHojaAsistencia()
+    {
+        include './includes/connection.php';
+        $query = mysqli_query($connection, "SELECT MAX(id) AS id FROM hojaasistencia");
+        $idHoja = mysqli_fetch_array($query);
+        return $idHoja['id'];
     }
 
     function getTodayDate()
@@ -223,6 +254,10 @@
         else
             return "";
     }
+
+  
+
+    
 
 
 ?>
