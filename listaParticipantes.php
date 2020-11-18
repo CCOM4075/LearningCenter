@@ -104,7 +104,7 @@
                                                     <td><?php echo $participante['genero']?></td>
                                                     <td><?php echo $participante['edificio']?></td>
                                                     <td><?php echo $participante['unidad']?></td>
-                                                    <td><a href="editParticipante.php?id=<?php echo $participante['participanteID'];?>">Editar</a> | <a  href="deleteParticipante.php?id=<?php echo $participante['participanteID'];?>">Eliminar</a></td>
+                                                    <td><a href="editParticipante.php?id=<?php echo $participante['participanteID'];?>" class='far fa-edit' style='color:green'></a> | <a  href="deleteParticipante.php?id=<?php echo $participante['participanteID'];?>" class='fas fa-trash' style='color:red'></a></td>
                                                 </tr>
  
                                         <?php
