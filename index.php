@@ -120,7 +120,7 @@
                                     <div class="overview__inner">
                                         <div class="overview-box clearfix">
                                             <div class="text">
-                                                <h2>000</h2>
+                                            <h2><?php echo addZero(cantidadParticipantesTrimestre()); ?></h2>
                                                 <h6>participantes <br/> este trimestre</h6>
                                             </div>
                                             <div class="icon">
