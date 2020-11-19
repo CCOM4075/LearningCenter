@@ -1,5 +1,6 @@
 <?php
     include './includes/connection.php';
+    include_once './functions/functions.php';
 
  
     if(!empty($_POST))
@@ -25,7 +26,7 @@
                                             INNER JOIN asistencia a ON h.id = a.hojaAsistencia
                                             INNER JOIN participantes p ON a.participanteID = p.participanteID
                                             INNER JOIN propositos x ON a.proposito = x.id
-                                            WHERE h.fecha = '$fechaString'");                            
+                                            WHERE h.fecha = '$fechaString' ORDER BY horaDeEntrada ASC");                            
         $result = mysqli_num_rows($query);
         if($result == 0)
         header("location: hojaAsistencia.php");
@@ -100,10 +101,9 @@
                         <h2 class="title-7"><?php 
                                                 if(!empty($_REQUEST['fecha']))
                                                 {
-                                                    include_once './functions/functions.php';
-                                                    $numeroDia = getCurrentDay();
-                                                    $mes = getCurrentMonth();
-                                                    $year = getCurrentYear();
+                                                    $numeroDia = $fechaFormato->format('d');
+                                                    $mes = getMes($fechaFormato->format('m'));
+                                                    $year = $fechaFormato->format('yy');
                                                     echo $numeroDia." de ".$mes." de ".$year;
                                                     
                                                 }
