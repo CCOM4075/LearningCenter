@@ -1,15 +1,29 @@
 <!DOCTYPE html>
-
+ 
 <?php
     include './includes/connection.php';
+    include './functions/functions.php';
 
     if(!empty($_POST))
     {  
         $nombre = $_POST['nombre'];
-		$proposito = $_POST['proposito'];
+        $idParticipante = '4';
+        $proposito = $_POST['proposito'];
         
-        $query = mysqli_query($connection, "INSERT INTO asistencia(participanteID, proposito)
-		                                    values(10, '$proposito')");
+        $existeHojaAsistencia = todayHojaAsistenciaExist();
+
+        if($existeHojaAsistencia == false)
+        {
+            createHojaAsistencia();  
+        }
+
+        $hojaAsistencia = getUltimaHojaAsistencia();
+        $queryParticipante =  mysqli_query($connection, "SELECT nombre, apellidos, genero, birthday, edificio, unidad FROM `participantes` WHERE participanteID = '$idParticipante'");
+        $participante = mysqli_fetch_array($queryParticipante);
+        $edad = getEdad($participante['birthday']);
+
+        $query = mysqli_query($connection, "INSERT INTO asistencia(participanteID, proposito, edad, horaDeEntrada, hojaAsistencia) values('$idParticipante', '$proposito', '$edad', NOW(), '$hojaAsistencia')");
+        
     }
 ?>
 
@@ -65,11 +79,12 @@
                         <div class="login-form">
 
 
-                        <form>
+                        <form action="" method="post">
                             <div class="form-row">
+                                
                                 <div class="form-group col-md-6">
                                     <label for="nombre">Nombre</label>
-                                    <input type="nombre" class="form-control" id="nombre" placeholder="Nombre Completo">
+                                    <input type="text" class="form-control" id="busca" placeholder="Nombre Completo" name="nombre">
                                 </div>
 
                                 <div class="form-group col-md-6">
@@ -79,38 +94,21 @@
                                     <div class="rs-select2--dark rs-select2--md rs-select2--border">
                                         <select class= "js-select2" name="proposito" id="proposito" class="form-row">
                                             <option value="0">Propósito</option>
-                                            <option value="1">Asignación</option>
-                                            <option value="2">Computadora</option>
-                                            <option value="3">Proyecto</option>
-                                            <option value="4">Re-Exámen</option>
-                                            <option value="5">Resumé</option>
-                                            <option value="6">Tutorías</option>
-                                            <option value="7">Internet</option>
-                                            <option value="8">Copia</option>
-                                            <option value="9">Actividad</option>
+                                            <?php
+                                                $queryProposito = mysqli_query($connection, "SELECT * FROM propositos");
+                                                while($propositos = mysqli_fetch_array($queryProposito))
+                                                {
+                                                    $propositoNombre = $propositos['proposito'];
+                                                    $idProposito = $propositos['id'];
+                                                    echo "<option value='$idProposito'> $propositoNombre</option>";
+                                                }
+                                            ?>
                                         </select>
                                         <div class="dropDownSelect2"></div>
                                     </div>
 
                                 </div>
-
-                                <!--<button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Iniciar Sección</button>-->
-                              
-                                <!-- <button class="au-btn au-btn--block au-btn--green" type="submit">
-                                    <a>Someter</a>
-                                </button>-->
-                                <input type="submit" value="Create User" class ="au-btn au-btn--block au-btn--green">
-
-                                
-
-                                <!--
-                                <div class="social-login-content">
-                                    <div class="social-button">
-                                        <button class="au-btn au-btn--block au-btn--blue m-b-20">sign in with facebook</button>
-                                        <button class="au-btn au-btn--block au-btn--blue2">sign in with twitter</button>
-                                    </div>
-                                -->
-
+                                <button type="submit" class="au-btn au-btn--block au-btn--green">Someter Asistencia</button>
                                 </div>
                             </form>
                            
