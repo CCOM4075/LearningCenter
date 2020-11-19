@@ -98,7 +98,7 @@
                                             </tr>
                                             <tr>
                                                 <th class="text-left">Edad</th>
-                                                <td class="text-left"><?php echo $edad->y?></td>
+                                                <td class="text-left"><?php echo getEdad($participante['birthday'])?></td>
                                             </tr>
                                                 <th class="text-left">Género</th>
                                                 <td class="text-left"><?php echo $participante['genero']?></td>
