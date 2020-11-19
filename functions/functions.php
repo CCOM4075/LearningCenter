@@ -1,4 +1,13 @@
 <?php
+    function getEdad($fechaNacimiento)
+    {
+        $naci = $fechaNacimiento;
+        $fecha_nacimiento = new DateTime($naci) ;
+        $hoy = new DateTime();
+        $edad = $hoy->diff($fecha_nacimiento);  
+        return $edad->y;
+    }
+
     function getMes($mesID)
     {
         if($mesID==1)
@@ -66,20 +75,26 @@
         $fechaHoy = getTodayDate();
         $fiscalYear = 1;
 
+        $ultimaHojaAsistencia = getUltimaHojaAsistencia();
+        $queryHoraSalidaDefault = mysqli_query($connection, "UPDATE asistencia SET horaDeSalida = '19:00:00' WHERE hojaAsistencia = '$ultimaHojaAsistencia' AND horaDeSalida = '00:00:00'");
+
+        $query_insert = mysqli_query($connection, "INSERT INTO hojaasistencia(fecha, fiscalYear) VALUES('$fechaHoy','$fiscalYear')");
+        
+        
+    }
+
+    function todayHojaAsistenciaExist()
+    {
+        $fechaHoy = getTodayDate();
         $hojaAsistencia = getHojaDeAsistencia($fechaHoy);
 
-        if($hojaAsistencia == 0)
-        {
-            $ultimaHojaAsistencia = getUltimaHojaAsistencia();
-            $queryHoraSalidaDefault = mysqli_query($connection, "UPDATE asistencia SET horaDeSalida = '19:00:00' WHERE hojaAsistencia = '$ultimaHojaAsistencia'");
-            
-            $query_insert = mysqli_query($connection, "INSERT INTO hojaasistencia(fecha, fiscalYear) VALUES('$fechaHoy','$fiscalYear')");
+        if($hojaAsistencia > 0){
+            return true;
         }
-        else
-        {
-
+        else{
+            return false;
         }
-    }
+    } 
 
     function getUltimaHojaAsistencia()
     {
@@ -134,6 +149,16 @@
 
         $hoy = new DateTime('now',$gmtTimezone);  //Obtener la fecha usando el timezone
         $horaActual = $hoy->format('H:i:s');
+
+        return $horaActual;
+    }
+
+    function getCurrentHourForInsert()
+    {
+        $gmtTimezone = new DateTimeZone('GMT-4');//Optener el time zone de P.R.
+
+        $hoy = new DateTime('now',$gmtTimezone);  //Obtener la fecha usando el timezone
+        $horaActual = $hoy->format('His');
 
         return $horaActual;
     }
