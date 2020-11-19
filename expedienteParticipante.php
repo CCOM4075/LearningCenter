@@ -1,5 +1,6 @@
 <?php
     include './includes/connection.php';
+    include './functions/functions.php';
     if(empty($_REQUEST['id']))
         {
             header("location: listaParticipante.php");
@@ -9,12 +10,7 @@
             $query2 = mysqli_query($connection, "SELECT h.fecha, p.proposito FROM `asistencia` a INNER JOIN propositos p 
                     ON a.proposito = p.id INNER JOIN hojaasistencia h ON a.hojaAsistencia = h.id WHERE a.participanteID = $participanteID ORDER BY h.id DESC");
             $participante = mysqli_fetch_array($query);
-            
-
-            $naci = $participante['birthday'];
-            $fecha_nacimiento = new DateTime($naci);
-            $hoy = new DateTime();
-            $edad = $hoy->diff($fecha_nacimiento);
+            $edad = getEdad($participante['birthday']);
         }
 ?>
 <!DOCTYPE html>
