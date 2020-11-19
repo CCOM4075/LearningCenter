@@ -1,5 +1,6 @@
 <?php
     include './includes/connection.php';
+    include './functions/functions.php';
  
 ?>
 <!DOCTYPE html>
@@ -90,23 +91,18 @@
                                             $result = mysqli_num_rows($query);
                                             if($result > 0){
  
-                                                while($participante = mysqli_fetch_array($query)){
-                                                    $naci = $participante['birthday'];
-                                                    $fecha_nacimiento = new DateTime($naci) ;
-                                                    $hoy = new DateTime();
-                                                    $edad = $hoy->diff($fecha_nacimiento);
- 
+                                                while($participante = mysqli_fetch_array($query))
+                                                {
                                         ?>          
                                                 <tr>
                                                     <td><?php echo $participante['participanteID']?></td>
                                                     <td><a href="expedienteParticipante.php?id=<?php echo $participante['participanteID'];?>"><?php echo $participante['nombre']." ".$participante['apellidos']?></a>
-                                                    <td><?php echo $edad->y?></td>
+                                                    <td><?php echo getEdad($participante['birthday'])?></td>
                                                     <td><?php echo $participante['genero']?></td>
                                                     <td><?php echo $participante['edificio']?></td>
                                                     <td><?php echo $participante['unidad']?></td>
                                                     <td><a href="editParticipante.php?id=<?php echo $participante['participanteID'];?>" class='far fa-edit' style='color:green'></a> | <a  href="deleteParticipante.php?id=<?php echo $participante['participanteID'];?>" class='fas fa-trash' style='color:red'></a></td>
                                                 </tr>
- 
                                         <?php
                                                 }
                                             }
