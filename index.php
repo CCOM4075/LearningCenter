@@ -186,7 +186,7 @@
                                                                                     INNER JOIN asistencia a ON h.id = a.hojaAsistencia
                                                                                     INNER JOIN participantes p ON a.participanteID = p.participanteID
                                                                                     INNER JOIN propositos x ON a.proposito = x.id
-                                                                                    WHERE h.fecha = '$fechaHoy'");
+                                                                                    WHERE h.fecha = '$fechaHoy' ORDER BY horaDeEntrada ASC");
                                             
                                                 $result = mysqli_num_rows($query);
                                                 if($result > 0){
