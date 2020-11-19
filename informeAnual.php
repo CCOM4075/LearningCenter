@@ -128,7 +128,7 @@
                         <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
                                     <!--rs-select2--light rs-select2--sm-->
                             <select class="js-select2" id="fiscalYear" name="fiscalYear" required> 
-                                <option value="">Año Fiscal </option>
+                                <option value="">Año Fiscal</option>
                                 <?php
                                     $runFiscalYear = mysqli_query($connection,"SELECT * FROM fiscalYear");
 
@@ -202,8 +202,19 @@
                                                     if($i==6)
                                                         $exit = true; 
                                                 }
-                                            ?>             
+                                            ?> 
                                         </tbody>
+
+                                        <tbody>
+                                            <tr>
+                                                <th class="text-left">Total</th>
+                                                <th class="text-left">098</th>
+                                                <th class="text-left">102</th>
+                                                <th class="text-left">181</th>
+                                                <th class="text-left">050</th>
+                                            </tr>
+                                        </tbody>
+
                                     </table>
                                 </div>
                             </div>
