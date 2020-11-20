@@ -3277,12 +3277,12 @@ section {
 .overview-box .icon {
     display: inline-block;
     vertical-align: top;
-    margin-right: 15px;
-    margin-left: 30px;
+    margin-right: 10px;
+    margin-left: 15px;
 }
 
 .overview-box .icon i {
-    font-size: 80px; /*person icon size*/
+    font-size: 65px; /*index gradient boxes icon size*/
     color: #fff;
 }
 
