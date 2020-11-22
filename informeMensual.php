@@ -1,11 +1,12 @@
 <?php
+    session_start(); 
     include './includes/connection.php';
- 
+    include_once './functions/functions.php';    
+    
     if(!empty($_POST))
 	{
         $mes = $_POST['mes'];
         $year = $_POST['year'];;
-
 
         if((!empty($mes))&&(!empty($year)))
             header("location: informeMensual.php?mes=$mes&year=$year");
@@ -56,59 +57,6 @@
 
 <body class="animsition">
     <div class="page-wrapper">
-        <!-- HEADER MOBILE-->
-        <header class="header-mobile d-block d-lg-none">
-            <div class="header-mobile__bar">
-                <div class="container-fluid">
-                    <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
-                            <img src="images/icon/LC_icon175x55.png" alt="CoolAdmin" />
-                        </a>
-                        <button class="hamburger hamburger--slider" type="button">
-                            <span class="hamburger-box">
-                                <span class="hamburger-inner"></span>
-                            </span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <nav class="navbar-mobile">
-                <div class="container-fluid">
-                    <ul class="navbar-mobile__list list-unstyled">
-
-                        
-                        <li>
-                            <a href="index.html">
-                                <i class="fas fa-chart-bar"></i>Inicio</a>
-                        </li>
-
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-tachometer-alt"></i>Registro</a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="form.html">Registro De Participante</a>
-                                </li>
-                                <li>
-                                    <a href="form2.php">Registro De Administrador</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="informes.html">
-                                <i class="fas fa-table"></i>Informe</a>
-                        </li>
-                        <li>
-                            <a href="calendar.html">
-                                <i class="fas fa-calendar-alt"></i>Calendario</a>
-                        </li>
-
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        <!-- END HEADER MOBILE-->
 
         <!-- MENU SIDEBAR-->
         <?php
