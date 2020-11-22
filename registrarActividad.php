@@ -24,13 +24,15 @@
             $promocion = $_POST['promocion'];
             $fotos = $_POST['fotos'];
             $fiscalYear = getCurrentFiscalYear();
+            $uploads_dir = '/files/promociones';
 
 
             //getting the image from the field
-            $promocionActividad = $_FILES['promocion']['name'];
+            $promocionActividad = basename($_FILES['promocion']['name']);
             $promocionActividadTemp = $_FILES['promocion']['tmp_name'];
 
-            move_uploaded_file($promocionActividadTemp,"promociones/$promocion");
+            //move_uploaded_file($promocionActividadTemp,"promociones/$promocion");
+            move_uploaded_file($promocionActividadTemp, "$uploads_dir/$promocionActividad");
 
 
             
