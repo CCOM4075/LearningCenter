@@ -7,7 +7,7 @@
     if(!empty($_POST))
     {  
         $nombre = $_POST['nombre'];
-        $idParticipante = "4";
+        $idParticipante = '4';
         $proposito = $_POST['proposito'];
         
         $existeHojaAsistencia = todayHojaAsistenciaExist();
