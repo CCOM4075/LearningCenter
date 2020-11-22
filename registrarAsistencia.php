@@ -4,6 +4,7 @@
     session_start();
     include './includes/connection.php';
     include './functions/functions.php';
+    verificarUsuario($_SESSION['rol_usuario']);
 
     if(!empty($_POST))
     {  
