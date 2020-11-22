@@ -370,5 +370,17 @@
         }
     }
 
+    function verificarUsuario($rol)
+    {
+        if($rol == '1' || $rol == '2')
+        {
+            return; 
+        }
+        else
+        {
+            header('location: login.php');	
+        }
+    }
+
 ?>
 
