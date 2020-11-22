@@ -358,5 +358,17 @@
         $userType = $_SESSION['rol_usuario'];
     }
 
+    function verificarBibliotecario($rol)
+    {
+        if($rol == '1')
+        {
+            return;
+        }
+        else
+        {
+            header('location: login.php');	
+        }
+    }
+
 ?>
 
