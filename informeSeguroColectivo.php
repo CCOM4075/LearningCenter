@@ -152,7 +152,7 @@
                             <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
                                         <!--rs-select2--light rs-select2--sm-->
                                 <select class="js-select2" name="year" required>
-                                    <option value="0">Año</option>
+                                    <option value="0">Año Fiscal</option>
                                     <?php
                                         
                                         $runFiscalYear = mysqli_query($connection,"SELECT * FROM fiscalyear");
