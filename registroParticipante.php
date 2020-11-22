@@ -3,6 +3,7 @@
 <html lang="en">
  
 <?php
+    session_start();
     include './includes/connection.php';
     include_once './functions/functions.php';
 
