@@ -1,5 +1,7 @@
 <?php
+    session_start();
     include './includes/connection.php';
+    include_once './functions/functions.php';
     //$query = mysqli_query($connection, "SELECT * FROM usuarios");
    // $query = mysqli_query($connection, "SELECT * FROM usuarios WHERE userID = '1'");
     //$usuario = mysqli_fetch_array($query);
