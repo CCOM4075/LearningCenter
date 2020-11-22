@@ -11,6 +11,9 @@ include './functions/functions.php';
     //$query = mysqli_query($connection, "INSERT INTO asistencia(participanteID, proposito, horaDeEntrada, hojaAsistencia) values('10', '1', ', '$hojaAsistencia')");
 
     echo getCurrentFiscalYear();
+
+    echo getUserName(2);
+    echo getUserRole(2);
 ?> 
 
 </body>
