@@ -49,7 +49,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Registro De Participante</title>
+    <title>Editar Participante</title>
     <link rel="icon"  href="images/icon/LC_icon16clear.ico" type="icon" sizes="16x16">
 
     <!-- Fontfaces CSS-->
@@ -106,7 +106,7 @@
 
                             <div class="card">
                                 <div class="card-header">
-                                        <strong>Registro de</strong> Participante
+                                        <strong>Editar</strong> Participante
                                     </div>
                                     <?php
                                         if(!empty($_POST))

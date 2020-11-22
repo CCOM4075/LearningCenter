@@ -118,7 +118,7 @@
                             <div class="col-lg-10">
                                 <div class="card">
                                     <div class="card-header">
-                                        <strong>Registro de</strong> Usuario
+                                        <strong>Editar</strong> Usuario
                                     </div>
                                     <?php
                                         if(!empty($_POST))
