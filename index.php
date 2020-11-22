@@ -1,15 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <?php
+    session_start();    
     include './includes/connection.php';
-    include_once './functions/functions.php';
-
-    $fechaHoy = getTodayDate();                       
+    include_once './functions/functions.php'; 
+    
+    $fechaHoy = getTodayDate();                
 ?>
  
 <!-- Learning Center Register -->
- 
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
     <!-- Required meta tags-->
     <meta charset="UTF-8">
