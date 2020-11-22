@@ -3,6 +3,7 @@
     
     include './includes/connection.php';
     include_once './functions/functions.php';
+    verificarBibliotecario($_SESSION['rol_usuario']);
     $validacion = false;
  
     if(!empty($_POST))
