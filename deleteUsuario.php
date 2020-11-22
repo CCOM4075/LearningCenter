@@ -1,9 +1,14 @@
 <?php
+    session_start();     
     include './includes/connection.php';
+    include_once './functions/functions.php';
+
     if(empty($_REQUEST['id']))
     {
         header("location: listaUsuarios.php");
-    }else{
+    }
+    else
+    {
         $usuarioID = $_REQUEST['id'];
     }
 ?>
