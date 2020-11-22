@@ -1,5 +1,6 @@
 <?php
     include './includes/connection.php';
+    include_once './functions/functions.php';
 
     if(!empty($_POST))
     {  
@@ -20,6 +21,7 @@
             $lugar = $_POST['lugar'];
             $promocion = $_POST['promocion'];
             $fotos = $_POST['fotos'];
+            $fiscalYear = getCurrentFiscalYear();
 
 
             //getting the image from the field
@@ -30,8 +32,8 @@
 
 
             
-            $queryRegistrarActividad = mysqli_query($connection, "INSERT INTO actividades(nombre, hora, fecha, proposito, tipo, recurso, lugar, promocion)
-            values('$nombre', '$hora', '$fecha', '$proposito', '$tipoActividad', '$recurso', '$lugar', '$promocionActividad')");
+            $queryRegistrarActividad = mysqli_query($connection, "INSERT INTO actividades(nombre, hora, fecha, proposito, tipo, recurso, lugar, promocion, fiscalyear)
+            values('$nombre', '$hora', '$fecha', '$proposito', '$tipoActividad', '$recurso', '$lugar', '$promocionActividad', $fiscalYear)");
             
             //Funcion para escoger el id incrementado que tiene el ultimo query
             $idActividad = mysqli_insert_id($connection);
