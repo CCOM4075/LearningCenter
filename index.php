@@ -2,9 +2,9 @@
     session_start();    
     include './includes/connection.php';
     include_once './functions/functions.php'; 
-    
-    $fechaHoy = getTodayDate();
     verificarBibliotecario($_SESSION['rol_usuario']);
+    $fechaHoy = getTodayDate();
+    
 ?>
  
 <!-- Learning Center Register -->
