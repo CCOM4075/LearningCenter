@@ -7,7 +7,7 @@
     if(!empty($_POST))
     {  
         $nombre = $_POST['nombre'];
-        $idParticipante = '4';
+        $idParticipante = "4";
         $proposito = $_POST['proposito'];
         
         $existeHojaAsistencia = todayHojaAsistenciaExist();
@@ -22,8 +22,7 @@
         $participante = mysqli_fetch_array($queryParticipante);
         $edad = getEdad($participante['birthday']);
 
-        $query = mysqli_query($connection, "INSERT INTO asistencia(participanteID, proposito, edad, horaDeEntrada, hojaAsistencia) values('$idParticipante', '$proposito', '$edad', NOW(), '$hojaAsistencia')");
-        
+        $query = mysqli_query($connection, "INSERT INTO asistencia(participanteID, proposito, edad, horaDeEntrada, hojaAsistencia) values('$idParticipante', '$proposito', '$edad', NOW(), '$hojaAsistencia')");  
     }
 ?>
 
@@ -39,6 +38,7 @@
 
     <!-- Title Page-->
     <title>Registro De Asistencia</title>
+    <link rel="icon"  href="images/icon/LC_icon16clear.ico" type="icon" sizes="16x16">
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -85,6 +85,7 @@
                                 <div class="form-group col-md-6">
                                     <label for="nombre">Nombre</label>
                                     <input type="text" class="form-control" id="busca" placeholder="Nombre Completo" name="nombre">
+                                    </input>
                                 </div>
 
                                 <div class="form-group col-md-6">
