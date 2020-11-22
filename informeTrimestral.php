@@ -1,4 +1,6 @@
 <?php
+    session_start();     
+    
     include './includes/connection.php';
     include_once './functions/functions.php';
     $validacion = false;
@@ -6,8 +8,7 @@
     if(!empty($_POST))
 	{
         $trimestre = $_POST['trimestre'];
-        $year = $_POST['year'];;
-
+        $year = $_POST['year'];
 
         if((!empty($trimestre))&&(!empty($year)))
             header("location: informeTrimestral.php?trimestre=$trimestre&year=$year");
