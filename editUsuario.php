@@ -1,5 +1,8 @@
 <?php
+    session_start();     
     include './includes/connection.php';
+    include_once './functions/functions.php';
+
     if(empty($_REQUEST['id']))
     {
         header("location: listaUsuarios.php");
@@ -9,7 +12,8 @@
 
     $query = mysqli_query($connection,"SELECT * FROM usuarios WHERE userID='$usuarioID'");
 
-		$data = mysqli_fetch_array($query);
+    $data = mysqli_fetch_array($query);
+    
     if(!empty($_POST))
 	{
         
