@@ -1,5 +1,10 @@
-<?php
+<?php  
+    session_start();     
+    
+     
     include './includes/connection.php';
+    include_once './functions/functions.php';
+    
     $validacion = false;
     if(!empty($_POST))
 	{
