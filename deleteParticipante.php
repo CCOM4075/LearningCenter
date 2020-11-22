@@ -117,7 +117,7 @@
 
                                             <?php
                                                 if(isset($_POST['yes'])){
-                                                    mysqli_query($connection,"UPDATE participantes SET activo ='2' WHERE participanteID ='$participanteID'");
+                                                    mysqli_query($connection,"UPDATE participantes SET activo ='0' WHERE participanteID ='$participanteID'");
                                                     echo "<script>window.open('listaParticipantes.php','_self')</script>";
                                                 }
                                                 if(isset($_POST['no'])){
