@@ -225,7 +225,8 @@
                                                     for($i=0; $i<4; $i++)
                                                     {
                                                 ?>
-                                                        <th class="text-left"><?php echo $total[$i] ?></th>
+                                                        <th class="text-left"><?php if(!empty($_REQUEST['fiscalYear']))
+                                                                                        echo $total[$i] ?></th>
                                                 <?php
                                                     }
                                                 ?>
