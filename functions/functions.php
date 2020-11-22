@@ -73,7 +73,7 @@
     {
         include './includes/connection.php';
         $fechaHoy = getTodayDate();
-        $fiscalYear = 1;
+        $fiscalYear = getCurrentFiscalYear();
 
         $ultimaHojaAsistencia = getUltimaHojaAsistencia();
         $queryHoraSalidaDefault = mysqli_query($connection, "UPDATE asistencia SET horaDeSalida = '19:00:00' WHERE hojaAsistencia = '$ultimaHojaAsistencia' AND horaDeSalida = '00:00:00'");
@@ -189,10 +189,11 @@
         include './includes/connection.php';
 
         $mesActual = getCurrentMonthNumber();
+        $fiscalYear = getCurrentFiscalYear();
         $queryCantidadMes = mysqli_query($connection, "SELECT a.id
         FROM hojaasistencia h
         INNER JOIN asistencia a ON h.id = a.hojaAsistencia
-        WHERE month(h.fecha) = '$mesActual'");
+        WHERE month(h.fecha) = '$mesActual' AND h.fiscalyear = '$fiscalYear'");
 
         $cantidadMes = mysqli_num_rows($queryCantidadMes);
 
@@ -203,11 +204,11 @@
     {
         include './includes/connection.php';
 
-        $yearActual = getCurrentYear();
+        $fiscalYear = getCurrentFiscalYear();
         $queryCantidadYear = mysqli_query($connection, "SELECT a.id
         FROM hojaasistencia h
         INNER JOIN asistencia a ON h.id = a.hojaAsistencia
-        WHERE year(h.fecha) = '$yearActual'");
+        WHERE h.fiscalYear = '$fiscalYear'");
 
         $cantidadYear = mysqli_num_rows($queryCantidadYear);
 
@@ -217,7 +218,7 @@
     function cantidadParticipantesTrimestre()
     { 
         include './includes/connection.php';
-        $year = 1;
+        $fiscalYear = getCurrentFiscalYear();
         $meses= getTrimestreMeses(getTrimestre(getCurrentMonthNumber()));
 
         $queryTrimestral = mysqli_query($connection, "SELECT a.id
@@ -225,7 +226,7 @@
                                                             INNER JOIN participantes p ON p.participanteID = a.participanteID
                                                             INNER JOIN propositos x ON x.id = a.proposito
                                                             INNER JOIN hojaasistencia h ON h.id = a.hojaAsistencia
-                                                            WHERE h.fiscalYear = $year AND (month(h.fecha) = $meses[0] OR month(h.fecha) = $meses[1] OR month(h.fecha) = $meses[2])");
+                                                            WHERE h.fiscalYear = $fiscalYear AND (month(h.fecha) = $meses[0] OR month(h.fecha) = $meses[1] OR month(h.fecha) = $meses[2])");
  
         $participantesTrimestre = mysqli_num_rows($queryTrimestral);
         return $participantesTrimestre; 
@@ -279,6 +280,43 @@
         else
             return "";
     }
+
+    function getCurrentFiscalYear()
+    {
+        include './includes/connection.php';
+        $year = getCurrentYear();
+        $mes = getCurrentMonthNumber();
+        $fiscalYear = '';
+        
+        if($mes == '07' || $mes == '08' || $mes == '09' || $mes == '10' || $mes == '11' || $mes == '12')
+            $fiscalYear = $year."-".($year+1);
+
+        else if($mes == '01' || $mes == '02' || $mes == '03' || $mes == '04' || $mes == '05' || $mes == '06')
+            $fiscalYear = ($year-1)."-".$year;
+        
+        $query = mysqli_query($connection, "SELECT id FROM fiscalyear WHERE year = '$fiscalYear'");
+        $fiscalYearID = mysqli_fetch_array($query);
+
+       
+        if($fiscalYearID>1)
+        {
+            $fiscalYearID = $fiscalYearID['id'];
+        }
+        else
+        {
+            //Funcion Para Crear un nuevo año fiscal
+            $fiscalYear = $year."-".($year+1);
+            $query = mysqli_query($connection, "INSERT INTO fiscalyear(year) VALUES ('$fiscalYear')");
+
+            $query2 = mysqli_query($connection, "SELECT MAX(id) AS id FROM fiscalyear");
+            $id = mysqli_fetch_array($query2);
+            $fiscalYearID = $id['id'];
+        }
+
+        return $fiscalYearID;   
+    }
+     
+    
 
   
 
