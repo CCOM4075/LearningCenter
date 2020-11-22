@@ -155,7 +155,7 @@
                                     <option value="0">Año</option>
                                     <?php
                                         
-                                        $runFiscalYear = mysqli_query($connection,"SELECT * FROM fiscalYear");
+                                        $runFiscalYear = mysqli_query($connection,"SELECT * FROM fiscalyear");
 
                                         while($fiscalYear = mysqli_fetch_array($runFiscalYear))
                                         {
