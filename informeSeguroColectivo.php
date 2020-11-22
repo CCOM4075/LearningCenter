@@ -1,4 +1,6 @@
 <?php
+    session_start();     
+
     include './includes/connection.php';
     $validacion = false;
  
@@ -6,7 +8,6 @@
 	{
         $mes = $_POST['mes'];
         $year = $_POST['year'];;
-
 
         if((!empty($mes))&&(!empty($year)))
             header("location: informeSeguroColectivo.php?mes=$mes&year=$year");
