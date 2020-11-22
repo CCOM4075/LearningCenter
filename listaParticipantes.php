@@ -87,7 +87,7 @@
  
                                         <tbody>
                                         <?php 
-                                            $query = mysqli_query($connection, "SELECT participanteID, nombre, apellidos, genero, birthday, edificio, unidad FROM `participantes`");
+                                            $query = mysqli_query($connection, "SELECT participanteID, nombre, apellidos, genero, birthday, edificio, unidad FROM participantes WHERE activo = 1");
                                             $result = mysqli_num_rows($query);
                                             if($result > 0){
  
