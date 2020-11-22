@@ -130,7 +130,7 @@
                             <select class="js-select2" id="fiscalYear" name="fiscalYear" required> 
                                 <option value="">Año Fiscal</option>
                                 <?php
-                                    $runFiscalYear = mysqli_query($connection,"SELECT * FROM fiscalYear");
+                                    $runFiscalYear = mysqli_query($connection,"SELECT * FROM fiscalyear");
 
                                     while($fiscalYear = mysqli_fetch_array($runFiscalYear))
                                     {
