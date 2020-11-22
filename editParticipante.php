@@ -1,17 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <?php
+    session_start();     
     include './includes/connection.php';
+    include_once './functions/functions.php';
+    
     if(empty($_REQUEST['id']))
     {
         header("location: listaParticipantes.php");
-    }else{
+    }
+    else
+    {
         $participanteID = $_REQUEST['id'];
     }
-    
-		
-		
 		$query = mysqli_query($connection,"SELECT * FROM participantes WHERE participanteID='$participanteID'");
 
 		$data = mysqli_fetch_array($query);
@@ -39,6 +38,8 @@
         }
     }
 ?>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <!-- Required meta tags-->
