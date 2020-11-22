@@ -127,7 +127,6 @@
 
 
                 </div>
-                <?php if(!empty($_REQUEST['fecha'])){echo $fechaString;}?>
                 <div class="container-fluid">
 
                 
