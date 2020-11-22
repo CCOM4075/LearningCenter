@@ -2,6 +2,7 @@
     session_start();   
     include './includes/connection.php';
     include_once './functions/functions.php';
+    verificarBibliotecario($_SESSION['rol_usuario']);
 
     if(empty($_REQUEST['id']))
         {
