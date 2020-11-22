@@ -1,7 +1,8 @@
 <?php
+    session_start();     
     include './includes/connection.php';
     include './functions/functions.php';
-
+    
     if(empty($_REQUEST['id']))
         {
             header("location: listaActividades.php");
