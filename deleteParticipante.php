@@ -1,9 +1,14 @@
 <?php
+    session_start();     
     include './includes/connection.php';
+    include_once './functions/functions.php';
+    
     if(empty($_REQUEST['id']))
     {
         header("location: listaParticipantes.php");
-    }else{
+    }
+    else
+    {
         $participanteID = $_REQUEST['id'];
     }
 ?>
