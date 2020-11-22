@@ -119,7 +119,7 @@
 
                                             <?php
                                                 if(isset($_POST['yes'])){
-                                                    mysqli_query($connection,"UPDATE usuarios SET activo ='2' WHERE userID ='$usuarioID'");
+                                                    mysqli_query($connection,"UPDATE usuarios SET activo ='0' WHERE userID ='$usuarioID'");
                                                     echo "<script>window.open('listaUsuarios.php','_self')</script>";
                                                 }
                                                 if(isset($_POST['no'])){
