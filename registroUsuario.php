@@ -1,5 +1,7 @@
 <?php
+    session_start();  
     include './includes/connection.php';
+    include_once './functions/functions.php';
 
     if(!empty($_POST))
 	{
