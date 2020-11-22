@@ -106,7 +106,7 @@
 
                             <div class="card">
                                 <div class="card-header">
-                                        <strong>Registro de</strong> Participante
+                                        <strong>Editar</strong> Participante
                                     </div>
                                     <?php
                                         if(!empty($_POST))
