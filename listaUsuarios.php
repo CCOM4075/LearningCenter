@@ -89,7 +89,7 @@
                                             
                                         
                                         <?php 
-                                            $query = mysqli_query($connection, "SELECT u.userID, u.nombre, u.apellidos, u.usuario, r.rol FROM usuarios u INNER JOIN rol r ON u.rol = r.rolID");
+                                            $query = mysqli_query($connection, "SELECT u.userID, u.nombre, u.apellidos, u.usuario, r.rol FROM usuarios u INNER JOIN rol r ON u.rol = r.rolID WHERE u.activo = 1");
                                             $result = mysqli_num_rows($query);
                                             if($result > 0){
 
