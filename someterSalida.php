@@ -1,10 +1,10 @@
 <?php
+    session_start();
     if(empty($_REQUEST['asistenciaID']))
     {
         header("location: index.php");
     }else{
         include './includes/connection.php';
-        include_once './functions/functions.php';
         $asistenciaID = $_REQUEST['asistenciaID'];
 
         $query = mysqli_query($connection,"SELECT horaDeSalida FROM asistencia WHERE id = '$asistenciaID'");
