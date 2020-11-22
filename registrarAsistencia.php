@@ -7,7 +7,7 @@
     if(!empty($_POST))
     {  
         $nombre = $_POST['nombre'];
-        $idParticipante = '4';
+        $idParticipante = '8';
         $proposito = $_POST['proposito'];
         
         $existeHojaAsistencia = todayHojaAsistenciaExist();
@@ -22,7 +22,7 @@
         $participante = mysqli_fetch_array($queryParticipante);
         $edad = getEdad($participante['birthday']);
 
-        $query = mysqli_query($connection, "INSERT INTO asistencia(participanteID, proposito, edad, horaDeEntrada, hojaAsistencia) values('$idParticipante', '$proposito', '$edad', NOW(), '$hojaAsistencia')");  
+        $query = mysqli_query($connection, "INSERT INTO asistencia(participanteid, proposito, edad, horaDeEntrada, hojaAsistencia) values('$idParticipante', '$proposito', '$edad', NOW(), '$hojaAsistencia')");  
     }
 ?>
 
