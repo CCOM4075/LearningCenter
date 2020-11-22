@@ -342,5 +342,21 @@
         $rol = $rol['rol'];
         return $rol;
     }
+    
+    function getUserUsuario($userID)
+    {
+        include './includes/connection.php';
+        $query = mysqli_query($connection, "SELECT usuario FROM usuarios WHERE userid = '$userID'");
+        $usuario = mysqli_fetch_array($query);
+        $usuario = $usuario['usuario'];
+        return $usuario;
+    }
+
+    function setSessionVariable($id, $rol)
+    {
+        $userID = $_SESSION['id_usuario'];
+        $userType = $_SESSION['rol_usuario'];
+    }
+
 ?>
 
