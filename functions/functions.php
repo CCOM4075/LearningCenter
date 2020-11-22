@@ -315,13 +315,32 @@
 
         return $fiscalYearID;   
     }
-     
-    
 
-  
+    function getUserName($userID)
+    {
+        include './includes/connection.php';
+        $query = mysqli_query($connection, "SELECT nombre, apellidos, rol FROM usuarios WHERE userid = '$userID'");
+        $user = mysqli_fetch_array($query);
 
-    
+        if($user['rol'] == 1)
+        {
+            $nombre = $user['nombre']." ".$user['apellidos'];
+        }
+        else
+        {
+            $nombre = $user['nombre'];
+        }
 
+        return $nombre;
+    }
 
+    function getUserRole($userID)
+    {
+        include './includes/connection.php';
+        $query = mysqli_query($connection, "SELECT rol FROM usuarios WHERE userid = '$userID'");
+        $rol = mysqli_fetch_array($query);
+        $rol = $rol['rol'];
+        return $rol;
+    }
 ?>
 
