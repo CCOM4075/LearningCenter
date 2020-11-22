@@ -3,7 +3,8 @@
     include './includes/connection.php';
     include_once './functions/functions.php'; 
     
-    $fechaHoy = getTodayDate();                
+    $fechaHoy = getTodayDate();
+    verificarBibliotecario($_SESSION['rol_usuario']);
 ?>
  
 <!-- Learning Center Register -->
