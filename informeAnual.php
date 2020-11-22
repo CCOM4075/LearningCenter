@@ -26,36 +26,46 @@
         array(0,0,0,0), 
         array(0,0,0,0),
         array(0,0,0,0));
+        $total = array(0,0,0,0);
         $queryEdades = mysqli_query($connection, "SELECT h.fecha, a.edad FROM hojaasistencia h
                             INNER JOIN asistencia a ON h.id = a.hojaAsistencia
                             WHERE h.fiscalYear = '$fiscalYear'");
         $edades = mysqli_num_rows($queryEdades);
         if($edades>0)
+        {
+            while($edades = mysqli_fetch_array($queryEdades))
             {
-                while($edades = mysqli_fetch_array($queryEdades))
+                $fecha = new DateTime($edades['fecha']);
+                $mes = $fecha->format('m');
+
+                if($edades['edad']>=0 && $edades['edad']<=12)
                 {
-                    $fecha = new DateTime($edades['fecha']);
-                    $mes = $fecha->format('m');
+                    $meses[$mes-1][0] += 1;
+                    $meses[$mes-1][3] += 1;
+                }
+                else if($edades['edad']>=13 && $edades['edad']<=17)
+                {
+                    $meses[$mes-1][1] += 1;
+                    $meses[$mes-1][3] += 1;
 
-                    if($edades['edad']>=0 && $edades['edad']<=12)
-                    {
-                        $meses[$mes-1][0] += 1;
-                        $meses[$mes-1][3] += 1;
-                    }
-                    else if($edades['edad']>=13 && $edades['edad']<=17)
-                    {
-                        $meses[$mes-1][1] += 1;
-                        $meses[$mes-1][3] += 1;
+                }
+                else if($edades['edad']>=18)
+                {
+                    $meses[$mes-1][2] += 1;
+                    $meses[$mes-1][3] += 1;
 
-                    }
-                    else if($edades['edad']>=18)
-                    {
-                        $meses[$mes-1][2] += 1;
-                        $meses[$mes-1][3] += 1;
-
-                    }
                 }
             }
+        }
+        for($i=0; $i<4; $i++)
+        {
+            for($j=0; $j<12; $j++)
+            {
+                $total[$i] += $meses[$j][$i];
+            }
+            
+        }
+
     }
 ?>
 
@@ -208,10 +218,14 @@
                                         <tbody>
                                             <tr>
                                                 <th class="text-left">Total</th>
-                                                <th class="text-left">098</th>
-                                                <th class="text-left">102</th>
-                                                <th class="text-left">181</th>
-                                                <th class="text-left">050</th>
+                                                <?php
+                                                    for($i=0; $i<4; $i++)
+                                                    {
+                                                ?>
+                                                        <th class="text-left"><?php echo $total[$i] ?></th>
+                                                <?php
+                                                    }
+                                                ?>
                                             </tr>
                                         </tbody>
 
