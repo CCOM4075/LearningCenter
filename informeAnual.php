@@ -1,5 +1,6 @@
 <?php
     include './includes/connection.php';
+    include_once './functions/functions.php';
 
     if(!empty($_POST))
 	{
@@ -189,7 +190,7 @@
                                             <tr>
                                                 <th class="text-left">
                                                 <?php
-                                                    include_once './functions/mes.php';
+                                                    
                                                     $mes = getMes($i+1);
                                                     echo "$mes";
                                                 ?>

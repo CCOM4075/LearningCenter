@@ -1,5 +1,6 @@
 <?php
     include './includes/connection.php';
+    include_once './functions/functions.php';
     $validacion = false;
  
     if(!empty($_POST))
@@ -18,8 +19,8 @@
     {
         $trimestre = $_REQUEST['trimestre'];
         $year = $_REQUEST['year'];
-        include_once './functions/trimestre.php';
-        $meses= getTrimestre($trimestre);
+        
+        $meses= getTrimestreMeses($trimestre);
 
         $queryTrimestral = mysqli_query($connection, "SELECT DISTINCT a.id, a.participanteID, p.nombre, p.apellidos, p.edificio, p.unidad, x.proposito, a.edad, p.genero, h.fecha 
                                                             FROM asistencia a 
