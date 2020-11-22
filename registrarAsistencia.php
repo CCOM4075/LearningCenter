@@ -8,23 +8,54 @@
 
     if(!empty($_POST))
     {  
-        $nombre = $_POST['nombre'];
-        $idParticipante = '8';
-        $proposito = $_POST['proposito'];
-        
-        $existeHojaAsistencia = todayHojaAsistenciaExist();
 
-        if($existeHojaAsistencia == false)
+
+        if(empty($_POST['nombre']) || empty($_POST['proposito']) )
         {
-            createHojaAsistencia();  
+            $alert='<p class="msg_error">Todos los Campos son Obligatorios.</p>';
         }
+        else
+        {
+            $nombre = $_POST['nombre'];
 
-        $hojaAsistencia = getUltimaHojaAsistencia();
-        $queryParticipante =  mysqli_query($connection, "SELECT nombre, apellidos, genero, birthday, edificio, unidad FROM `participantes` WHERE participanteID = '$idParticipante'");
-        $participante = mysqli_fetch_array($queryParticipante);
-        $edad = getEdad($participante['birthday']);
+            $queryParticipanteID =  mysqli_query($connection, "SELECT participanteid FROM participantes WHERE CONCAT(nombre , ' ', apellidos) = '$nombre'");
+            $resultIDParticipante = mysqli_num_rows($queryParticipanteID);
+            
+            if($resultIDParticipante==0)
+            {
+                $alert='<p class="msg_error">No se encontro al Participante.</p>';
+            }
+            else
+            {
+                $participanteID = mysqli_fetch_array($queryParticipanteID);
+                $idParticipante = $participanteID['participanteid'];
+                $proposito = $_POST['proposito'];
+                
+                $existeHojaAsistencia = todayHojaAsistenciaExist();
 
-        $query = mysqli_query($connection, "INSERT INTO asistencia(participanteid, proposito, edad, horaDeEntrada, hojaAsistencia) values('$idParticipante', '$proposito', '$edad', NOW(), '$hojaAsistencia')");  
+                if($existeHojaAsistencia == false)
+                {
+                    createHojaAsistencia();  
+                }
+
+                $hojaAsistencia = getUltimaHojaAsistencia();
+                $queryParticipante =  mysqli_query($connection, "SELECT nombre, apellidos, genero, birthday, edificio, unidad FROM `participantes` WHERE participanteID = '$idParticipante'");
+                $participante = mysqli_fetch_array($queryParticipante);
+                $edad = getEdad($participante['birthday']);
+
+                $queryValidacionAsistenciaHoy =  mysqli_query($connection, "SELECT id FROM asistencia WHERE participanteid = '$idParticipante' AND hojaAsistencia = '$hojaAsistencia'");
+                $result = mysqli_num_rows($queryValidacionAsistenciaHoy);
+                if($result>0)
+                {
+                    $alert='<p class="msg_error">Ya ha realizado asistencia hoy.</p>';
+                }
+                else
+                {
+                    $query = mysqli_query($connection, "INSERT INTO asistencia(participanteid, proposito, edad, horaDeEntrada, hojaAsistencia) values('$idParticipante', '$proposito', '$edad', NOW(), '$hojaAsistencia')");  
+                    $alert='<p class="msg_error">Se ha Registrado la Asistencia.</p>';
+                }
+            }
+        }
     }
 ?>
 
@@ -79,7 +110,12 @@
                         </div>
 
                         <div class="login-form">
-
+                        <?php
+                            if(!empty($_POST))
+                            {
+                        ?>
+                                <div class="alert"><?php echo isset($alert) ? $alert : '' ?></div>
+                        <?php } ?>
 
                         <form action="" method="post">
                             <div class="form-row">
