@@ -6,6 +6,7 @@
     }else{
         include './includes/connection.php';
         include_once './functions/functions.php';
+        verificarBibliotecario($_SESSION['rol_usuario']);
         $asistenciaID = $_REQUEST['asistenciaID'];
 
         $query = mysqli_query($connection,"SELECT horaDeSalida FROM asistencia WHERE id = '$asistenciaID'");
