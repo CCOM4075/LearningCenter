@@ -8,8 +8,6 @@
 
     if(!empty($_POST))
     {  
-
-
         if(empty($_POST['nombre']) || empty($_POST['proposito']) )
         {
             $alert='<p class="msg_error">Todos los Campos son Obligatorios.</p>';
