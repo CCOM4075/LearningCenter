@@ -96,7 +96,7 @@
 
 <body class="animsition">
     <div class="page-wrapper">
-        <div class="page-content--bge5">
+        <div class="page-content--bgoh">
             <div class="container">
                 <div class="login-wrap">
                     <div class="login-content">
@@ -154,7 +154,9 @@
                 </div>
             </div>
         </div>
-
+            <p style="text-align:right;">
+                <a href="signout.php">Salir</a>
+            </p>
     </div>
 
     <!-- Jquery JS-->
