@@ -61,7 +61,7 @@ if(!empty($_SESSION['active']))
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Iniciar Sessión</title>
+    <title>Iniciar Sesión</title>
     <link rel="icon"  href="images/icon/LC_icon16clear.ico" type="icon" sizes="16x16">
 
     <!-- Fontfaces CSS-->
