@@ -49,7 +49,7 @@
                 }
                 else
                 {
-                    $query = mysqli_query($connection, "INSERT INTO asistencia(participanteid, proposito, edad, horaDeEntrada, hojaAsistencia) values('$idParticipante', '$proposito', '$edad', NOW(), '$hojaAsistencia')");  
+                    $query = mysqli_query($connection, "INSERT INTO asistencia(participanteid, proposito, edad, horaDeEntrada, hojaAsistencia, horaDeSalida) values('$idParticipante', '$proposito', '$edad', NOW(), '$hojaAsistencia', '00:00:00')");  
                     $alert='<p class="msg_error">Se ha Registrado la Asistencia.</p>';
                 }
             }
