@@ -49,7 +49,8 @@
                 }
                 else
                 {
-                    $query = mysqli_query($connection, "INSERT INTO asistencia(participanteid, proposito, edad, horaDeEntrada, hojaAsistencia, horaDeSalida) values('$idParticipante', '$proposito', '$edad', NOW(), '$hojaAsistencia', '00:00:00')");  
+                    $horaActual = getCurrentHour();
+                    $query = mysqli_query($connection, "INSERT INTO asistencia(participanteid, proposito, edad, horaDeEntrada, hojaAsistencia, horaDeSalida) values('$idParticipante', '$proposito', '$edad', '$horaActual', '$hojaAsistencia', '00:00:00')");  
                     $alert='<p class="msg_error">Se ha Registrado la Asistencia.</p>';
                 }
             }
